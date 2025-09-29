@@ -1,2 +1,0 @@
-# bimrocket.github.io
-Bimrocket

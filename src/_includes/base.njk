@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BIMROCKET | {{ title }}</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <img src="/img/bimrocket.svg" alt="" class="logo">
+    <nav class="menu">
+      <a href="{{ '/' | url }}">Home</a>
+      <a href="/features">Features</a>
+    </nav>
+  </header>
+
+  <main>
+    <div>{{ page.url}}</div>
+    {{ content | safe }}
+  </main>
+
+  <footer>
+    <p>BIMROCKET</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "bimrocket.guthub.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Bimrocket",
+  "type": "module",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bimrocket/bimrocket.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bimrocket/bimrocket.github.io/issues"
+  },
+  "homepage": "https://github.com/bimrocket/bimrocket.github.io#readme"
+}
