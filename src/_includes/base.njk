@@ -8,21 +8,38 @@
 </head>
 <body>
   <header>
-    <img src="/img/bimrocket.svg" alt="" class="logo">
-    <nav class="menu">
+    <div class="logo_div">
+      <img src="/img/bimrocket.svg" alt="" class="logo">
+      <button class="expand_button">+</button>
+    </div>
+    
+    <nav class="menu hidden">
       <a href="{{ '/' | url }}">Home</a>
       <a href="/features">Features</a>
-      <a href="/help">Help</a>
+      <a href="/install">Install</a>
     </nav>
   </header>
 
-  <main>
-    <div>{{ page.url}}</div>
-    {{ content | safe }}
-  </main>
+  <div class="content">
+    <main>
+      <div>{{ page.url}}</div>
 
-  <footer>
-    <p>BIMROCKET</p>
-  </footer>
+      {{ content | safe }}
+    </main>
+
+    <footer>
+      <p>BIMROCKET</p>    
+    </footer>
+  </div>
+
+<script>
+  let menu = document.querySelector(".menu");
+  let button = document.querySelector(".expand_button");
+  button.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+</script>
+
 </body>
 </html>
