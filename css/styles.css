@@ -1,47 +1,141 @@
-body {
-  font-family: sans-serif;
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/montserrat.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body 
+{
+  font-family: Montserrat, Arial;
+  font-size: 14px;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
-header
+header 
 {
-  background: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.3s ease; /* suaviza el cambio */
+  background: #444;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
 }
 
-header img.logo
+header .logo_div
 {
-  height: 40px;
+  display: flex;
+  width: 100%;
 }
 
-.menu {
+header .logo_div img.logo
+{
+  height: 48px;
+  flex-grow: 1;
+}
+
+header .logo_div .expand_button
+{
+  width:48px;
+  margin-left: -48px;
+  flex-grow: 0;
+  background: transparent;
+  color: white;
+  border: none;
+  display:none;
+}
+
+header .logo_div .expand_button:hover
+{
+  background-color: #666;
+}
+
+.menu 
+{
   display: flex;
   justify-content: center;
+  width:100%;
 }
 
-.menu a {
+.menu a 
+{
+  font-size: 18px;
   color: white;
   padding: 1em;
   text-decoration: none;
 }
 
-.menu a.active {
+.menu a.active 
+{
   background: #555;
 }
 
-.menu a:hover {
+.menu a:hover 
+{
+  background: #600000;
+}
+
+body > .content
+{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  overflow: auto;
+  height: 100%;
+}
+
+main
+{
+  padding: 8px;
+  flex-grow: 1;
+}
+
+footer
+{
+  display: flex;
+  justify-content: center;  
+  min-height: 200px;
   background: #444;
+  color: #f0f0f0;
+  flex-grow: 0;
+  padding: 8px;
 }
 
 /* Responsivo: en pantallas menores de 600px, se hace vertical */
-@media (max-width: 600px) {
-  .menu {
+@media (max-width: 600px) 
+{
+  header .logo_div .expand_button
+  {
+    display: block;
+  }
+  
+  .menu 
+  {
     flex-direction: column;
-    align-items: stretch;
   }
 
-  .menu a {
+  .menu.hidden
+  {
+    display: none;
+  }  
+  
+  .menu a 
+  {
     text-align: center;
     border-bottom: 1px solid #444;
+    flex-grow: 1;
   }
 }

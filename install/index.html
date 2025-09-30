@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, interactive-widget=resizes-visual" />
+  <title>BIMROCKET | Install</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo_div">
+      <img src="/img/bimrocket.svg" alt="" class="logo">
+      <button class="expand_button">+</button>
+    </div>
+    
+    <nav class="menu hidden">
+      <a href="/">Home</a>
+      <a href="/features">Features</a>
+      <a href="/install">Install</a>
+    </nav>
+  </header>
+
+  <div class="content">
+    <main>
+      <div>/install/</div>
+
+      <h2>Installation methods</h2>
+<p>Bimrocket can be installed using any of the following methods:</p>
+<h3>1. zip package</h3>
+<p>This is the simplest method to install Bimrocket.</p>
+<ol>
+<li>Download the zip package from the latest release: <a href="https://github.com/bimrocket/bimrocket/releases">https://github.com/bimrocket/bimrocket/releases</a>.
+There are two versions available:
+<ul>
+<li>One specific for Windows x64 (<code>bimrocket-tomcat-{version}-windows-x64.zip</code>) (the JDK is included in this package).</li>
+<li>A generic one (<code>bimrocket-tomcat-{version}-generic.zip</code>) for other operating systems (JDK-17 must be installed separately).</li>
+</ul>
+</li>
+<li>Uncompress the zip package.</li>
+<li>Execute the file <code>&lt;BIMROCKET_TOMCAT&gt;/bin/startup(.bat|sh)</code> to start the tomcat server.</li>
+<li>Once started, enter the application by opening this URL: <a href="http://localhost:8080">http://localhost:8080</a></li>
+<li>To stop the tomcat server execute the file <code>&lt;BIMROCKET_TOMCAT&gt;/bin/shutdown(.bat|sh)</code>.</li>
+</ol>
+<h3>2. war files</h3>
+<p>This method allows you to install Bimrocket in a Java servlet container such as Apache Tomcat.</p>
+<ol>
+<li>Install JDK 17:
+<ul>
+<li>Linux: Most distributions include the JDK in their packaging system:
+<ul>
+<li>Debian/Ubuntu: <code>sudo apt install openjdk-17-jdk</code></li>
+<li>Fedora: <code>sudo dnf install java-17-openjdk</code></li>
+<li>RedHat: <code>sudo yum install java-17-openjdk</code></li>
+<li>Arch linux: <code>sudo pacman -S jre17-openjdk</code></li>
+</ul>
+</li>
+<li>Other operting systems (Windows, MacOS, ...): Install the jdk-17 installation package from <a href="https://adoptium.net/temurin/releases/">https://adoptium.net/temurin/releases/</a></li>
+</ul>
+</li>
+<li>Install Apache Tomcat 10.1.x from <a href="https://tomcat.apache.org/download-10.cgi">https://tomcat.apache.org/download-10.cgi</a>.</li>
+<li>Download the Bimrocket war files from the latest release: <a href="https://github.com/bimrocket/bimrocket/releases">https://github.com/bimrocket/bimrocket/releases</a></li>
+<li>Copy <code>bimrocket.war</code> inside <code>&lt;TOMCAT_HOME&gt;/webapps</code> folder.</li>
+<li>Copy <code>bimrocket-server.war</code> inside <code>&lt;TOMCAT_HOME&gt;/webapps</code> folder.</li>
+<li>Start the tomcat server (<code>&lt;TOMCAT_HOME&gt;/bin/startup(.bat|sh)</code>)</li>
+<li>Once started, enter the application by opening this URL: <a href="http://localhost:8080/bimrocket">http://localhost:8080/bimrocket</a></li>
+<li>To stop the tomcat server execute the file <code>&lt;TOMCAT_HOME&gt;/bin/shutdown(.bat|sh)</code>.</li>
+</ol>
+<h3>3. docker containers</h3>
+<p>This section describes the procedure to install Bimrocket using docker containers.</p>
+<p>There are two docker images, one for the frontend and another one for the backend. Instructions for deploying these containers are described below:</p>
+<ul>
+<li><a href="https://github.com/bimrocket/bimrocket/tree/master/bimrocket-webapp/docker">Frontend docker container instructions</a></li>
+<li><a href="https://github.com/bimrocket/bimrocket/tree/master/bimrocket-server/docker">Backend docker container instructions</a></li>
+</ul>
+<h2>Default credentials</h2>
+<p>Some Bimrocket services (like BCF and cloudfs) may require authentication. These are the default credentials:</p>
+<ul>
+<li>Username: <code>admin</code></li>
+<li>Password: <code>bimrocket</code></li>
+</ul>
+<p>The <code>admin</code> password can be change via the Bimrocket server configuration file. More details about server configuration can be found here:</p>
+<p><a href="https://github.com/bimrocket/bimrocket/wiki/bimrocket-server-configuration">Server configuration</a></p>
+
+    </main>
+
+    <footer>
+      <p>BIMROCKET</p>    
+    </footer>
+  </div>
+
+<script>
+  let menu = document.querySelector(".menu");
+  let button = document.querySelector(".expand_button");
+  button.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+</script>
+
+</body>
+</html>

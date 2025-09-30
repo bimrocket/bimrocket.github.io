@@ -8,26 +8,86 @@
 </head>
 <body>
   <header>
-    <img src="/img/bimrocket.svg" alt="" class="logo">
-    <nav class="menu">
+    <div class="logo_div">
+      <img src="/img/bimrocket.svg" alt="" class="logo">
+      <button class="expand_button">+</button>
+    </div>
+    
+    <nav class="menu hidden">
       <a href="/">Home</a>
       <a href="/features">Features</a>
-      <a href="/help">Help</a>
+      <a href="/install">Install</a>
     </nav>
   </header>
 
-  <main>
-    <div>/features/</div>
-    <ul>
-  <li>3D Parametric tool</li>
-  <li>IFC load/export</li>
-  <li>OBJ load/export</li>
+  <div class="content">
+    <main>
+      <div>/features/</div>
+
+      <h2>features</h2>
+<ul>
+<li>Parametric design tool based on <a href="https://en.wikipedia.org/wiki/Constructive_solid_geometry">CSG</a>.</li>
+<li>Supported primitives: solids, profiles (2d shapes) and cords (3d polylines).</li>
+<li>Profile/cord creation and editing.</li>
+<li>Extrusion and revolution of profiles to create solids.</li>
+<li>Union, intersection and subtraction of solids.</li>
+<li>Object transformation (translation, rotation, scale).</li>
+<li>Definition of formulas for object property values.</li>
+<li>Measuring tools (length, angle, area and volume).</li>
+<li>Orbit-Pan-Zoom tool.</li>
+<li>Fly tool (with collision detection and ground distance control).</li>
+<li>Multiple selection of objects.</li>
+<li>Face selection tool.</li>
+<li>Editing of model structure and object properties.</li>
+<li>Dynamic sectioning of models.</li>
+<li>Realistic shading: shadow casting and ambient occlusion.</li>
+<li>Solar simulation tool.</li>
+<li>Vertex, egde and face snapping in the drawing, measurement and transformation tools.</li>
+<li>Scripting tool (using javascript language).</li>
+<li>Reporting tool to check conditions on the model objects (supported reporting formats: BRS and <a href="https://www.buildingsmart.org/what-is-information-delivery-specification-ids/">IDS</a>).</li>
+<li>Object controllers (a Controller is a program that changes the state of an object when a certain event occurs).</li>
+<li>BIM Inventory tool to list the IFC types, classifications, groups and layers of the model.</li>
+<li>BIM Layout tool to visualize the interior layout of the building.</li>
+<li>BIM Inspector tool to inspect the IFC entities of the model.</li>
+<li>BIM Delta tool to detect changes between two versions of an IFC file.</li>
+<li>Search tool to find model properties by name or by value.</li>
+<li>Histogram tool to visualize the distribution of values ​​for a given property.</li>
+<li>Multiple file storage systems are supported: webdav server, local file system and IndexedDB.</li>
+<li>Load/Export IFC models. Support for multiple IFC schemas (IFC2X3, IFC4 and IFC4X3_ADD2).</li>
+<li>Load/Export models in BRF format (JSON BimRocket format).</li>
+<li>Load/Export models in STL, GLB, Wavefront OBJ and Collada formats.</li>
+<li>Integrated with external services (some of them provided by bimrocket-server)
+<ul>
+<li>Webdav server</li>
+<li><a href="https://en.wikipedia.org/wiki/BIM_Collaboration_Format">BCF</a> service (BIM Collaboration Service)</li>
+<li><a href="https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/">bSDD</a> service (buildingSmart Data Dictionary)</li>
+<li><a href="https://www.ogc.org/es/publications/standard/wfs/">WFS</a> service (OGC Web Feature Service)</li>
+<li><a href="http://brain4it.org">Brain4it</a> (AI platform oriented to the IoT)</li>
+<li>IFCDB service (stores IFC models in external database. In progress)</li>
+<li>Print service (generates a vectorial PDF file)</li>
+</ul>
+</li>
+<li>Modular design to easily extend functionality.</li>
+<li>Web application with a responsive user interface. Support for touch devices.</li>
+<li>Based on <a href="https://threejs.org">THREE.js</a> library.</li>
+<li>Built with Maven.</li>
 </ul>
 
-  </main>
+    </main>
 
-  <footer>
-    <p>BIMROCKET</p>
-  </footer>
+    <footer>
+      <p>BIMROCKET</p>    
+    </footer>
+  </div>
+
+<script>
+  let menu = document.querySelector(".menu");
+  let button = document.querySelector(".expand_button");
+  button.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+</script>
+
 </body>
 </html>
