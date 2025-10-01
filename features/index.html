@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, interactive-widget=resizes-visual" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BIMROCKET | Features</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <header>
-    <div class="logo_div">
-      <img src="/img/bimrocket.svg" alt="" class="logo">
-      <button class="expand_button">+</button>
-    </div>
-    
-    <nav class="menu hidden">
-      <a href="/">Home</a>
-      <a href="/features">Features</a>
-      <a href="/install">Install</a>
+    <a href="/"><img src="/img/bimrocket.svg" alt="bimrocket" class="logo"></a>
+    <nav>
+      <button class="menu-toggle">☰</button>
+      <ul id="menu">
+        <li><a href="/">Home</a></li>
+        <li class="submenu">
+          <a href="#">Product</a>
+          <ul>
+            <li><a href="/features">Features</a></li>
+            <li><a href="#">Desarrollo</a></li>
+            <li><a href="#">Soporte</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Documentation</a>
+          <ul>
+            <li><a href="/install">Install</a></li>
+            <li><a href="/configuration">Configuration</a></li>
+          </ul>
+        </li>
+        <li><a href="/">Contacto</a></li>
+      </ul>
     </nav>
   </header>
 
@@ -76,18 +89,46 @@
     </main>
 
     <footer>
-      <p>BIMROCKET</p>    
+      <p>BIMROCKET</p>
     </footer>
   </div>
 
-<script>
-  let menu = document.querySelector(".menu");
-  let button = document.querySelector(".expand_button");
-  button.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
-  });
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const menu = document.getElementById("menu");
 
-</script>
+    toggle.addEventListener("click", () =>
+    {
+      menu.classList.toggle("active");
+    });
 
+    const content = document.querySelector(".content");
+    content.addEventListener("click", () =>
+    {
+      menu.classList.remove("active");
+      clearDrops();
+    });
+
+    const links = document.querySelectorAll(".submenu > a");
+    for (let link of links)
+    {
+      link.addEventListener("click", event =>
+      {
+        event.preventDefault();
+        clearDrops();
+        link.parentElement.classList.toggle("drop");
+      });
+    }
+
+    function clearDrops()
+    {
+      const links = [...document.querySelectorAll(".submenu.drop")];
+      for (let link of links)
+      {
+        link.classList.remove("drop");
+      }
+    }
+
+  </script>
 </body>
 </html>
