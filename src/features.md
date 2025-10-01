@@ -1,6 +1,6 @@
 ---
 title: Features
-layout: base.njk
+layout: template.njk
 ---
 ## features
 - Parametric design tool based on [CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry).

@@ -1,6 +1,6 @@
 ---
 title: Install
-layout: base.njk
+layout: template.njk
 ---
 
 ## Installation methods
