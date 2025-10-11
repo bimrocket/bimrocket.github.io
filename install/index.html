@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Install | BIMROCKET</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BIMROCKET | Install</title>
+  <meta name="description" content="BIMROCKET - The Open BIM Platform">
+  <meta name="keywords" content="BIM, THREEJS, OrientDB, MongoDB">
+  
   <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Raleway:ital,wght@0,100..900;1,100..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
 </head>
 <body>
   <header>
-    <a href="/"><img src="/img/bimrocket.svg" alt="bimrocket" class="logo"></a>
+    <a href="/"><h1><img src="/img/bimrocket.svg" alt="bimrocket" class="logo"></h1></a>
     <nav>
-      <button class="menu-toggle">☰</button>
+      <button class="image-button menu-toggle"><span class="material-symbols-outlined">menu</span></button>
       <ul id="menu">
         <li><a href="/">Home</a></li>
         <li class="submenu">
-          <a href="#">Product</a>
+          <a href="#">Product <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
             <li><a href="/features">Features</a></li>
-            <li><a href="#">Desarrollo</a></li>
-            <li><a href="#">Soporte</a></li>
+            <li><a href="/architecture">Architecture</a></li>
+            <li><a href="/license">License</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="#">Documentation</a>
+          <a href="#">Documentation <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
             <li><a href="/install">Install</a></li>
             <li><a href="/configuration">Configuration</a></li>
+            <li><a href="/user_guides">User guides</a></li>
           </ul>
         </li>
-        <li><a href="/">Contacto</a></li>
+        <li><a href="/download">Download</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="content">
-    <main>
-      <div>/install/</div>
+  <main>
+    <div class="content">
+      <h2><span class="material-symbols-outlined">install_desktop</span> Install</h2>
 
-      <h2>Installation methods</h2>
-<p>Bimrocket can be installed using any of the following methods:</p>
+      <p>Bimrocket can be installed using any of the following methods:</p>
 <h3>1. zip package</h3>
 <p>This is the simplest method to install Bimrocket.</p>
 <ol>
@@ -85,58 +92,29 @@ There are two versions available:
 <li><a href="https://github.com/bimrocket/bimrocket/tree/master/bimrocket-webapp/docker">Frontend docker container instructions</a></li>
 <li><a href="https://github.com/bimrocket/bimrocket/tree/master/bimrocket-server/docker">Backend docker container instructions</a></li>
 </ul>
-<h2>Default credentials</h2>
+<h3>Default credentials</h3>
 <p>Some Bimrocket services (like BCF and cloudfs) may require authentication. These are the default credentials:</p>
 <ul>
 <li>Username: <code>admin</code></li>
 <li>Password: <code>bimrocket</code></li>
 </ul>
-<p>The <code>admin</code> password can be change via the Bimrocket server configuration file. More details about server configuration can be found here:</p>
-<p><a href="https://github.com/bimrocket/bimrocket/wiki/bimrocket-server-configuration">Server configuration</a></p>
+<p>The <code>admin</code> password can be changed via the Bimrocket server configuration file. More details about server configuration can be found here:</p>
+<p><a href="/configuration">Server configuration</a></p>
 
-    </main>
+    </div>
+  </main>
 
-    <footer>
-      <p>BIMROCKET</p>
-    </footer>
-  </div>
+  <footer>
+    <p><a href="/">© 2025 BIMROCKET</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/img/github.svg" alt="github" /> GitHub</a>
+  </footer>
 
-  <script>
-    const toggle = document.querySelector(".menu-toggle");
-    const menu = document.getElementById("menu");
+  <button id="up-button" title="Anar amunt">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
 
-    toggle.addEventListener("click", () =>
-    {
-      menu.classList.toggle("active");
-    });
-
-    const content = document.querySelector(".content");
-    content.addEventListener("click", () =>
-    {
-      menu.classList.remove("active");
-      clearDrops();
-    });
-
-    const links = document.querySelectorAll(".submenu > a");
-    for (let link of links)
-    {
-      link.addEventListener("click", event =>
-      {
-        event.preventDefault();
-        clearDrops();
-        link.parentElement.classList.toggle("drop");
-      });
-    }
-
-    function clearDrops()
-    {
-      const links = [...document.querySelectorAll(".submenu.drop")];
-      for (let link of links)
-      {
-        link.classList.remove("drop");
-      }
-    }
-
+  <script src="/js/main.js">
   </script>
+
 </body>
 </html>

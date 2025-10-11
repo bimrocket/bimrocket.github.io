@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Configuration | BIMROCKET</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BIMROCKET - The Open BIM Platform">
+  <meta name="keywords" content="BIM, THREEJS, OrientDB, MongoDB">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Raleway:ital,wght@0,100..900;1,100..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <a href="/"><h1><img src="/img/bimrocket.svg" alt="bimrocket" class="logo"></h1></a>
+    <nav>
+      <button class="image-button menu-toggle"><span class="material-symbols-outlined">menu</span></button>
+      <ul id="menu">
+        <li><a href="/">Home</a></li>
+        <li class="submenu">
+          <a href="#">Product <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <ul>
+            <li><a href="/features">Features</a></li>
+            <li><a href="/architecture">Architecture</a></li>
+            <li><a href="/license">License</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Documentation <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <ul>
+            <li><a href="/install">Install</a></li>
+            <li><a href="/configuration">Configuration</a></li>
+            <li><a href="/user_guides">User guides</a></li>
+          </ul>
+        </li>
+        <li><a href="/download">Download</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="content">
+      <h2><span class="material-symbols-outlined">settings</span> Configuration</h2>
+
+      <p>Bimrocket server configuration is managed with the <a href="https://smallrye.io/smallrye-config">smallrye-config</a> library that follows the <a href="https://microprofile.io/specifications/microprofile-config-2/">microprofile-config</a> specification. This library can obtain configuration parameters from multiple sources at the same time (environment variables, JVM properties, external files, etc.).
+By default, bimrocket defines these parameters in a yaml file like this:</p>
+<pre><code class="language-yaml"># bimrocket-server config
+
+# service config
+services:
+
+  # security service
+  security:
+    adminPassword: bimrocket
+    passwordPattern: '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&amp;+=_\-\.])(?=\S+$).{8,}$'
+    authorizationCacheTimeout: 300
+    userCacheTimeout: 300
+    roleCacheTimeout: 300
+    ldap:
+      enabled: false
+      url: ldap://dc1.santfeliu.local
+      domain: santfeliu.local
+      searchBase: DC=santfeliu,DC=local
+      adminUsername: admin
+      adminPassword: changeit
+    store:
+      class: org.bimrocket.service.security.store.SecurityOrientDaoStore
+      orient:
+        database: bimdb
+
+  # file service
+  file:
+    store:
+      class: org.bimrocket.service.file.store.filesystem.FileSystemFileStore
+      filesystem:
+        directory: ${BIMROCKET_DATA_PATH}/cloudfs
+    folders:
+      - models
+      - scripts
+      - reports
+      - ifc_snapshots
+
+  # bcf service
+  bcf:
+    projectTemplate:
+    store:
+      class: org.bimrocket.service.bcf.store.BcfOrientDaoStore
+      orient:
+        database: bimdb
+    mail:
+      createTopic:
+        subject: '#{project.name}##{index}: #{title} [#{priority}]'
+        body: '#{description}'
+
+  # ifcdb service
+  ifcdb:
+    schemas:
+      - IFC2X3
+      - IFC4
+    maxFileSizeMb: 200
+    store:
+      class: org.bimrocket.service.ifcdb.store.orient.OrientIfcStore
+
+  # task service
+  task:
+    taskCacheSize: 10
+    store:
+      class: org.bimrocket.service.task.store.orient.TaskOrientDaoStore
+      orient:
+        database: bimdb
+
+  # print service
+  print:
+    directory: ${BIMROCKET_DATA_PATH}/printsvc
+    title: 'Bimrocket print'
+    creator: 'Bimrocket PrintService'
+
+  # mail service
+  mail:
+    enabled: false
+    host: helios
+    port: 25
+    startTls: false
+    auth: false
+    username: none
+    password: none
+    from: 'admin@bimrocket.org'
+    contentType: 'text/plain;charset=ISO-8859-1'
+
+  # proxy service
+  proxy:
+    validUrls:
+      - https://api.openai.com/
+      - https://api.bsdd.buildingsmart.org/
+    aliases:
+      chatgpt:
+        url: https://api.openai.com/v1/chat/completions
+        ipFilter: ''
+        authorization: changeit
+
+# database config
+databases:
+  bimdb:
+    url: embedded:${BIMROCKET_DATA_PATH}/db/bimdb
+    username: root
+    password: orientdb
+  IFC2X3:
+    url: embedded:${BIMROCKET_DATA_PATH}/db/IFC2X3
+    username: root
+    password: orientdb
+  IFC4:
+    url: embedded:${BIMROCKET_DATA_PATH}/db/IFC4
+    username: root
+    password: orientdb
+</code></pre>
+<p>During server startup, a yaml configuration file is created (if not exists) in this path: <code>${BIMROCKET_DATA_PATH}/bimrocket-server.yaml</code>
+where <code>${BIMROCKET_DATA_PATH}</code> points to <code>${user.home}/bimrocket</code> by default.
+Edit this yaml file to change the parameters you need and restart the bimrocket server for the parameters to take effect.</p>
+<p>The value of <code>BIMROCKET_DATA_PATH</code> can be changed via an environment variable or a JVM property:</p>
+<ul>
+<li>Environment variable: <code>BIMROCKET_DATA_PATH=&lt;my_location&gt;</code></li>
+<li>JVM property: In tomcat installations, edit <code>&lt;TOMCAT_HOME&gt;/conf/catalina.properties</code> and add this line: <code>BIMROCKET_DATA_PATH=&lt;my_location&gt;</code></li>
+</ul>
+<p>By default, OrientDB embedded databases are created automaticaly in <code>${BIMROCKET_DATA_PATH}/db</code>.<br>
+You can change the database urls in <code>bimrocket-server.yaml</code> file to create the databases in a remote OrientDB server.</p>
+<p>The default password of the <code>admin</code> user is <code>bimrocket</code>.
+It can be changed through the <code>services.security.adminPassword</code> property of the <code>bimrocket-server.yaml</code> file.</p>
+
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="/">© 2025 BIMROCKET</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/img/github.svg" alt="github" /> GitHub</a>
+  </footer>
+
+  <button id="up-button" title="Anar amunt">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+
+  <script src="/js/main.js">
+  </script>
+
+</body>
+</html>

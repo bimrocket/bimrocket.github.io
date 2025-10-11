@@ -1,66 +1,146 @@
 :root
 {
+  --font-family: Montserrat, Open Sans, Raleway, Work Sans, Barlow;
+  --font-size: 1rem;
+  --font-weight: 500;
+  --scrollbar-color: #c00000;
   --header-height: 48px;
-  --menu-hover-background-color: #c00000;
+  --header-background: #444;
+  --header-color: #ffffff;
+  --body-background: #fafafa;
+  --body-color: #444;
+  --max-content-width: 1024px;
+  --menu-color: #fff;
+  --menu-background: #222;
+  --menu-hover-color: #fff;
+  --menu-hover-background: #c00000;
+  --vmenu-color: #fff;
+  --vmenu-background: #222;
+  --vmenu-hover-color: #fff;
+  --vmenu-hover-background: var(--menu-hover-background);
+  --section-background: #ffffff;
+  --footer-color: #fafafa;
+  --footer-background: #444;
+  --border-radius: 4px;
+  --link-color: #d00000;
 }
 
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(/fonts/montserrat.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-    U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
-    U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-body
+html, body
 {
-  font-family: sans-serif;
-  font-family: Montserrat, Arial;
-  font-size: 14px;
   margin: 0;
   padding: 0;
+  height: auto;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  background: var(--body-background);
+  color: var(--body-color);
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+}
+
+form
+{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 header
 {
-  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  color: var(--header-color);
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
   transition: all 0.3s ease;
-  background: #444;
-  display: flex;
+  background: var(--header-background);
   flex-direction: column;
-  flex: 0 0 auto;
 }
 
-header > a .logo
+header > a h1
 {
-  height: 100%;
+  line-height: var(--header-height);
+  color: var(--header-color);
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+header > a h1 > img
+{
+  height: var(--header-height);
+}
+
+main
+{
+  margin-top: calc(var(--header-height) + 32px);
+  padding: 1rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+main .content
+{
+  max-width: var(--max-content-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main .content > h2
+{
+  display: flex;
+  align-items: center;
+}
+
+main .content > h2 > span
+{
+  padding-right: 6px;
+}
+
+main .content ul
+{
+  padding-inline-start: 24px;
+}
+
+footer
+{
+  text-align: center;
+  min-height: 100px;
+  background: var(--footer-background);
+  color: var(--footer-color);
+  padding: 2rem;
+  flex-grow: 0;
+}
+
+footer a
+{
+  color: var(--footer-color);
 }
 
 header > a
 {
   height: var(--header-height);
+  text-decoration: none;
 }
 
 header nav
 {
-  color: white;
+  color: var(--menu-color);
   position: relative;
 }
 
 header nav a
 {
-  color: white;
+  color: var(--menu-color);
   text-decoration: none;
 }
 
@@ -77,12 +157,30 @@ header nav > ul > li
   position: relative;
 }
 
+header nav > ul > li > a,
+header nav > ul > li.submenu > a
+{
+  display: flex;
+  align-items: center;
+}
+
+header nav > ul > li.submenu > a span
+{
+  transform: rotate(0deg);
+  transition: transform 0.1s;
+}
+
+header nav > ul > li.submenu.drop > a span
+{
+  transform: rotate(180deg);
+}
+
 header nav ul ul
 {
   position: absolute;
   top: 100%;
   left: 0;
-  background: #444;
+  background: var(--menu-background);
   display: none;
   flex-direction: column;
   min-width: 180px;
@@ -98,25 +196,31 @@ header nav li.drop > ul
   display: flex;
 }
 
-header nav ul li a
+header nav ul li > a
 {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 10px;
+  padding-right: 12px;
+  line-height: 24px;
 }
 
-header nav ul li a:hover
+header nav ul li > a:hover
 {
-  background-color: var(--menu-hover-background-color);
+  color: var(--menu-hover-color);
+  background-color: var(--menu-hover-background);
 }
 
-header .menu-toggle
+header nav ul li.submenu > a
+{
+  padding-right: 2px;
+}
+
+header button.menu-toggle.image-button
 {
   position: fixed;
-  font-size: 16px;
   background: none;
-  border: none;
   color: white;
-  cursor: pointer;
   padding: 0;
   top:0;
   left:0;
@@ -125,87 +229,155 @@ header .menu-toggle
   display: none;
 }
 
-body > .content
+a
 {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  overflow: auto;
-  height: 100%;
+  text-decoration: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  color: var(--link-color);
 }
 
-main
+main a:hover
 {
-  padding: 8px;
+  text-decoration: underline;
+}
+
+code
+{
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  background: #f0f0f0;
+  border-radius: var(--border-radius);
+  padding: 4px;
+}
+
+.flex
+{
+  display: flex;
+}
+
+.flex-grow-1
+{
   flex-grow: 1;
 }
 
-footer
+.ml-1
 {
-  display: flex;
-  justify-content: center;
-  min-height: 200px;
-  background: #444;
-  color: #f0f0f0;
-  flex-grow: 0;
-  padding: 8px;
+  margin-left: 0.5rem;
 }
 
-
-@media (max-width: 768px)
+.mr-1
 {
-  header .menu-toggle
-  {
-    display: block;
-  }
+  margin-right: 0.5rem;
+}
 
-  header nav ul
-  {
-    position: fixed;
-    top: var(--header-height);
-    left: 0;
-    bottom: 0;
-    flex-direction: column;
-    width: 250px;
-    max-width: 100%;
-    background: #333;
-    _padding: 10px;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    overflow-y: auto;
-    overflow-x:hidden;
-    box-sizing: border-box;
-  }
+.mt-1
+{
+  margin-top: 0.5rem;
+}
 
-  header nav ul.active
-  {
-    transform: translateX(0);
-  }
+.mb-1
+{
+  margin-bottom: 0.5rem;
+}
 
-  header nav > ul > li
-  {
-  }
+section
+{
+  margin-bottom: 2rem;
+  background: var(--section-background);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-  header nav ul ul
-  {
-    position: static;
-    background: none;
-    display: block;
-    box-shadow: none;
-    padding-left: 20px;
-    transform: none;
-  }
+main ul > li, main ol > li
+{
+  margin-bottom: 0.5rem;
+}
 
-  header nav ul ul li
-  {
-    padding: 4px 0;
-    border-left: 1px solid #606060;
-  }
+h2, h3
+{
+  scroll-margin-top: calc(var(--header-height) + 50px);
+}
 
-  header nav li.submenu > a:hover
-  {
-    background-color: transparent;
-  }
+button.image-button
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+section > h3
+{
+  display: flex;
+  align-items: center;
+}
+
+pre
+{
+  background: #f0f0f0;
+  border-radius: var(--border-radius);
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.language-yaml
+{
+  font-family: monospace;
+  white-space: pre;
+  margin: 1em 0;
+  background: transparent;
+}
+
+nav.pagination
+{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  line-height: normal;
+}
+
+#up-button
+{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: opacity 0.3s;
+  z-index: 1000;
+  padding-top: 4px;
+}
+
+#up-button:hover
+{
+  background-color: #555;
+}
+
+a.github
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a.github > img
+{
+  width: 32px;
+  padding-right: 4px;
 }
 
 *::-webkit-scrollbar
@@ -221,139 +393,74 @@ footer
 
 *::-webkit-scrollbar-thumb
 {
-  background-color: rgb(238, 127, 35);
-  outline: 1px solid slategrey;
+  background-color: var(--scrollbar-color);
+  outline: 1px solid var(--scrollbar-color);
 }
 
-
-/*
-body
+@media (max-width: 768px), (max-height: 500px)
 {
-  font-family: Montserrat, Arial;
-  font-size: 14px;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-}
-
-header
-{
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  background: #444;
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 auto;
-}
-
-header .logo_div
-{
-  display: flex;
-  width: 100%;
-}
-
-header .logo_div img.logo
-{
-  height: 48px;
-  flex-grow: 1;
-}
-
-header .logo_div .expand_button
-{
-  width:48px;
-  margin-left: -48px;
-  flex-grow: 0;
-  background: transparent;
-  color: white;
-  border: none;
-  display:none;
-}
-
-header .logo_div .expand_button:hover
-{
-  background-color: #666;
-}
-
-.menu
-{
-  display: flex;
-  justify-content: center;
-  width:100%;
-}
-
-.menu a
-{
-  font-size: 18px;
-  color: white;
-  padding: 1em;
-  text-decoration: none;
-}
-
-.menu a.active
-{
-  background: #555;
-}
-
-.menu a:hover
-{
-  background: #600000;
-}
-
-body > .content
-{
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  overflow: auto;
-  height: 100%;
-}
-
-main
-{
-  padding: 8px;
-  flex-grow: 1;
-}
-
-footer
-{
-  display: flex;
-  justify-content: center;
-  min-height: 200px;
-  background: #444;
-  color: #f0f0f0;
-  flex-grow: 0;
-  padding: 8px;
-}
-
-@media (max-width: 600px)
-{
-  header .logo_div .expand_button
+  header button.menu-toggle.image-button
   {
-    display: block;
+    display: flex;
   }
 
-  .menu
+  header nav ul
   {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
     flex-direction: column;
+    width: 250px;
+    max-width: 100%;
+    color: var(--vmenu-color);
+    background: var(--vmenu-background);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    overflow-x:hidden;
+    box-sizing: border-box;
   }
 
-  .menu.hidden
+  header nav ul.active
   {
-    display: none;
+    transform: translateX(0);
+    box-shadow: 3px 0px 3px 0px rgba(0,0,0,0.2);
   }
 
-  .menu a
+  header nav > ul > li
   {
-    text-align: center;
-    border-bottom: 1px solid #444;
-    flex-grow: 1;
+  }
+
+  header nav ul li.drop ul
+  {
+    position: static;
+    background: none;
+    display: block;
+    box-shadow: none;
+    padding-left: 20px;
+    transform: none;
+  }
+
+  header nav ul ul li
+  {
+    border-left: 1px solid #606060;
+  }
+
+  header nav ul li a:hover
+  {
+    color: var(--vmenu-hover-color);
+    background-color: var(--vmenu-hover-background);
+  }
+
+  main
+  {
+    margin-top: var(--header-height);
+  }
+
+  h2, h3
+  {
+    scroll-margin-top: calc(var(--header-height) + 8px);
   }
 }
-*/
+
