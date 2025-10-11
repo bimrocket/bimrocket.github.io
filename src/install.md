@@ -1,9 +1,9 @@
 ---
 title: Install
-layout: template.njk
+layout: base.njk
+icon: install_desktop
 ---
 
-## Installation methods
 Bimrocket can be installed using any of the following methods:
 
 ### 1. zip package
@@ -45,11 +45,11 @@ There are two docker images, one for the frontend and another one for the backen
  - [Backend docker container instructions](https://github.com/bimrocket/bimrocket/tree/master/bimrocket-server/docker)
 
 
-## Default credentials
+### Default credentials
 Some Bimrocket services (like BCF and cloudfs) may require authentication. These are the default credentials:
  - Username: `admin`
  - Password: `bimrocket`
 
-The `admin` password can be change via the Bimrocket server configuration file. More details about server configuration can be found here:
+The `admin` password can be changed via the Bimrocket server configuration file. More details about server configuration can be found here:
 
-[Server configuration](https://github.com/bimrocket/bimrocket/wiki/bimrocket-server-configuration)
+[Server configuration](/configuration)

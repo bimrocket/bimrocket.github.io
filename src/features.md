@@ -1,8 +1,9 @@
 ---
 title: Features
-layout: template.njk
+layout: base.njk
+icon: deployed_code
 ---
-## features
+
 - Parametric design tool based on [CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry).
 - Supported primitives: solids, profiles (2d shapes) and cords (3d polylines).
 - Profile/cord creation and editing.
