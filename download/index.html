@@ -6,7 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BIMROCKET - The Open BIM Platform">
   <meta name="keywords" content="BIM, THREEJS, OrientDB, MongoDB">
-  
+  <meta name="theme-color" content="#404040">
+  <script>
+    if (window.localStorage)
+    {
+      const storedTheme = window.localStorage.getItem("theme");
+      if (storedTheme)
+      {
+        document.documentElement.setAttribute("data-theme", storedTheme);
+      }
+    }
+  </script>
+
   <link rel="stylesheet" href="/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,9 +26,12 @@
 </head>
 <body>
   <header>
-    <a href="/"><h1><img src="/img/bimrocket.svg" alt="bimrocket" class="logo"></h1></a>
+    <a href="/"><h1><img src="/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+
+    <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
     <nav>
-      <button class="image-button menu-toggle"><span class="material-symbols-outlined">menu</span></button>
       <ul id="menu">
         <li><a href="/">Home</a></li>
         <li class="submenu">
@@ -43,9 +57,79 @@
 
   <main>
     <div class="content">
+      
       <h2><span class="material-symbols-outlined">download</span> Download</h2>
+      
 
       
+<p>Current version: <strong>v1.0-alpha-10</strong></p>
+<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/v1.0-alpha-10">Release notes</a></p>
+
+<section class="download">
+  <span class="material-symbols-outlined">deployed_code</span>
+  <div>
+    <h3>
+      BIMROCKET zip package for Windows x64.
+    </h3>
+    <p>Includes openjdk-17 for Windows x64.</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-tomcat-1.0-windows-x64.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Download
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      BIMROCKET generic zip package for all platforms (Linux, MacOS, Windows).
+    </h3>
+    <p>Requires openjdk-17+ that must be installed separatelly.</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-tomcat-1.0-generic.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Download
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      BIMROCKET webapp war
+    </h3>
+    <p>Requires a Jakarta 10 servlet container (like Apache tomcat 10.1).</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket.war" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Download
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      BIMROCKET server war
+    </h3>
+    <p>Requires a Jakarta 10 servlet container (like Apache tomcat 10.1).</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-server.war" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Download
+      </a>
+    </div>
+  </div>
+</section>
+
+<a href="https://github.com/bimrocket/bimrocket/releases"
+<h3>
+  Other releases
+</h3>
+
     </div>
   </main>
 

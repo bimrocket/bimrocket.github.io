@@ -6,7 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BIMROCKET - The Open BIM Platform">
   <meta name="keywords" content="BIM, THREEJS, OrientDB, MongoDB">
-  
+  <meta name="theme-color" content="#404040">
+  <script>
+    if (window.localStorage)
+    {
+      const storedTheme = window.localStorage.getItem("theme");
+      if (storedTheme)
+      {
+        document.documentElement.setAttribute("data-theme", storedTheme);
+      }
+    }
+  </script>
+
   <link rel="stylesheet" href="/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,9 +26,12 @@
 </head>
 <body>
   <header>
-    <a href="/"><h1><img src="/img/bimrocket.svg" alt="bimrocket" class="logo"></h1></a>
+    <a href="/"><h1><img src="/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+
+    <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
     <nav>
-      <button class="image-button menu-toggle"><span class="material-symbols-outlined">menu</span></button>
       <ul id="menu">
         <li><a href="/">Home</a></li>
         <li class="submenu">
@@ -43,10 +57,34 @@
 
   <main>
     <div class="content">
-      <h2><span class="material-symbols-outlined">home</span> Home</h2>
+      
 
-      <p>Welcome to bimrocket!</p>
+      <div style="margin-left: auto;margin-right: auto;text-align: center">
+<p>The Open BIM platform</p>
+<p class="featured">Now available</p>
+<p class="featured">BIMROCKET v1.0-alpha-10</p>
+<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/v1.0-alpha-10">Release notes</a></p>
 
+<a href="https://bim.santfeliu.cat" class="link-button m-1">
+  <span class="material-symbols-outlined pr-1">rocket_launch</span> Try it
+</a>
+
+<a href="/download" class="link-button m-1">
+  <span class="material-symbols-outlined pr-1">download</span> Download
+</a>
+
+<div class="screenshots">
+
+  <img src="/img/screenshots/screenshot-1.png" alt="Building" />
+
+  <img src="/img/screenshots/screenshot-2.png" alt="Building" />
+
+  <img src="/img/screenshots/screenshot-3.png" alt="Building" />
+
+</div>
+
+
+</div>
     </div>
   </main>
 
