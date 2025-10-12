@@ -4,28 +4,30 @@ layout: base.njk
 icon: home
 ---
 <div style="margin-left: auto;margin-right: auto;text-align: center">
-<p>The Open BIM platform</p>
-<p class="featured">Now available</p>
-<p class="featured">{{ product.name }} {{ product.version }}</p>
-<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/{{ product.version }}">Release notes</a></p>
 
-<a href="{{ product.testUrl }}" class="link-button m-1">
-  <span class="material-symbols-outlined pr-1">rocket_launch</span> Try it
-</a>
+  <section class="version">
+    <p>The Open BIM platform</p>
+    <p class="featured">Now available</p>
+    <p class="featured">{{ product.name }} {{ product.version }}</p>
+    <p><a href="https://github.com/bimrocket/bimrocket/releases/tag/{{ product.version }}">Release notes</a></p>
 
-<a href="/download" class="link-button m-1">
-  <span class="material-symbols-outlined pr-1">download</span> Download
-</a>
+    <a href="{{ product.testUrl }}" class="link-button m-1">
+      <span class="material-symbols-outlined pr-1">rocket_launch</span> Try it
+    </a>
 
-<div class="screenshots">
+    <a href="/download" class="link-button m-1">
+      <span class="material-symbols-outlined pr-1">download</span> Download
+    </a>
+  </section>
 
-  <img src="/img/screenshots/screenshot-1.png" alt="Building" />
+  <section class="screenshots">
 
-  <img src="/img/screenshots/screenshot-2.png" alt="Building" />
+    <img src="/img/screenshots/screenshot-1.png" alt="Screenshot 1" />
 
-  <img src="/img/screenshots/screenshot-3.png" alt="Building" />
+    <img src="/img/screenshots/screenshot-2.png" alt="Screenshot 2" />
 
-</div>
+    <img src="/img/screenshots/screenshot-3.png" alt="Screenshot 3" />
 
+  </section>
 
 </div>
