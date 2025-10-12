@@ -5,4 +5,5 @@ export default async function(eleventyConfig)
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/js");
+  eleventyConfig.addGlobalData("year", new Date().getFullYear());
 };

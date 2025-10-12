@@ -3,3 +3,71 @@ title: Download
 layout: base.njk
 icon: download
 ---
+
+<p>Current version: <strong>{{ product.version }}</strong></p>
+<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/{{ product.version }}">Release notes</a></p>
+
+<section class="download">
+  <span class="material-symbols-outlined">deployed_code</span>
+  <div>
+    <h3>
+      {{ product.name }} zip package for Windows x64.
+    </h3>
+    <p>Includes openjdk-17 for Windows x64.</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-tomcat-1.0-windows-x64.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Download
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      {{ product.name }} generic zip package for all platforms (Linux, MacOS, Windows).
+    </h3>
+    <p>Requires openjdk-17+ that must be installed separatelly.</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-tomcat-1.0-generic.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Download
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      {{ product.name }} webapp war
+    </h3>
+    <p>Requires a Jakarta 10 servlet container (like Apache tomcat 10.1).</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket.war" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Download
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      {{ product.name }} server war
+    </h3>
+    <p>Requires a Jakarta 10 servlet container (like Apache tomcat 10.1).</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-server.war" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Download
+      </a>
+    </div>
+  </div>
+</section>
+
+<a href="https://github.com/bimrocket/bimrocket/releases"
+<h3>
+  Other releases
+</h3>
