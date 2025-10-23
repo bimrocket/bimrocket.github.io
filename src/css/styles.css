@@ -46,8 +46,8 @@
   --section-background: #1c1c1c;
   --footer-color: #fafafa;
   --footer-background: #444;
-  --pre-background: #404040;
-  --code-background: #404040;
+  --pre-background: #303030;
+  --code-background: #303030;
   --link-color: #ff6060;
   --button-hover-color: #f0f0f0;
   --button-hover-background: #b05050;
@@ -448,12 +448,16 @@ pre
   padding: 2px;
 }
 
+pre .hljs
+{
+  background: transparent;  
+}
+
 .language-yaml
 {
   padding: 0;
   font-family: monospace;
   white-space: pre;
-  margin: 1em 0;
   background: transparent;
 }
 
