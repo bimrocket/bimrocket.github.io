@@ -14,7 +14,7 @@ icon: deployed_code
 - Measuring tools (length, angle, area and volume).
 - Orbit-Pan-Zoom tool.
 - Fly tool (with collision detection and ground distance control).
-- Multiple selection of objects.
+- Multiple selection tools: by point, by box, by property, by QR code or by context.
 - Face selection tool.
 - Editing of model structure and object properties.
 - Dynamic sectioning of models.
@@ -35,13 +35,15 @@ icon: deployed_code
 - Load/Export models in BRF format (JSON BimRocket format).
 - Load/Export models in STL, GLB, Wavefront OBJ and Collada formats.
 - Integrated with external services (some of them provided by bimrocket-server)
-  - Webdav server
+  - Webdav server where models, scripts, reports and other files are stored.
   - [BCF](https://en.wikipedia.org/wiki/BIM_Collaboration_Format) service (BIM Collaboration Service)
   - [bSDD](https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/) service (buildingSmart Data Dictionary)
   - [WFS](https://www.ogc.org/es/publications/standard/wfs/) service (OGC Web Feature Service)
   - [Brain4it](http://brain4it.org) (AI platform oriented to the IoT)
-  - IFCDB service (stores IFC models in external database. In progress)
-  - Print service (generates a vectorial PDF file)
+  - IFCDB service (stores IFC objects in a database)
+  - Bimrocket security service (user and role management)
+  - Bimrocket print service (generates a PDF with vector geometries)
+- Data for bimrocket-server services can be stored in OrientDB or MongoDB.
 - Modular design to easily extend functionality.
 - Web application with a responsive user interface. Support for touch devices.
 - Based on [THREE.js](https://threejs.org) library.
