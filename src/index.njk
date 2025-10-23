@@ -22,11 +22,19 @@ icon: home
 
   <section class="screenshots">
 
-    <img src="/img/screenshots/screenshot-1.png" alt="Screenshot 1" />
+  {% macro screenshot(id, title) %}
+  <a href="/img/screenshots/screenshot-{{ id }}.png" title="Screenshot {{ id }}">
+    <img src="/img/screenshots/screenshot-{{ id }}.png" alt="{{ title }}">
+  </a>
+  {% endmacro %}
 
-    <img src="/img/screenshots/screenshot-2.png" alt="Screenshot 2" />
+   {{ screenshot(1, "") }}
 
-    <img src="/img/screenshots/screenshot-3.png" alt="Screenshot 3" />
+   {{ screenshot(2, "") }}
+
+   {{ screenshot(3, "") }}
+
+   {{ screenshot(4, "") }}
 
   </section>
 

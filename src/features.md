@@ -32,7 +32,7 @@ icon: deployed_code
 - Histogram tool to visualize the distribution of values ​​for a given property.
 - Multiple file storage systems are supported: webdav server, local file system and IndexedDB.
 - Load/Export IFC models. Support for multiple IFC schemas (IFC2X3, IFC4 and IFC4X3_ADD2).
-- Load/Export models in BRF format (JSON BimRocket format).
+- Load/Export models in BRF format (JSON Bimrocket format).
 - Load/Export models in STL, GLB, Wavefront OBJ and Collada formats.
 - Integrated with external services (some of them provided by bimrocket-server)
   - Webdav server where models, scripts, reports and other files are stored.
@@ -40,11 +40,12 @@ icon: deployed_code
   - [bSDD](https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/) service (buildingSmart Data Dictionary)
   - [WFS](https://www.ogc.org/es/publications/standard/wfs/) service (OGC Web Feature Service)
   - [Brain4it](http://brain4it.org) (AI platform oriented to the IoT)
-  - IFCDB service (stores IFC objects in a database)
+  - Bimrocket IFCDB service (stores IFC objects in a database)
   - Bimrocket security service (user and role management)
   - Bimrocket print service (generates a PDF with vector geometries)
 - Data for bimrocket-server services can be stored in OrientDB or MongoDB.
 - Modular design to easily extend functionality.
 - Web application with a responsive user interface. Support for touch devices.
+- Multi-language support (currently available in English, Spanish and Catalan).
 - Based on [THREE.js](https://threejs.org) library.
 - Built with Maven.
