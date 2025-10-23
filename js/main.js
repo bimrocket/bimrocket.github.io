@@ -101,6 +101,18 @@ function setTheme(theme)
   document.documentElement.setAttribute("data-theme", theme);
   window.localStorage.setItem("theme", theme);
   updateThemeButton();
+
+  const link = document.getElementById('hljs-theme');
+  let hljsCss;
+  if (theme === "dark")
+  {
+    hljsCss = "github-dark.min.css";
+  } 
+  else 
+  {
+    hljsCss = "github.min.css";
+  }
+  link.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/" + hljsCss;
 }
 
 function clearDrops(currentMenu)

@@ -7,6 +7,8 @@
   <meta name="description" content="BIMROCKET - The Open BIM Platform">
   <meta name="keywords" content="BIM, THREEJS, OrientDB, MongoDB">
   <meta name="theme-color" content="#404040">
+  <link id="hljs-theme" rel="stylesheet" href="">
+
   <script>
     if (window.localStorage)
     {
@@ -15,6 +17,17 @@
       {
         document.documentElement.setAttribute("data-theme", storedTheme);
       }
+      const link = document.getElementById('hljs-theme');
+      let hljsCss;
+      if (storedTheme === "dark")
+      {
+        hljsCss = "github-dark.min.css";
+      } 
+      else 
+      {
+        hljsCss = "github.min.css";
+      }
+      link.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/" + hljsCss;
     }
   </script>
 
@@ -23,6 +36,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Raleway:ital,wght@0,100..900;1,100..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/yaml.min.js"></script>
 </head>
 <body>
   <header>
@@ -72,7 +88,7 @@
 <li>Measuring tools (length, angle, area and volume).</li>
 <li>Orbit-Pan-Zoom tool.</li>
 <li>Fly tool (with collision detection and ground distance control).</li>
-<li>Multiple selection of objects.</li>
+<li>Multiple selection tools: by point, by box, by property, by QR code or by context.</li>
 <li>Face selection tool.</li>
 <li>Editing of model structure and object properties.</li>
 <li>Dynamic sectioning of models.</li>
@@ -94,15 +110,17 @@
 <li>Load/Export models in STL, GLB, Wavefront OBJ and Collada formats.</li>
 <li>Integrated with external services (some of them provided by bimrocket-server)
 <ul>
-<li>Webdav server</li>
+<li>Webdav server where models, scripts, reports and other files are stored.</li>
 <li><a href="https://en.wikipedia.org/wiki/BIM_Collaboration_Format">BCF</a> service (BIM Collaboration Service)</li>
 <li><a href="https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/">bSDD</a> service (buildingSmart Data Dictionary)</li>
 <li><a href="https://www.ogc.org/es/publications/standard/wfs/">WFS</a> service (OGC Web Feature Service)</li>
 <li><a href="http://brain4it.org">Brain4it</a> (AI platform oriented to the IoT)</li>
-<li>IFCDB service (stores IFC models in external database. In progress)</li>
-<li>Print service (generates a vectorial PDF file)</li>
+<li>IFCDB service (stores IFC objects in a database)</li>
+<li>Bimrocket security service (user and role management)</li>
+<li>Bimrocket print service (generates a PDF with vector geometries)</li>
 </ul>
 </li>
+<li>Data for bimrocket-server services can be stored in OrientDB or MongoDB.</li>
 <li>Modular design to easily extend functionality.</li>
 <li>Web application with a responsive user interface. Support for touch devices.</li>
 <li>Based on <a href="https://threejs.org">THREE.js</a> library.</li>
@@ -123,6 +141,8 @@
 
   <script src="/js/main.js">
   </script>
+
+  <script>hljs.highlightAll();</script>
 
 </body>
 </html>
