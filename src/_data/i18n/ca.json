@@ -1,0 +1,18 @@
+{
+  "lemma" : "La plataforma BIM per a tothom",
+  "language_selector" : "Selector d'idioma",
+
+  "menu.home": "Inici",
+  "menu.product": "Producte",
+  "menu.features": "Característiques",
+  "menu.architecture": "Arquitectura",
+  "menu.license": "Llicència",
+  "menu.documentation": "Documentació",
+  "menu.install": "Instal·lació",
+  "menu.configuration": "Configuració",
+  "menu.user_guides": "Guies d'usuari",
+  "menu.download": "Baixades",
+
+  "button.try": "Prova",
+  "button.download": "Baixa"
+}

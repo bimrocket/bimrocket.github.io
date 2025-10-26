@@ -1,0 +1,75 @@
+---
+title: menu.download
+layout: layouts/base.njk
+icon: download
+language: ca
+---
+
+<p>Versió actual: <strong>{{ product.version }}</strong></p>
+<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/{{ product.version }}">Notes de la versió</a></p>
+
+<section class="download">
+  <span class="material-symbols-outlined">deployed_code</span>
+  <div>
+    <h3>
+      Paquet zip de {{ product.name }} per a Windows x64.
+    </h3>
+    <p>Inclou openjdk-17 per a Windows x64.</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-tomcat-1.0-windows-x64.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      Paquet zip genèric de {{ product.name }} per a totes les plataformes (Linux, MacOS, Windows).
+    </h3>
+    <p>Requereix la instal·lació d'una màquina virtual de Java versió 17 o superior.</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-tomcat-1.0-generic.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      Aplicació de frontend de {{ product.name }} en format war
+    </h3>
+    <p>Requereix un contenidor de servlets Jakarta 10 (com Apache tomcat 10.1).</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket.war" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      Aplicació de backend de {{ product.name }} en format war
+    </h3>
+    <p>Requereix un contenidor de servlets Jakarta 10 (com Apache tomcat 10.1).</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-server.war" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<a href="https://github.com/bimrocket/bimrocket/releases">
+  <h3>
+    Altres versions
+  </h3>
+</a>

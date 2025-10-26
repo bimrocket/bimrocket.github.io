@@ -1,0 +1,18 @@
+{
+  "lemma" : "The BIM platform for everyone",
+  "language_selector" : "Language selector",
+
+  "menu.home": "Home",
+  "menu.product": "Product",
+  "menu.features": "Features",
+  "menu.architecture": "Architecture",
+  "menu.license": "License",
+  "menu.documentation": "Documentation",
+  "menu.install": "Install",
+  "menu.configuration": "Configuration",
+  "menu.user_guides": "User guides",
+  "menu.download": "Download",
+
+  "button.try": "Try it",
+  "button.download": "Download"
+}

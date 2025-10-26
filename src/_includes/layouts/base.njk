@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ language }}">
 <head>
-  <title>{{ title }} | {{ product.name }}</title>
+  <title>{{ t(title) }} | {{ product.name }}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BIMROCKET - The Open BIM Platform">
@@ -22,8 +22,8 @@
       if (storedTheme === "dark")
       {
         hljsCss = "github-dark.min.css";
-      } 
-      else 
+      }
+      else
       {
         hljsCss = "github.min.css";
       }
@@ -31,7 +31,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
@@ -42,39 +42,45 @@
 </head>
 <body>
   <header>
-    <a href="/"><h1><img src="/img/bimrocket.svg" alt="{{ product.name }}" class="logo"></h1></a>
+    <a href="/{{ language }}"><h1><img src="/assets/img/bimrocket.svg" alt="{{ product.name }}" class="logo"></h1></a>
+
+    <select id="lang-select" title="{{ t("language_selector")}}">
+      <option value="en" data-short="EN" {% if language == 'en' %}selected{% endif %}>EN</option>
+      <option value="es" data-short="ES" {% if language == 'es' %}selected{% endif %}>ES</option>
+      <option value="ca" data-short="CA" {% if language == 'ca' %}selected{% endif %}>CA</option>
+    </select>
 
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
     <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
 
     <nav>
       <ul id="menu">
-        <li><a href="/">Home</a></li>
+        <li><a href="/{{ language }}">{{ t("menu.home") }}</a></li>
         <li class="submenu">
-          <a href="#">Product <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <a href="#">{{ t("menu.product") }} <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/features">Features</a></li>
-            <li><a href="/architecture">Architecture</a></li>
-            <li><a href="/license">License</a></li>
+            <li><a href="/{{ language }}/features">{{ t("menu.features") }}</a></li>
+            <li><a href="/{{ language }}/architecture">{{ t("menu.architecture") }}</a></li>
+            <li><a href="/{{ language }}/license">{{ t("menu.license") }}</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="#">Documentation <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <a href="#">{{ t("menu.documentation") }} <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/install">Install</a></li>
-            <li><a href="/configuration">Configuration</a></li>
-            <li><a href="/user_guides">User guides</a></li>
+            <li><a href="/{{ language }}/install">{{ t("menu.install") }}</a></li>
+            <li><a href="/{{ language }}/configuration">{{ t("menu.configuration") }}</a></li>
+            <li><a href="/{{ language }}/user_guides">{{ t("menu.user_guides") }}</a></li>
           </ul>
         </li>
-        <li><a href="/download">Download</a></li>
+        <li><a href="/{{ language }}/download">{{ t("menu.download") }}</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
     <div class="content">
-      {% if page.url != "/" %}
-      <h2><span class="material-symbols-outlined">{{ icon }}</span> {{ title }}</h2>
+      {% if page.url != "/" + language + "/" %}
+      <h2><span class="material-symbols-outlined">{{ icon }}</span> {{ t(title) }}</h2>
       {% endif %}
 
       {{ content | safe }}
@@ -82,15 +88,15 @@
   </main>
 
   <footer>
-    <p><a href="/">© {{ year }} {{ product.name }}</a></p>
-    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/img/github.svg" alt="github" /> GitHub</a>
+    <p><a href="/{{ language }}">© {{ year }} {{ product.name }}</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/assets/img/github.svg" alt="github" /> GitHub</a>
   </footer>
 
   <button id="up-button" title="Anar amunt">
     <span class="material-symbols-outlined">arrow_upward</span>
   </button>
 
-  <script src="/js/main.js">
+  <script src="/assets/js/main.js">
   </script>
 
   <script>hljs.highlightAll();</script>

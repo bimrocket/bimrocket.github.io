@@ -1,7 +1,8 @@
 ---
-title: Install
-layout: base.njk
+title: menu.install
+layout: layouts/base.njk
 icon: install_desktop
+language: en
 ---
 
 Bimrocket can be installed using any of the following methods:
@@ -52,4 +53,4 @@ Some Bimrocket services (like BCF and cloudfs) may require authentication. These
 
 The `admin` password can be changed via the Bimrocket server configuration file. More details about server configuration can be found here:
 
-[Server configuration](/configuration)
+[Server configuration](/{{ language }}/configuration)

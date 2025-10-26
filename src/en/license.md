@@ -1,7 +1,8 @@
 ---
-title: License
-layout: base.njk
+title: menu.license
+layout: layouts/base.njk
 icon: contract
+language: en
 ---
 
 BIMROCKET

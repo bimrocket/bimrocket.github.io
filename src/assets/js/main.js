@@ -4,6 +4,7 @@ const footer = document.querySelector("footer");
 const menuButton = document.querySelector(".menu-toggle");
 const themeButton = document.querySelector(".theme-toggle");
 const upButton = document.getElementById('up-button');
+const langSelect = document.getElementById('lang-select');
 
 function registerListeners()
 {
@@ -17,6 +18,13 @@ function registerListeners()
     {
       upButton.style.display = "none";
     }
+  });
+
+  langSelect.addEventListener('change', e =>
+  {
+    const selected = e.target.value;
+    const path = location.pathname.replace(/^\/(en|es|ca)\//, '');
+    location.href = `/${selected}/${path}`;
   });
 
   upButton.addEventListener("click", event =>
@@ -41,7 +49,6 @@ function registerListeners()
       menuButton.querySelector("span").textContent = "menu";
     }
   });
-
 
   themeButton.addEventListener("click", event =>
   {
@@ -89,6 +96,12 @@ function registerListeners()
   }
 }
 
+function updateLanguageLabel()
+{
+  const opt = langSelect.selectedOptions[0];
+  langSelect.dataset.display = opt.dataset.short;
+}
+
 function isVerticalMenu()
 {
   const width = window.innerWidth;
@@ -107,8 +120,8 @@ function setTheme(theme)
   if (theme === "dark")
   {
     hljsCss = "github-dark.min.css";
-  } 
-  else 
+  }
+  else
   {
     hljsCss = "github.min.css";
   }
@@ -142,6 +155,8 @@ function updateThemeButton()
   }
 }
 
+updateLanguageLabel();
 registerListeners();
 updateThemeButton();
 clearDrops();
+

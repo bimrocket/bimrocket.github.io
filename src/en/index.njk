@@ -1,0 +1,42 @@
+---
+title: menu.home
+layout: layouts/base.njk
+icon: home
+language: en
+---
+<div style="margin-left: auto;margin-right: auto;text-align: center">
+
+  <section class="version">
+    <p>{{ t("lemma") }}</p>
+    <p class="featured">Now available</p>
+    <p class="featured">{{ product.name }} {{ product.version }}</p>
+    <p><a href="https://github.com/bimrocket/bimrocket/releases/tag/{{ product.version }}">Release notes</a></p>
+
+    <a href="{{ product.testUrl }}" class="link-button m-1">
+      <span class="material-symbols-outlined pr-1">rocket_launch</span> {{ t("button.try") }}
+    </a>
+
+    <a href="/{{ language }}/download" class="link-button m-1">
+      <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
+    </a>
+  </section>
+
+  <section class="screenshots">
+
+  {% macro screenshot(id, title) %}
+  <a href="/assets/img/screenshots/screenshot-{{ id }}.png" title="Screenshot {{ id }}">
+    <img src="/assets/img/screenshots/screenshot-{{ id }}.png" alt="{{ title }}">
+  </a>
+  {% endmacro %}
+
+   {{ screenshot(1, "") }}
+
+   {{ screenshot(2, "") }}
+
+   {{ screenshot(3, "") }}
+
+   {{ screenshot(4, "") }}
+
+  </section>
+
+</div>

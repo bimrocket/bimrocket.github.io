@@ -1,11 +1,12 @@
 ---
-title: Features
-layout: base.njk
+title: menu.features
+layout: layouts/base.njk
 icon: deployed_code
+language: en
 ---
 
 - Parametric design tool based on [CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry).
-- Supported primitives: solids, profiles (2d shapes) and cords (3d polylines).
+- Supported graphic primitives: solids, profiles (2d shapes) and cords (3d polylines).
 - Profile/cord creation and editing.
 - Extrusion and revolution of profiles to create solids.
 - Union, intersection and subtraction of solids.
@@ -24,7 +25,7 @@ icon: deployed_code
 - Scripting tool (using javascript language).
 - Reporting tool to check conditions on the model objects (supported reporting formats: BRS and [IDS](https://www.buildingsmart.org/what-is-information-delivery-specification-ids/)).
 - Object controllers (a Controller is a program that changes the state of an object when a certain event occurs).
-- BIM Inventory tool to list the IFC types, classifications, groups and layers of the model.
+- BIM Inventory tool to list the IFC object types, classifications, groups and layers of the model.
 - BIM Layout tool to visualize the interior layout of the building.
 - BIM Inspector tool to inspect the IFC entities of the model.
 - BIM Delta tool to detect changes between two versions of an IFC file.
@@ -34,18 +35,18 @@ icon: deployed_code
 - Load/Export IFC models. Support for multiple IFC schemas (IFC2X3, IFC4 and IFC4X3_ADD2).
 - Load/Export models in BRF format (JSON Bimrocket format).
 - Load/Export models in STL, GLB, Wavefront OBJ and Collada formats.
-- Integrated with external services (some of them provided by bimrocket-server)
+- Integrated with external services (some of them provided by **bimrocket-server**)
   - Webdav server where models, scripts, reports and other files are stored.
-  - [BCF](https://en.wikipedia.org/wiki/BIM_Collaboration_Format) service (BIM Collaboration Service)
-  - [bSDD](https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/) service (buildingSmart Data Dictionary)
-  - [WFS](https://www.ogc.org/es/publications/standard/wfs/) service (OGC Web Feature Service)
+  - [BCF](https://en.wikipedia.org/wiki/BIM_Collaboration_Format) service (*BIM Collaboration Service*)
+  - [bSDD](https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/) service (*buildingSmart Data Dictionary*)
+  - [WFS](https://www.ogc.org/es/publications/standard/wfs/) service (*OGC Web Feature Service*)
   - [Brain4it](http://brain4it.org) (AI platform oriented to the IoT)
   - Bimrocket IFCDB service (stores IFC objects in a database)
   - Bimrocket security service (user and role management)
-  - Bimrocket print service (generates a PDF with vector geometries)
-- Data for bimrocket-server services can be stored in OrientDB or MongoDB.
+  - Bimrocket print service (generates a PDF file with vector geometries)
+- Data for **bimrocket-server** services can be stored in OrientDB or MongoDB.
 - Modular design to easily extend functionality.
 - Web application with a responsive user interface. Support for touch devices.
-- Multi-language support (currently available in English, Spanish and Catalan).
-- Based on [THREE.js](https://threejs.org) library.
-- Built with Maven.
+- Multi-language support (currently available in english, spanish and catalan).
+- Based on the [THREE.js](https://threejs.org) graphic library.
+- Project built with Maven.

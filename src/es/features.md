@@ -1,0 +1,52 @@
+---
+title: menu.features
+layout: layouts/base.njk
+icon: deployed_code
+language: es
+---
+
+- Herramienta de diseño paramétrico basada en [CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry).
+- Primitivas gráficas soportadas: sólidos, perfiles (formas 2D) y cuerdas (polilíneas 3D).
+- Creación y edición de perfiles y cuerdas.
+- Extrusión y revolución de perfiles para crear sólidos.
+- Unión, intersección y sustracción de sólidos.
+- Transformación de objetos (traslación, rotación, escala).
+- Definición de fórmulas para los valores de propiedades de los objetos.
+- Herramientas de medición (longitud, ángulo, área y volumen).
+- Herramienta de órbita, desplazamiento y zoom.
+- Herramienta de vuelo (con detección de colisiones y control de distancia al suelo).
+- Diversas herramientas de selección: por punto, por caja, por propiedad, por código QR o por contexto.
+- Herramienta de selección de caras.
+- Edición de la estructura del modelo y de las propiedades de los objetos.
+- Seccionamiento dinámico de modelos.
+- Iluminación realista: proyección de sombras y oclusión ambiental.
+- Herramienta de simulación solar.
+- Ajuste a vértices, aristas y caras en las herramientas de dibujo, medición y transformación.
+- Herramienta de scripting (utilizando el lenguaje JavaScript).
+- Herramienta de informes para analizar condiciones sobre los objetos del modelo (formatos de informe soportados: BRS y [IDS](https://www.buildingsmart.org/what-is-information-delivery-specification-ids/)).
+- Controladores de objetos (un *Controller* es un programa que cambia el estado de un objeto cuando se produce un determinado evento).
+- Herramienta de inventario BIM para listar los tipos de objeto IFC, las clasificaciones, los grupos y las capas del modelo.
+- Herramienta de distribución BIM para visualizar la disposición interior del edificio.
+- Herramienta de inspección BIM para inspeccionar las entidades IFC del modelo.
+- Herramienta BIM Delta para detectar cambios entre dos versiones de un archivo IFC.
+- Herramienta de búsqueda para encontrar propiedades del modelo por nombre o por valor.
+- Herramienta de histograma para visualizar la distribución de valores de una propiedad determinada.
+- Se soportan múltiples sistemas de almacenamiento de archivos: servidor WebDAV, sistema de archivos local e IndexedDB.
+- Carga/exportación de modelos IFC. Compatibilidad con múltiples esquemas IFC (IFC2X3, IFC4 e IFC4X3_ADD2).
+- Carga/exportación de modelos en formato BRF (formato JSON de Bimrocket).
+- Carga/exportación de modelos en formatos STL, GLB, Wavefront OBJ y Collada.
+- Integración con servicios externos (algunos proporcionados por **bimrocket-server**):
+  - Servidor WebDAV donde se almacenan modelos, scripts, informes y otros archivos.
+  - Servicio [BCF](https://en.wikipedia.org/wiki/BIM_Collaboration_Format) (*BIM Collaboration Service*).
+  - Servicio [bSDD](https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/) (*buildingSmart Data Dictionary*).
+  - Servicio [WFS](https://www.ogc.org/es/publications/standard/wfs/) (*OGC Web Feature Service*).
+  - [Brain4it](http://brain4it.org) (plataforma de IA orientada al IoT).
+  - Servicio IFCDB de Bimrocket (almacena objetos IFC en una base de datos).
+  - Servicio de seguridad de Bimrocket (gestión de usuarios y roles).
+  - Servicio de impresión de Bimrocket (genera un archivo PDF con geometrías vectoriales).
+- Los datos de los servicios de **bimrocket-server** se pueden almacenar en OrientDB o MongoDB.
+- Diseño modular para extender fácilmente la funcionalidad.
+- Aplicación web con una interfaz de usuario adaptable (*responsive*). Compatibilidad con dispositivos táctiles.
+- Soporte multilingüe (actualmente disponible en inglés, castellano y catalán).
+- Basada en la librería gráfica [THREE.js](https://threejs.org).
+- Proyecto generado con Maven.

@@ -1,0 +1,52 @@
+---
+title: menu.features
+layout: layouts/base.njk
+icon: deployed_code
+language: ca
+---
+
+- Eina de disseny paramètric basada en [CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry).
+- Primitives gràfiques suportades: sòlids, perfils (formes 2D) i cordes (polilínies 3D).
+- Creació i edició de perfils i cordes.
+- Extrusió i revolució de perfils per crear sòlids.
+- Unió, intersecció i substracció de sòlids.
+- Transformació d’objectes (translació, rotació, escala).
+- Definició de fórmules per als valors de propietats dels objectes.
+- Eines de mesura (longitud, angle, àrea i volum).
+- Eina d’òrbita, desplaçament i zoom.
+- Eina de vol (amb detecció de col·lisions i control de distància al terra).
+- Diverses eines de selecció: per punt, per caixa, per propietat, per codi QR o per context.
+- Eina de selecció de cares.
+- Edició de l’estructura del model i de les propietats dels objectes.
+- Seccionament dinàmic de models.
+- Il·luminació realista: projecció d’ombres i oclusió ambiental.
+- Eina de simulació solar.
+- Ajust a vèrtexs, arestes i cares a les eines de dibuix, mesura i transformació.
+- Eina d’scripting (utilitzant el llenguatge JavaScript).
+- Eina d’informes per analitzar condicions sobre els objectes del model (formats d’informe suportats: BRS i [IDS](https://www.buildingsmart.org/what-is-information-delivery-specification-ids/)).
+- Controladors d’objectes (un *Controller* és un programa que canvia l’estat d’un objecte quan es produeix un determinat esdeveniment).
+- Eina d’inventari BIM per llistar els tipus d'objecte IFC, les classificacions, els grups i les capes del model.
+- Eina de distribució BIM per visualitzar la disposició interior de l’edifici.
+- Eina d’inspecció BIM per inspeccionar les entitats IFC del model.
+- Eina BIM Delta per detectar canvis entre dues versions d’un fitxer IFC.
+- Eina de cerca per trobar propietats del model per nom o per valor.
+- Eina d’histograma per visualitzar la distribució de valors d’una propietat determinada.
+- S’admeten múltiples sistemes d’emmagatzematge de fitxers: servidor WebDAV, sistema de fitxers local i IndexedDB.
+- Càrrega/exportació de models IFC. Compatibilitat amb múltiples esquemes IFC (IFC2X3, IFC4 i IFC4X3_ADD2).
+- Càrrega/exportació de models en format BRF (format JSON de Bimrocket).
+- Càrrega/exportació de models en formats STL, GLB, Wavefront OBJ i Collada.
+- Integració amb serveis externs (alguns proporcionats per **bimrocket-server**):
+  - Servidor WebDAV on s’emmagatzemen models, scripts, informes i altres fitxers.
+  - Servei [BCF](https://en.wikipedia.org/wiki/BIM_Collaboration_Format) (*BIM Collaboration Service*).
+  - Servei [bSDD](https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/) (*buildingSmart Data Dictionary*).
+  - Servei [WFS](https://www.ogc.org/es/publications/standard/wfs/) (*OGC Web Feature Service*).
+  - [Brain4it](http://brain4it.org) (plataforma d’IA orientada a l’IoT).
+  - Servei IFCDB de Bimrocket (emmagatzema objectes IFC en una base de dades).
+  - Servei de seguretat de Bimrocket (gestió d’usuaris i rols).
+  - Servei d’impressió de Bimrocket (genera un fitxer PDF amb geometries vectorials).
+- Les dades dels serveis de **bimrocket-server** es poden emmagatzemar a OrientDB o MongoDB.
+- Disseny modular per estendre fàcilment la funcionalitat.
+- Aplicació web amb una interfície d’usuari adaptable (*responsive*). Compatibilitat amb dispositius tàctils.
+- Suport multilingüe (actualment disponible en anglès, castellà i català).
+- Basada en la llibreria gràfica [THREE.js](https://threejs.org).
+- Projecte generat amb Maven.

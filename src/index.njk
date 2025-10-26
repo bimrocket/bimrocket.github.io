@@ -1,41 +1,28 @@
----
-title: Home
-layout: base.njk
-icon: home
----
-<div style="margin-left: auto;margin-right: auto;text-align: center">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BIMROCKET</title>
+  <meta http-equiv="refresh" content="3; url=/en/">
+  <script>
+    (function() {
+      const supported = ['en', 'es', 'ca'];
 
-  <section class="version">
-    <p>The Open BIM platform</p>
-    <p class="featured">Now available</p>
-    <p class="featured">{{ product.name }} {{ product.version }}</p>
-    <p><a href="https://github.com/bimrocket/bimrocket/releases/tag/{{ product.version }}">Release notes</a></p>
+      const lang = (navigator.languages && navigator.languages[0]) ||
+         navigator.language || supported[0];
 
-    <a href="{{ product.testUrl }}" class="link-button m-1">
-      <span class="material-symbols-outlined pr-1">rocket_launch</span> Try it
-    </a>
+      const short = lang.substring(0, 2).toLowerCase();
 
-    <a href="/download" class="link-button m-1">
-      <span class="material-symbols-outlined pr-1">download</span> Download
-    </a>
-  </section>
+      const chosen = supported.includes(short) ? short : supported[0];
 
-  <section class="screenshots">
-
-  {% macro screenshot(id, title) %}
-  <a href="/img/screenshots/screenshot-{{ id }}.png" title="Screenshot {{ id }}">
-    <img src="/img/screenshots/screenshot-{{ id }}.png" alt="{{ title }}">
-  </a>
-  {% endmacro %}
-
-   {{ screenshot(1, "") }}
-
-   {{ screenshot(2, "") }}
-
-   {{ screenshot(3, "") }}
-
-   {{ screenshot(4, "") }}
-
-  </section>
-
-</div>
+      if (!location.pathname.startsWith('/' + chosen + '/'))
+      {
+        location.replace('/' + chosen + '/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>BIMROCKET</p>
+</body>
+</html>
