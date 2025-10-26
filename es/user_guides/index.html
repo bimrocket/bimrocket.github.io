@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <title>License | BIMROCKET</title>
+  <title>Guias de usuario | BIMROCKET</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BIMROCKET - The Open BIM Platform">
@@ -22,8 +22,8 @@
       if (storedTheme === "dark")
       {
         hljsCss = "github-dark.min.css";
-      } 
-      else 
+      }
+      else
       {
         hljsCss = "github.min.css";
       }
@@ -31,7 +31,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
@@ -42,31 +42,37 @@
 </head>
 <body>
   <header>
-    <a href="/"><h1><img src="/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+    <a href="/es"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+
+    <select id="lang-select" title="Selector de idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" selected>ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
 
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
     <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
 
     <nav>
       <ul id="menu">
-        <li><a href="/">Home</a></li>
+        <li><a href="/es">Inicio</a></li>
         <li class="submenu">
-          <a href="#">Product <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <a href="#">Producto <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/features">Features</a></li>
-            <li><a href="/architecture">Architecture</a></li>
-            <li><a href="/license">License</a></li>
+            <li><a href="/es/features">Características</a></li>
+            <li><a href="/es/architecture">Arquitectura</a></li>
+            <li><a href="/es/license">Licencia</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="#">Documentation <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <a href="#">Documentación <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/install">Install</a></li>
-            <li><a href="/configuration">Configuration</a></li>
-            <li><a href="/user_guides">User guides</a></li>
+            <li><a href="/es/install">Instalación</a></li>
+            <li><a href="/es/configuration">Configuración</a></li>
+            <li><a href="/es/user_guides">Guias de usuario</a></li>
           </ul>
         </li>
-        <li><a href="/download">Download</a></li>
+        <li><a href="/es/download">Descargas</a></li>
       </ul>
     </nav>
   </header>
@@ -74,44 +80,23 @@
   <main>
     <div class="content">
       
-      <h2><span class="material-symbols-outlined">contract</span> License</h2>
+      <h2><span class="material-symbols-outlined">support</span> Guias de usuario</h2>
       
 
-      <p>BIMROCKET</p>
-<p>Copyright (C) 2021-2025, Ajuntament de Sant Feliu de Llobregat</p>
-<p>This program is licensed and may be used, modified and redistributed under
-the terms of the European Public License (EUPL), either version 1.1 or (at
-your option) any later version as soon as they are approved by the European
-Commission.</p>
-<p>Alternatively, you may redistribute and/or modify this program under the
-terms of the GNU Lesser General Public License as published by the Free
-Software Foundation; either  version 3 of the License, or (at your option)
-any later version.</p>
-<p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p>
-<p>See the licenses for the specific language governing permissions, limitations
-and more details.</p>
-<p>You should have received a copy of the EUPL1.1 and the LGPLv3 licenses along
-with this program; if not, you may find them at:</p>
-<p><a href="https://joinup.ec.europa.eu/software/page/eupl/licence-eupl">https://joinup.ec.europa.eu/software/page/eupl/licence-eupl</a></p>
-<p><a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a></p>
-<p>and</p>
-<p><a href="https://www.gnu.org/licenses/lgpl.txt">https://www.gnu.org/licenses/lgpl.txt</a></p>
-
+      
     </div>
   </main>
 
   <footer>
-    <p><a href="/">© 2025 BIMROCKET</a></p>
-    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/img/github.svg" alt="github" /> GitHub</a>
+    <p><a href="/es">© 2025 BIMROCKET</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/assets/img/github.svg" alt="github" /> GitHub</a>
   </footer>
 
   <button id="up-button" title="Anar amunt">
     <span class="material-symbols-outlined">arrow_upward</span>
   </button>
 
-  <script src="/js/main.js">
+  <script src="/assets/js/main.js">
   </script>
 
   <script>hljs.highlightAll();</script>

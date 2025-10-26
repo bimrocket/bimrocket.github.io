@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <title>Architecture | BIMROCKET</title>
+  <title>Arquitectura | BIMROCKET</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BIMROCKET - The Open BIM Platform">
@@ -22,8 +22,8 @@
       if (storedTheme === "dark")
       {
         hljsCss = "github-dark.min.css";
-      } 
-      else 
+      }
+      else
       {
         hljsCss = "github.min.css";
       }
@@ -31,7 +31,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
@@ -42,31 +42,37 @@
 </head>
 <body>
   <header>
-    <a href="/"><h1><img src="/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+    <a href="/es"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+
+    <select id="lang-select" title="Selector de idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" selected>ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
 
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
     <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
 
     <nav>
       <ul id="menu">
-        <li><a href="/">Home</a></li>
+        <li><a href="/es">Inicio</a></li>
         <li class="submenu">
-          <a href="#">Product <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <a href="#">Producto <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/features">Features</a></li>
-            <li><a href="/architecture">Architecture</a></li>
-            <li><a href="/license">License</a></li>
+            <li><a href="/es/features">Características</a></li>
+            <li><a href="/es/architecture">Arquitectura</a></li>
+            <li><a href="/es/license">Licencia</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="#">Documentation <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <a href="#">Documentación <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/install">Install</a></li>
-            <li><a href="/configuration">Configuration</a></li>
-            <li><a href="/user_guides">User guides</a></li>
+            <li><a href="/es/install">Instalación</a></li>
+            <li><a href="/es/configuration">Configuración</a></li>
+            <li><a href="/es/user_guides">Guias de usuario</a></li>
           </ul>
         </li>
-        <li><a href="/download">Download</a></li>
+        <li><a href="/es/download">Descargas</a></li>
       </ul>
     </nav>
   </header>
@@ -74,12 +80,12 @@
   <main>
     <div class="content">
       
-      <h2><span class="material-symbols-outlined">dashboard_2</span> Architecture</h2>
+      <h2><span class="material-symbols-outlined">dashboard_2</span> Arquitectura</h2>
       
 
       
-<a href="/img/architecture.png" title="view image">
-  <img src="/img/architecture.png" alt="BIMROCKET architecture" style="max-width: 100%">
+<a href="/assets/img/architecture.png" title="view image">
+  <img src="/assets/img/architecture.png" alt="BIMROCKET architecture" style="max-width: 100%">
 </a>
 
 
@@ -87,15 +93,15 @@
   </main>
 
   <footer>
-    <p><a href="/">© 2025 BIMROCKET</a></p>
-    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/img/github.svg" alt="github" /> GitHub</a>
+    <p><a href="/es">© 2025 BIMROCKET</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/assets/img/github.svg" alt="github" /> GitHub</a>
   </footer>
 
   <button id="up-button" title="Anar amunt">
     <span class="material-symbols-outlined">arrow_upward</span>
   </button>
 
-  <script src="/js/main.js">
+  <script src="/assets/js/main.js">
   </script>
 
   <script>hljs.highlightAll();</script>

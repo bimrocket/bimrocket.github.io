@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Configuración | BIMROCKET</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BIMROCKET - The Open BIM Platform">
+  <meta name="keywords" content="BIM, THREEJS, OrientDB, MongoDB">
+  <meta name="theme-color" content="#404040">
+  <link id="hljs-theme" rel="stylesheet" href="">
+
+  <script>
+    if (window.localStorage)
+    {
+      const storedTheme = window.localStorage.getItem("theme");
+      if (storedTheme)
+      {
+        document.documentElement.setAttribute("data-theme", storedTheme);
+      }
+      const link = document.getElementById('hljs-theme');
+      let hljsCss;
+      if (storedTheme === "dark")
+      {
+        hljsCss = "github-dark.min.css";
+      }
+      else
+      {
+        hljsCss = "github.min.css";
+      }
+      link.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/" + hljsCss;
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Raleway:ital,wght@0,100..900;1,100..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/yaml.min.js"></script>
+</head>
+<body>
+  <header>
+    <a href="/es"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+
+    <select id="lang-select" title="Selector de idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" selected>ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
+
+    <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
+    <nav>
+      <ul id="menu">
+        <li><a href="/es">Inicio</a></li>
+        <li class="submenu">
+          <a href="#">Producto <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <ul>
+            <li><a href="/es/features">Características</a></li>
+            <li><a href="/es/architecture">Arquitectura</a></li>
+            <li><a href="/es/license">Licencia</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Documentación <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <ul>
+            <li><a href="/es/install">Instalación</a></li>
+            <li><a href="/es/configuration">Configuración</a></li>
+            <li><a href="/es/user_guides">Guias de usuario</a></li>
+          </ul>
+        </li>
+        <li><a href="/es/download">Descargas</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="content">
+      
+      <h2><span class="material-symbols-outlined">settings</span> Configuración</h2>
+      
+
+      <p>La configuración del servidor <strong>Bimrocket</strong> se gestiona con la librería <a href="https://smallrye.io/smallrye-config">smallrye-config</a> que sigue la especificación <a href="https://microprofile.io/specifications/microprofile-config-2/">microprofile-config</a>. Esta librería puede obtener parámetros de configuración desde múltiples fuentes al mismo tiempo (variables de entorno, propiedades de la JVM, ficheros externos, etc.).
+Por defecto, Bimrocket define estos parámetros en un archivo YAML como este:</p>
+<pre><code class="language-yaml"># bimrocket-server config
+
+# service config
+services:
+
+  # security service
+  security:
+    adminPassword: bimrocket
+    passwordPattern: '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&amp;+=_\-\.])(?=\S+$).{8,}$'
+    authorizationCacheTimeout: 300
+    userCacheTimeout: 300
+    roleCacheTimeout: 300
+    ldap:
+      enabled: false
+      url: ldap://dc1.santfeliu.local
+      domain: santfeliu.local
+      searchBase: DC=santfeliu,DC=local
+      adminUsername: admin
+      adminPassword: changeit
+    store:
+      class: org.bimrocket.service.security.store.SecurityOrientDaoStore
+      orient:
+        database: bimdb
+
+  # file service
+  file:
+    store:
+      class: org.bimrocket.service.file.store.filesystem.FileSystemFileStore
+      filesystem:
+        directory: ${BIMROCKET_DATA_PATH}/cloudfs
+    folders:
+      - models
+      - scripts
+      - reports
+      - ifc_snapshots
+
+  # bcf service
+  bcf:
+    projectTemplate:
+    store:
+      class: org.bimrocket.service.bcf.store.BcfOrientDaoStore
+      orient:
+        database: bimdb
+    mail:
+      createTopic:
+        subject: '#{project.name}##{index}: #{title} [#{priority}]'
+        body: '#{description}'
+
+  # ifcdb service
+  ifcdb:
+    schemas:
+      - IFC2X3
+      - IFC4
+    maxFileSizeMb: 200
+    store:
+      class: org.bimrocket.service.ifcdb.store.orient.OrientIfcStore
+
+  # task service
+  task:
+    taskCacheSize: 10
+    store:
+      class: org.bimrocket.service.task.store.orient.TaskOrientDaoStore
+      orient:
+        database: bimdb
+
+  # print service
+  print:
+    directory: ${BIMROCKET_DATA_PATH}/printsvc
+    title: 'Bimrocket print'
+    creator: 'Bimrocket PrintService'
+
+  # mail service
+  mail:
+    enabled: false
+    host: helios
+    port: 25
+    startTls: false
+    auth: false
+    username: none
+    password: none
+    from: 'admin@bimrocket.org'
+    contentType: 'text/plain;charset=ISO-8859-1'
+
+  # proxy service
+  proxy:
+    validUrls:
+      - https://api.openai.com/
+      - https://api.bsdd.buildingsmart.org/
+    aliases:
+      chatgpt:
+        url: https://api.openai.com/v1/chat/completions
+        ipFilter: ''
+        authorization: changeit
+
+# database config
+databases:
+  bimdb:
+    url: embedded:${BIMROCKET_DATA_PATH}/db/bimdb
+    username: root
+    password: orientdb
+  IFC2X3:
+    url: embedded:${BIMROCKET_DATA_PATH}/db/IFC2X3
+    username: root
+    password: orientdb
+  IFC4:
+    url: embedded:${BIMROCKET_DATA_PATH}/db/IFC4
+    username: root
+    password: orientdb
+
+</code></pre>
+<p>Durante el arranque del servidor, se crea un archivo de configuración YAML (si no existe) en esta ruta: <code>${BIMROCKET_DATA_PATH}/bimrocket-server.yaml</code>
+donde <code>${BIMROCKET_DATA_PATH}</code> apunta por defecto a <code>${user.home}/bimrocket</code>.
+Edita este archivo YAML para cambiar los parámetros que necesites y reinicia el servidor Bimrocket para que los cambios tengan efecto.</p>
+<p>El valor de <code>BIMROCKET_DATA_PATH</code> se puede cambiar mediante una variable de entorno o una propiedad de la JVM:</p>
+<ul>
+<li><strong>Variable de entorno</strong>: <code>BIMROCKET_DATA_PATH=&lt;mi_ubicación&gt;</code></li>
+<li><strong>Propiedad de la JVM</strong>: En instalaciones de Tomcat, edita <code>&lt;TOMCAT_HOME&gt;/conf/catalina.properties</code> y añade esta línea: <code>BIMROCKET_DATA_PATH=&lt;mi_ubicación&gt;</code></li>
+</ul>
+<p>Por defecto, las bases de datos <strong>OrientDB</strong> embebidas se crean automáticamente en <code>${BIMROCKET_DATA_PATH}/db</code>.
+Puedes cambiar las URLs de las bases de datos en el archivo <code>bimrocket-server.yaml</code> para crearlas en un servidor OrientDB remoto.</p>
+<p>La contraseña por defecto del usuario <code>admin</code> es <code>bimrocket</code>.
+Se puede cambiar mediante la propiedad <code>services.security.adminPassword</code> del archivo <code>bimrocket-server.yaml</code>.</p>
+
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="/es">© 2025 BIMROCKET</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/assets/img/github.svg" alt="github" /> GitHub</a>
+  </footer>
+
+  <button id="up-button" title="Anar amunt">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+
+  <script src="/assets/js/main.js">
+  </script>
+
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

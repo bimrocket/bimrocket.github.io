@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Descargas | BIMROCKET</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BIMROCKET - The Open BIM Platform">
+  <meta name="keywords" content="BIM, THREEJS, OrientDB, MongoDB">
+  <meta name="theme-color" content="#404040">
+  <link id="hljs-theme" rel="stylesheet" href="">
+
+  <script>
+    if (window.localStorage)
+    {
+      const storedTheme = window.localStorage.getItem("theme");
+      if (storedTheme)
+      {
+        document.documentElement.setAttribute("data-theme", storedTheme);
+      }
+      const link = document.getElementById('hljs-theme');
+      let hljsCss;
+      if (storedTheme === "dark")
+      {
+        hljsCss = "github-dark.min.css";
+      }
+      else
+      {
+        hljsCss = "github.min.css";
+      }
+      link.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/" + hljsCss;
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Raleway:ital,wght@0,100..900;1,100..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/yaml.min.js"></script>
+</head>
+<body>
+  <header>
+    <a href="/es"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+
+    <select id="lang-select" title="Selector de idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" selected>ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
+
+    <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
+    <nav>
+      <ul id="menu">
+        <li><a href="/es">Inicio</a></li>
+        <li class="submenu">
+          <a href="#">Producto <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <ul>
+            <li><a href="/es/features">Características</a></li>
+            <li><a href="/es/architecture">Arquitectura</a></li>
+            <li><a href="/es/license">Licencia</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Documentación <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <ul>
+            <li><a href="/es/install">Instalación</a></li>
+            <li><a href="/es/configuration">Configuración</a></li>
+            <li><a href="/es/user_guides">Guias de usuario</a></li>
+          </ul>
+        </li>
+        <li><a href="/es/download">Descargas</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="content">
+      
+      <h2><span class="material-symbols-outlined">download</span> Descargas</h2>
+      
+
+      
+<p>Versión actual: <strong>v1.0-alpha-10</strong></p>
+<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/v1.0-alpha-10">Notas de la versión</a></p>
+
+<section class="download">
+  <span class="material-symbols-outlined">deployed_code</span>
+  <div>
+    <h3>
+      Paquete zip de BIMROCKET para Windows x64.
+    </h3>
+    <p>Incluye openjdk-17 pera Windows x64.</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-tomcat-1.0-windows-x64.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Descargar
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      Paquete zip genérico de BIMROCKET para todas las plataformas (Linux, MacOS, Windows).
+    </h3>
+    <p>Requiere de la instalación de una máquina virtual de Java versión 17 o superior.</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-tomcat-1.0-generic.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Descargar
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      Aplicación de frontend de BIMROCKET en formato war
+    </h3>
+    <p>Requiere un contenedor de servlets Jakarta 10 (como Apache tomcat 10.1).</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket.war" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Descargar
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">deployed_code</span>
+  <div>
+    <h3>
+      Aplicación de backend de BIMROCKET en formato war
+    </h3>
+    <p>Requiere un contenedor de servlets Jakarta 10 (como Apache tomcat 10.1).</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-server.war" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Descargar
+      </a>
+    </div>
+  </div>
+</section>
+
+<a href="https://github.com/bimrocket/bimrocket/releases">
+  <h3>
+    Otras versiones
+  </h3>
+</a>
+
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="/es">© 2025 BIMROCKET</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/assets/img/github.svg" alt="github" /> GitHub</a>
+  </footer>
+
+  <button id="up-button" title="Anar amunt">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+
+  <script src="/assets/js/main.js">
+  </script>
+
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

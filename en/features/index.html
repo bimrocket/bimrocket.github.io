@@ -22,8 +22,8 @@
       if (storedTheme === "dark")
       {
         hljsCss = "github-dark.min.css";
-      } 
-      else 
+      }
+      else
       {
         hljsCss = "github.min.css";
       }
@@ -31,7 +31,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
@@ -42,31 +42,37 @@
 </head>
 <body>
   <header>
-    <a href="/"><h1><img src="/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+    <a href="/en"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+
+    <select id="lang-select" title="Language selector">
+      <option value="en" data-short="EN" selected>EN</option>
+      <option value="es" data-short="ES" >ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
 
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
     <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
 
     <nav>
       <ul id="menu">
-        <li><a href="/">Home</a></li>
+        <li><a href="/en">Home</a></li>
         <li class="submenu">
           <a href="#">Product <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/features">Features</a></li>
-            <li><a href="/architecture">Architecture</a></li>
-            <li><a href="/license">License</a></li>
+            <li><a href="/en/features">Features</a></li>
+            <li><a href="/en/architecture">Architecture</a></li>
+            <li><a href="/en/license">License</a></li>
           </ul>
         </li>
         <li class="submenu">
           <a href="#">Documentation <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/install">Install</a></li>
-            <li><a href="/configuration">Configuration</a></li>
-            <li><a href="/user_guides">User guides</a></li>
+            <li><a href="/en/install">Install</a></li>
+            <li><a href="/en/configuration">Configuration</a></li>
+            <li><a href="/en/user_guides">User guides</a></li>
           </ul>
         </li>
-        <li><a href="/download">Download</a></li>
+        <li><a href="/en/download">Download</a></li>
       </ul>
     </nav>
   </header>
@@ -79,7 +85,7 @@
 
       <ul>
 <li>Parametric design tool based on <a href="https://en.wikipedia.org/wiki/Constructive_solid_geometry">CSG</a>.</li>
-<li>Supported primitives: solids, profiles (2d shapes) and cords (3d polylines).</li>
+<li>Supported graphic primitives: solids, profiles (2d shapes) and cords (3d polylines).</li>
 <li>Profile/cord creation and editing.</li>
 <li>Extrusion and revolution of profiles to create solids.</li>
 <li>Union, intersection and subtraction of solids.</li>
@@ -98,7 +104,7 @@
 <li>Scripting tool (using javascript language).</li>
 <li>Reporting tool to check conditions on the model objects (supported reporting formats: BRS and <a href="https://www.buildingsmart.org/what-is-information-delivery-specification-ids/">IDS</a>).</li>
 <li>Object controllers (a Controller is a program that changes the state of an object when a certain event occurs).</li>
-<li>BIM Inventory tool to list the IFC types, classifications, groups and layers of the model.</li>
+<li>BIM Inventory tool to list the IFC object types, classifications, groups and layers of the model.</li>
 <li>BIM Layout tool to visualize the interior layout of the building.</li>
 <li>BIM Inspector tool to inspect the IFC entities of the model.</li>
 <li>BIM Delta tool to detect changes between two versions of an IFC file.</li>
@@ -108,39 +114,39 @@
 <li>Load/Export IFC models. Support for multiple IFC schemas (IFC2X3, IFC4 and IFC4X3_ADD2).</li>
 <li>Load/Export models in BRF format (JSON Bimrocket format).</li>
 <li>Load/Export models in STL, GLB, Wavefront OBJ and Collada formats.</li>
-<li>Integrated with external services (some of them provided by bimrocket-server)
+<li>Integrated with external services (some of them provided by <strong>bimrocket-server</strong>)
 <ul>
 <li>Webdav server where models, scripts, reports and other files are stored.</li>
-<li><a href="https://en.wikipedia.org/wiki/BIM_Collaboration_Format">BCF</a> service (BIM Collaboration Service)</li>
-<li><a href="https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/">bSDD</a> service (buildingSmart Data Dictionary)</li>
-<li><a href="https://www.ogc.org/es/publications/standard/wfs/">WFS</a> service (OGC Web Feature Service)</li>
+<li><a href="https://en.wikipedia.org/wiki/BIM_Collaboration_Format">BCF</a> service (<em>BIM Collaboration Service</em>)</li>
+<li><a href="https://www.buildingsmart.org/users/services/buildingsmart-data-dictionary/">bSDD</a> service (<em>buildingSmart Data Dictionary</em>)</li>
+<li><a href="https://www.ogc.org/es/publications/standard/wfs/">WFS</a> service (<em>OGC Web Feature Service</em>)</li>
 <li><a href="http://brain4it.org">Brain4it</a> (AI platform oriented to the IoT)</li>
 <li>Bimrocket IFCDB service (stores IFC objects in a database)</li>
 <li>Bimrocket security service (user and role management)</li>
-<li>Bimrocket print service (generates a PDF with vector geometries)</li>
+<li>Bimrocket print service (generates a PDF file with vector geometries)</li>
 </ul>
 </li>
-<li>Data for bimrocket-server services can be stored in OrientDB or MongoDB.</li>
+<li>Data for <strong>bimrocket-server</strong> services can be stored in OrientDB or MongoDB.</li>
 <li>Modular design to easily extend functionality.</li>
 <li>Web application with a responsive user interface. Support for touch devices.</li>
-<li>Multi-language support (currently available in English, Spanish and Catalan).</li>
-<li>Based on <a href="https://threejs.org">THREE.js</a> library.</li>
-<li>Built with Maven.</li>
+<li>Multi-language support (currently available in english, spanish and catalan).</li>
+<li>Based on the <a href="https://threejs.org">THREE.js</a> graphic library.</li>
+<li>Project built with Maven.</li>
 </ul>
 
     </div>
   </main>
 
   <footer>
-    <p><a href="/">© 2025 BIMROCKET</a></p>
-    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/img/github.svg" alt="github" /> GitHub</a>
+    <p><a href="/en">© 2025 BIMROCKET</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/assets/img/github.svg" alt="github" /> GitHub</a>
   </footer>
 
   <button id="up-button" title="Anar amunt">
     <span class="material-symbols-outlined">arrow_upward</span>
   </button>
 
-  <script src="/js/main.js">
+  <script src="/assets/js/main.js">
   </script>
 
   <script>hljs.highlightAll();</script>

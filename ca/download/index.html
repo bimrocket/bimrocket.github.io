@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
-  <title>Download | BIMROCKET</title>
+  <title>Baixades | BIMROCKET</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BIMROCKET - The Open BIM Platform">
@@ -22,8 +22,8 @@
       if (storedTheme === "dark")
       {
         hljsCss = "github-dark.min.css";
-      } 
-      else 
+      }
+      else
       {
         hljsCss = "github.min.css";
       }
@@ -31,7 +31,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
@@ -42,31 +42,37 @@
 </head>
 <body>
   <header>
-    <a href="/"><h1><img src="/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+    <a href="/ca"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
+
+    <select id="lang-select" title="Selector d&#39;idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" >ES</option>
+      <option value="ca" data-short="CA" selected>CA</option>
+    </select>
 
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
     <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
 
     <nav>
       <ul id="menu">
-        <li><a href="/">Home</a></li>
+        <li><a href="/ca">Inici</a></li>
         <li class="submenu">
-          <a href="#">Product <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <a href="#">Producte <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/features">Features</a></li>
-            <li><a href="/architecture">Architecture</a></li>
-            <li><a href="/license">License</a></li>
+            <li><a href="/ca/features">Característiques</a></li>
+            <li><a href="/ca/architecture">Arquitectura</a></li>
+            <li><a href="/ca/license">Llicència</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="#">Documentation <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
+          <a href="#">Documentació <span class="material-symbols-outlined">keyboard_arrow_down</span></a>
           <ul>
-            <li><a href="/install">Install</a></li>
-            <li><a href="/configuration">Configuration</a></li>
-            <li><a href="/user_guides">User guides</a></li>
+            <li><a href="/ca/install">Instal·lació</a></li>
+            <li><a href="/ca/configuration">Configuració</a></li>
+            <li><a href="/ca/user_guides">Guies d&#39;usuari</a></li>
           </ul>
         </li>
-        <li><a href="/download">Download</a></li>
+        <li><a href="/ca/download">Baixades</a></li>
       </ul>
     </nav>
   </header>
@@ -74,23 +80,23 @@
   <main>
     <div class="content">
       
-      <h2><span class="material-symbols-outlined">download</span> Download</h2>
+      <h2><span class="material-symbols-outlined">download</span> Baixades</h2>
       
 
       
-<p>Current version: <strong>v1.0-alpha-10</strong></p>
-<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/v1.0-alpha-10">Release notes</a></p>
+<p>Versió actual: <strong>v1.0-alpha-10</strong></p>
+<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/v1.0-alpha-10">Notes de la versió</a></p>
 
 <section class="download">
   <span class="material-symbols-outlined">deployed_code</span>
   <div>
     <h3>
-      BIMROCKET zip package for Windows x64.
+      Paquet zip de BIMROCKET per a Windows x64.
     </h3>
-    <p>Includes openjdk-17 for Windows x64.</p>
+    <p>Inclou openjdk-17 per a Windows x64.</p>
     <div>
       <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-tomcat-1.0-windows-x64.zip" class="link-button">
-        <span class="material-symbols-outlined pr-1">download</span> Download
+        <span class="material-symbols-outlined pr-1">download</span> Baixa
       </a>
     </div>
   </div>
@@ -100,12 +106,12 @@
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      BIMROCKET generic zip package for all platforms (Linux, MacOS, Windows).
+      Paquet zip genèric de BIMROCKET per a totes les plataformes (Linux, MacOS, Windows).
     </h3>
-    <p>Requires openjdk-17+ that must be installed separatelly.</p>
+    <p>Requereix la instal·lació d'una màquina virtual de Java versió 17 o superior.</p>
     <div>
       <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-tomcat-1.0-generic.zip" class="link-button">
-        <span class="material-symbols-outlined pr-1">download</span> Download
+        <span class="material-symbols-outlined pr-1">download</span> Baixa
       </a>
     </div>
   </div>
@@ -115,12 +121,12 @@
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      BIMROCKET webapp war
+      Aplicació de frontend de BIMROCKET en format war
     </h3>
-    <p>Requires a Jakarta 10 servlet container (like Apache tomcat 10.1).</p>
+    <p>Requereix un contenidor de servlets Jakarta 10 (com Apache tomcat 10.1).</p>
     <div>
       <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket.war" class="link-button">
-        <span class="material-symbols-outlined pr-1">download</span> Download
+        <span class="material-symbols-outlined pr-1">download</span> Baixa
       </a>
     </div>
   </div>
@@ -130,35 +136,36 @@
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      BIMROCKET server war
+      Aplicació de backend de BIMROCKET en format war
     </h3>
-    <p>Requires a Jakarta 10 servlet container (like Apache tomcat 10.1).</p>
+    <p>Requereix un contenidor de servlets Jakarta 10 (com Apache tomcat 10.1).</p>
     <div>
       <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-10/bimrocket-server.war" class="link-button">
-        <span class="material-symbols-outlined pr-1">download</span> Download
+        <span class="material-symbols-outlined pr-1">download</span> Baixa
       </a>
     </div>
   </div>
 </section>
 
-<a href="https://github.com/bimrocket/bimrocket/releases"
-<h3>
-  Other releases
-</h3>
+<a href="https://github.com/bimrocket/bimrocket/releases">
+  <h3>
+    Altres versions
+  </h3>
+</a>
 
     </div>
   </main>
 
   <footer>
-    <p><a href="/">© 2025 BIMROCKET</a></p>
-    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/img/github.svg" alt="github" /> GitHub</a>
+    <p><a href="/ca">© 2025 BIMROCKET</a></p>
+    <a href="https://github.com/bimrocket/bimrocket" class="github"><img src="/assets/img/github.svg" alt="github" /> GitHub</a>
   </footer>
 
   <button id="up-button" title="Anar amunt">
     <span class="material-symbols-outlined">arrow_upward</span>
   </button>
 
-  <script src="/js/main.js">
+  <script src="/assets/js/main.js">
   </script>
 
   <script>hljs.highlightAll();</script>
