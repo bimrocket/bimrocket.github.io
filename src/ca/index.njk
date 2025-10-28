@@ -24,19 +24,24 @@ language: ca
   <section class="screenshots">
 
   {% macro screenshot(id, title) %}
-  <a href="/assets/img/screenshots/screenshot-{{ id }}.png" title="Captura {{ id }}">
-    <img src="/assets/img/screenshots/screenshot-{{ id }}.png" alt="{{ title }}">
+  <a href="/assets/img/screenshots/screenshot-{{ id }}.png">
+    <figure>
+      <img src="/assets/img/screenshots/screenshot-{{ id }}.png" alt="{{ title }}">
+      <figcaption>{{ title }}</figcaption>
+    </figure>
   </a>
   {% endmacro %}
 
-   {{ screenshot(1, "") }}
+   {{ screenshot(1, "Consulta de les propietats d'un objecte") }}
 
-   {{ screenshot(2, "") }}
+   {{ screenshot(2, "Eina de simulació d'ombres") }}
 
-   {{ screenshot(3, "") }}
+   {{ screenshot(3, "Gestió d'incidències a través del servei BCF") }}
 
-   {{ screenshot(4, "") }}
+   {{ screenshot(4, "Navegació per l'interior d'un edifici amb visualització de dades sensorials") }}
 
+   {{ screenshot(5, "Model digital de ciutat generat a partir d'informació provinent d'un servidor GIS") }}
+   
   </section>
 
 </div>
