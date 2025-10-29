@@ -105,7 +105,7 @@ services:
       adminUsername: admin
       adminPassword: changeit
     store:
-      class: org.bimrocket.service.security.store.SecurityOrientDaoStore
+      class: org.bimrocket.service.security.store.orient.SecurityOrientDaoStore
       orient:
         database: bimdb
 
@@ -125,7 +125,7 @@ services:
   bcf:
     projectTemplate:
     store:
-      class: org.bimrocket.service.bcf.store.BcfOrientDaoStore
+      class: org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore
       orient:
         database: bimdb
     mail:
@@ -203,10 +203,131 @@ Edit this yaml file to change the parameters you need and restart the bimrocket 
 <li><strong>Environment variable</strong>: <code>BIMROCKET_DATA_PATH=&lt;my_location&gt;</code></li>
 <li><strong>JVM property</strong>: In tomcat installations, edit <code>&lt;TOMCAT_HOME&gt;/conf/catalina.properties</code> and add this line: <code>BIMROCKET_DATA_PATH=&lt;my_location&gt;</code></li>
 </ul>
-<p>By default, <strong>OrientDB</strong> embedded databases are created automaticaly in <code>${BIMROCKET_DATA_PATH}/db</code>.<br>
+<p>In the default configuration, <strong>OrientDB</strong> embedded databases are created automaticaly in <code>${BIMROCKET_DATA_PATH}/db</code>.<br>
 You can change the database urls in <code>bimrocket-server.yaml</code> file to create the databases in a remote OrientDB server.</p>
 <p>The default password of the <code>admin</code> user is <code>bimrocket</code>.
 It can be changed through the <code>services.security.adminPassword</code> property of the <code>bimrocket-server.yaml</code> file.</p>
+<h3>Service configuration parameters</h3>
+<p>The following section describes the configuration parameters accepted by each service.<br>
+These parameters can be modified directly in the <code>bimrocket-server.yaml</code> file or through any other mechanism provided by the <em>smallrye config</em> library (environment properties, JVM variables, etc.).<br>
+In many cases, it is necessary to restart the services for configuration changes to take effect.</p>
+<h4>SecurityService</h4>
+<p>Service that manages user information and access roles.<br>
+Base path: <code>services.security</code></p>
+<ul>
+<li><code>.adminPassword</code> {String}: Password of the <code>admin</code> user. This user has full privileges over all services.</li>
+<li><code>.passwordPattern</code> {String}: Java regular expression that defines the accepted format for user passwords.</li>
+<li><code>.authorizationCacheTimeout</code> {Long}: Refresh time (in seconds) of the authorization cache.</li>
+<li><code>.userCacheTimeout</code> {Long}: Refresh time (in seconds) of the user cache.</li>
+<li><code>.roleCacheTimeout</code> {Long}: Refresh time (in seconds) of the role cache.</li>
+<li><code>.ldap.enabled</code> {Boolean}: Parameter that indicates whether user passwords are validated against an LDAP server.<br>
+When this parameter is enabled, users do not need to be created in the database.</li>
+<li><code>.ldap.url</code> {String}: URL of the LDAP server.</li>
+<li><code>.ldap.domain</code> {String}: Domain of the LDAP server.</li>
+<li><code>.ldap.searchBase</code> {String}: Base path in the LDAP directory where users are searched.</li>
+<li><code>.ldap.adminUsername</code> {String}: User for accessing the LDAP server.</li>
+<li><code>.ldap.adminPassword</code> {String}: Password for accessing the LDAP server.</li>
+<li><code>.store.class</code> {Class}: Class that implements user and role storage:
+<ul>
+<li>For storage in OrientDB: <code>org.bimrocket.service.security.store.orient.SecurityOrientDaoStore</code></li>
+<li>For storage in MongoDB: <code>org.bimrocket.service.security.store.mongo.SecurityMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code> {String}: Alias of the OrientDB database defined in the <code>databases</code> section.</li>
+<li><code>.store.mongo.database</code> {String}: Alias of the MongoDB database defined in the <code>databases</code> section.</li>
+</ul>
+<h4>FileService</h4>
+<p>Service that manages the storage of files and folders.<br>
+Base path: <code>services.file</code></p>
+<ul>
+<li><code>.folders</code> {List&lt;String&gt;}: List of folders to be created in the base directory of the service.</li>
+<li><code>.store</code> {Class}: Class that implements the storage of folders and files:
+<ul>
+<li>For file system storage: <code>org.bimrocket.service.file.store.filesystem.FileSystemFileStore</code></li>
+</ul>
+</li>
+<li><code>.store.filesystem.directory</code> {String}: Base directory where folders and files are stored.</li>
+</ul>
+<h4>BcfService</h4>
+<p>Service that manages the storage of BCF issues.<br>
+Base path: <code>services.bcf</code></p>
+<ul>
+<li><code>.projectTemplate</code> {String}: Name of the project used as a template.<br>
+When a new BCF project is created, it inherits the extensions (<em>BcfExtensions</em>) of the template project.</li>
+<li><code>.store</code> {Class}: Class that implements the storage of BCF issues:
+<ul>
+<li>For storage in OrientDB: <code>org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore</code></li>
+<li>For storage in MongoDB: <code>org.bimrocket.service.bcf.store.mongo.BcfMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code>: Alias of the OrientDB database defined in the <code>databases</code> section.</li>
+<li><code>.store.mongo.database</code>: Alias of the MongoDB database defined in the <code>databases</code> section.</li>
+<li><code>.mail.createTopic.subject</code> {String}: Pattern that defines the subject of the message sent to participants
+when the issue is created. The pattern can include expressions <code>#{&lt;property&gt;}</code> where <code>property</code> is any property of the <em>Topic</em> (issue).</li>
+<li><code>.mail.createTopic.body</code> {String}: Pattern that defines the body of the message sent to participants
+when the issue is created. The pattern can include expressions <code>#{&lt;property&gt;}</code> where <code>property</code> is any property of the <em>Topic</em> (issue).</li>
+</ul>
+<h4>IfcdbService</h4>
+<p>Service that manages the storage of IFC model objects in a database.<br>
+Base path: <code>services.ifcdb</code></p>
+<ul>
+<li><code>.schemas</code> {List&lt;String&gt;}: List of supported IFC schemas (IFC2X3, IFC4, or IFC4X3_ADD2).<br>
+A separate database will be created for each schema.<br>
+The <code>alias</code> of the database used will match the name of the IFC schema.</li>
+<li><code>.maxFileSizeMb</code> {Integer}: Maximum size in MB of IFC models that can be stored in the database.</li>
+<li><code>.store</code> {Class}: Class that defines the implementation of model storage:
+<ul>
+<li>For storage in OrientDB: <code>org.bimrocket.service.ifcdb.store.orient.OrientIfcStore</code></li>
+<li>For storage in MongoDB: <code>org.bimrocket.service.ifcdb.store.mongo.MongoIfcStore</code></li>
+</ul>
+</li>
+</ul>
+<h4>TaskService</h4>
+<p>Service that manages task execution on the server.<br>
+Base path: <code>services.task</code></p>
+<ul>
+<li><code>.taskCacheSize</code> {Integer}: Number of tasks cached in an LRU structure.</li>
+<li><code>.store.class</code> {Class}: Class that defines the implementation of task data storage:
+<ul>
+<li>For storage in OrientDB: <code>org.bimrocket.service.task.store.orient.TaskOrientDaoStore</code></li>
+<li>For storage in MongoDB: <code>org.bimrocket.service.task.store.mongo.TaskMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code> {String}: Alias of the OrientDB database defined in the <code>databases</code> section.</li>
+<li><code>.store.mongo.database</code> {String}: Alias of the MongoDB database defined in the <code>databases</code> section.</li>
+</ul>
+<h4>ProxyService</h4>
+<p>Service for accessing external URLs.<br>
+Base path: <code>services.proxy</code></p>
+<ul>
+<li><code>.validUrls</code> {List&lt;String&gt;}: List of URLs accepted by the proxy.</li>
+<li><code>.aliases.&lt;alias&gt;</code> {Object}: Definition of an external connection associated with <code>alias</code>.</li>
+<li><code>.aliases.&lt;alias&gt;.url</code> {String}: External URL to access.</li>
+<li><code>.aliases.&lt;alias&gt;.ipFilter</code> {String}: Java regular expression that defines which IP addresses are allowed to access the URL.</li>
+<li><code>.aliases.&lt;alias&gt;.authorization</code> {String}: <em>Authorization</em> header sent when accessing the URL (Bearer or Basic).</li>
+</ul>
+<h4>MailService</h4>
+<p>Service for sending email messages.<br>
+Base path: <code>services.mail</code></p>
+<ul>
+<li><code>.enabled</code> {Boolean}: Parameter that controls the activation of the service.</li>
+<li><code>.host</code> {String}: Name of the SMTP mail server.</li>
+<li><code>.port</code> {Integer}: Listening port of the mail server.</li>
+<li><code>.startTls</code> {Boolean}: Parameter that controls the use of the TLS protocol.</li>
+<li><code>.auth</code> {Boolean}: Parameter that indicates whether the connection requires authentication.</li>
+<li><code>.username</code> {String}: Username used to authenticate with the server.</li>
+<li><code>.password</code> {String}: Password used to authenticate with the server.</li>
+<li><code>.from</code> {String}: Default sender email address.</li>
+<li><code>.contentType</code> {String}: <em>Content-Type</em> of the message body.</li>
+</ul>
+<h4>PrintService</h4>
+<p>Service for generating PDF files with vector geometries.<br>
+Base path: <code>services.print</code></p>
+<ul>
+<li><code>.directory</code> {String}: Directory where generated PDF files are stored.</li>
+<li><code>.title</code> {String}: Title displayed in the PDF document.</li>
+<li><code>.creator</code> {String}: <code>creator</code> property included in the PDF document.</li>
+</ul>
 
     </div>
   </main>

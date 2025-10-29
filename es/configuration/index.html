@@ -105,7 +105,7 @@ services:
       adminUsername: admin
       adminPassword: changeit
     store:
-      class: org.bimrocket.service.security.store.SecurityOrientDaoStore
+      class: org.bimrocket.service.security.store.orient.SecurityOrientDaoStore
       orient:
         database: bimdb
 
@@ -125,7 +125,7 @@ services:
   bcf:
     projectTemplate:
     store:
-      class: org.bimrocket.service.bcf.store.BcfOrientDaoStore
+      class: org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore
       orient:
         database: bimdb
     mail:
@@ -195,6 +195,7 @@ databases:
     password: orientdb
 
 </code></pre>
+<h3>Configuración inicial</h3>
 <p>Durante el arranque del servidor, se crea un archivo de configuración YAML (si no existe) en esta ruta: <code>${BIMROCKET_DATA_PATH}/bimrocket-server.yaml</code>
 donde <code>${BIMROCKET_DATA_PATH}</code> apunta por defecto a <code>${user.home}/bimrocket</code>.
 Edita este archivo YAML para cambiar los parámetros que necesites y reinicia el servidor Bimrocket para que los cambios tengan efecto.</p>
@@ -203,10 +204,132 @@ Edita este archivo YAML para cambiar los parámetros que necesites y reinicia el
 <li><strong>Variable de entorno</strong>: <code>BIMROCKET_DATA_PATH=&lt;mi_ubicación&gt;</code></li>
 <li><strong>Propiedad de la JVM</strong>: En instalaciones de Tomcat, edita <code>&lt;TOMCAT_HOME&gt;/conf/catalina.properties</code> y añade esta línea: <code>BIMROCKET_DATA_PATH=&lt;mi_ubicación&gt;</code></li>
 </ul>
-<p>Por defecto, las bases de datos <strong>OrientDB</strong> embebidas se crean automáticamente en <code>${BIMROCKET_DATA_PATH}/db</code>.
+<p>En la configuración por defecto, <strong>Bimrocket</strong> crea automáticamente bases de datos embebidas de <strong>OrientDB</strong> en la ruta <code>${BIMROCKET_DATA_PATH}/db</code>.
 Puedes cambiar las URLs de las bases de datos en el archivo <code>bimrocket-server.yaml</code> para crearlas en un servidor OrientDB remoto.</p>
 <p>La contraseña por defecto del usuario <code>admin</code> es <code>bimrocket</code>.
 Se puede cambiar mediante la propiedad <code>services.security.adminPassword</code> del archivo <code>bimrocket-server.yaml</code>.</p>
+<h3>Parámetros de configuración de los servicios</h3>
+<p>A continuación se describen los parámetros de configuración que acepta cada servicio.
+Estos parámetros pueden modificarse directamente en el fichero <code>bimrocket-server.yaml</code> o bien mediante cualquier
+otro mecanismo previsto por la libreria <em>smallrye config</em> (propiedades de entorno, variables de la JVM, etc...).
+En muchos casos, es necesario reiniciar los servicios para que los cambios de la configuración tengan efecto.</p>
+<h4>SecurityService</h4>
+<p>Servicio que gestiona la información de los usuarios y los roles de acceso.<br>
+Ruta base: <code>services.security</code></p>
+<ul>
+<li><code>.adminPassword</code> {String}: Contraseña del usuario <code>admin</code>. Este usuario tiene privilegios totales sobre todos los servicios.</li>
+<li><code>.passwordPattern</code> {String}: Expresión regular de Java que determina el formato aceptado de las contraseñas de los usuarios.</li>
+<li><code>.authorizationCacheTimeout</code> {Long}: Tiempo de refresco (en segundos) de la cache de autorización.</li>
+<li><code>.userCacheTimeout</code> {Long}: Tiempo de refresco (en segundos) de la cache de usuarios.</li>
+<li><code>.roleCacheTimeout</code> {Long}: Tiempo de refresco (en segundos) de la cache de roles.</li>
+<li><code>.ldap.enabled</code> {Boolean}: Parámetro que indica si las contraseñas de los usuarios se validan contra un servidor LDAP.
+Cuando este parámetro está activado, no es necesario que los usuarios se creen en la base de datos.</li>
+<li><code>.ldap.url</code> {String}: URL del servidor LDAP.</li>
+<li><code>.ldap.domain</code> {String}: Dominio del servidor LDAP.</li>
+<li><code>.ldap.searchBase</code> {String}: Ruta base del directorio LDAP donde buscar los usuarios.</li>
+<li><code>.ldap.adminUsername</code> {String}: Usuario para acceder al servidor LDAP.</li>
+<li><code>.ldap.adminPassword</code> {String}: Contraseña para acceder al servidor LDAP.</li>
+<li><code>.store.class</code> {Class}: Clase que implementa el almacenamiento de los usuarios y roles:
+<ul>
+<li>Para el almacenamiento en OrientDB: <code>org.bimrocket.service.security.store.orient.SecurityOrientDaoStore</code></li>
+<li>Para el almacenamiento en MongoDB: <code>org.bimrocket.service.security.store.mongo.SecurityMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code> {String}: Alias de la base de datos OrientDB que se define en la sección <code>databases</code>.</li>
+<li><code>.store.mongo.database</code> {String}: Alias de la base de datos MongoDB que se define en la sección <code>databases</code>.</li>
+</ul>
+<h4>FileService</h4>
+<p>Servicio que gestiona el almacenamiento de ficheros y carpetas.<br>
+Ruta base: <code>services.file</code></p>
+<ul>
+<li><code>.folders</code> {List&lt;String&gt;}: Lista de carpetas a crear en el directorio base del servicio.</li>
+<li><code>.store</code> {Class}: Clase que implementa el almacenamiento de carpetas y ficheros:
+<ul>
+<li>Para el almacenamiento en el sistema de ficheros: <code>org.bimrocket.service.file.store.filesystem.FileSystemFileStore</code></li>
+</ul>
+</li>
+<li><code>.store.filesystem.directory</code> {String}: Directorio base donde se almacenan las carpetas y los ficheros.</li>
+</ul>
+<h4>BcfService</h4>
+<p>Servicio que gestiona el almacenamiento de incidencias BCF.<br>
+Ruta base: <code>services.bcf</code></p>
+<ul>
+<li><code>.projectTemplate</code> {String}: Nombre del proyecto que se toma como plantilla.
+Al crear un nuevo proyecto BCF, éste heredará las extensiones (BcfExtensions) del proyecto plantilla.</li>
+<li><code>.store</code> {Class}: Clase que implementa el almacenamiento de las incidencias BCF:
+<ul>
+<li>Para el almacenamiento en OrientDB: <code>org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore</code></li>
+<li>Para el almacenamiento en MongoDB: <code>org.bimrocket.service.bcf.store.mongo.BcfMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code>: Alias de la base de datos OrientDB que se define en la sección <code>databases</code>.</li>
+<li><code>.store.mongo.database</code>: Alias de la base de datos MongoDB que se define en la sección <code>databases</code>.</li>
+<li><code>.mail.createTopic.subject</code> {String}: Patrón que determina el asunto del mensaje que se enviará a los participantes
+de la incidencia en el momento de su creación. El patrón puede incluir expresiones <code>#{&lt;property&gt;}</code>donde <code>property</code> es cualquier propiedad del Topic (incidencia).</li>
+<li><code>.mail.createTopic.body</code> {String}: Patrón que determina el cuerpo del mensaje que se enviará a los
+participantes de la incidencia en el momento de su creación. El patrón puede incluir expresiones <code>#{&lt;property&gt;}</code> donde <code>property</code> es cualquier propiedad del Topic (incidencia).</li>
+</ul>
+<h4>IfcdbService</h4>
+<p>Servicio que gestiona el almacenamiento de objetos de un modelo IFC en una base de datos.<br>
+Ruta base: <code>services.ifcdb</code></p>
+<ul>
+<li><code>.schemas</code> {List&lt;String&gt;}: Lista de esquemas IFC soportados (IFC2X3, IFC4 o IFC4X3_ADD2).
+Para cada esquema se creará una base de datos diferente.
+El <code>alias</code> de la base de datos utilitzada coincidirá con el nombre del esquema IFC.</li>
+<li><code>.maxFileSizeMb</code> {Integer}: Tamaño máximo en Mb de los modelos IFC que se podrán almacenar en la base de datos.</li>
+<li><code>.store</code> {Class}: Clase que determina la implementación del almacenamiento de los modelos:
+<ul>
+<li>Para el almacenamiento en OrientDB: <code>org.bimrocket.service.ifcdb.store.orient.OrientIfcStore</code></li>
+<li>Para el almacenamiento en MongoDB: <code>org.bimrocket.service.ifcdb.store.mongo.MongoIfcStore</code></li>
+</ul>
+</li>
+</ul>
+<h4>TaskService</h4>
+<p>Servicio que gestiona la ejecución de tareas en el servidor.<br>
+Ruta base: <code>services.task</code></p>
+<ul>
+<li><code>.taskCacheSize</code> {Integer}: Número de tareas que se cachean en una estructura LRU.</li>
+<li><code>.store.class</code> {Class}: Classe que determina la implementación del almacenamiento de los datos de las tareas:
+<ul>
+<li>Para el almacenamiento en OrientDB: <code>org.bimrocket.service.task.store.orient.TaskOrientDaoStore</code></li>
+<li>Para el almacenamiento en MongoDB: <code>org.bimrocket.service.task.store.mongo.TaskMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code> {String}: Alias de la base de datos OrientDB que se define en la sección <code>databases</code>.</li>
+<li><code>.store.mongo.database</code> {String}: Alias de la base de datos MongoDB que se define en la sección <code>databases</code>.</li>
+</ul>
+<h4>ProxyService</h4>
+<p>Servicio para acceder a URL externas.<br>
+Ruta base: <code>services.proxy</code></p>
+<ul>
+<li><code>.validUrls</code> {List&lt;String&gt;}: Lista de URLs acceptadas por el proxy.</li>
+<li><code>.aliases.&lt;alias&gt;</code> {Object}: Definición de una conexión externa asociada a <code>alias</code>.</li>
+<li><code>.aliases.&lt;alias&gt;.url</code> {String}: URL externa a la que se quiere acceder.</li>
+<li><code>.aliases.&lt;alias&gt;.ipFilter</code> {String}: Expression regular de Java que determina qué direcciones IP pueden acceder a la URL.</li>
+<li><code>.aliases.&lt;alias&gt;.authorization</code> {String}: Cabecera HTTP <em>Authorization</em> que se enviará al acceder a la URL (Bearer o Basic).</li>
+</ul>
+<h4>MailService</h4>
+<p>Servicio para enviar correos electrónicos.<br>
+Ruta base: <code>services.mail</code></p>
+<ul>
+<li><code>.enabled</code> {Boolean}: Parámetro que controla la activación del servicio.</li>
+<li><code>.host</code> {String}: Nombre del servidor de correo SMTP.</li>
+<li><code>.port</code> {Integer}: Puerto de escucha del servidor de correo.</li>
+<li><code>.startTls</code> {Boolean}: Parámetro que controla el uso del protocolo TLS.</li>
+<li><code>.auth</code> {Boolean}: Parámetro que indica si la conexión se establece pasando credenciales.</li>
+<li><code>.username</code> {String}: Nombre del usuario que se autentica en el servidor.</li>
+<li><code>.password</code> {String}: Contraseña del usuario que se autentica en el servidor.</li>
+<li><code>.from</code> {String}: Dirección de correo del remitente por defecto.</li>
+<li><code>.contentType</code> {String}: Content-Type del cuerpo del mensaje.</li>
+</ul>
+<h4>PrintService</h4>
+<p>Servicio para generar ficheros PDF con geometrias vectoriales.<br>
+Ruta base: <code>services.print</code></p>
+<ul>
+<li><code>.directory</code> {String}: Directorio donde se almacenan los ficheros PDF generados.</li>
+<li><code>.title</code> {String}: Titulo que se mostrará en el documento PDF.</li>
+<li><code>.creator</code> {String}: Propiedad <code>creator</code> que se incorporará al documento PDF.</li>
+</ul>
 
     </div>
   </main>

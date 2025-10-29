@@ -105,7 +105,7 @@ services:
       adminUsername: admin
       adminPassword: changeit
     store:
-      class: org.bimrocket.service.security.store.SecurityOrientDaoStore
+      class: org.bimrocket.service.security.store.orient.SecurityOrientDaoStore
       orient:
         database: bimdb
 
@@ -125,7 +125,7 @@ services:
   bcf:
     projectTemplate:
     store:
-      class: org.bimrocket.service.bcf.store.BcfOrientDaoStore
+      class: org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore
       orient:
         database: bimdb
     mail:
@@ -202,10 +202,132 @@ Edita aquest fitxer YAML per canviar els paràmetres que necessitis i reinicia e
 <li><strong>Variable d'entorn:</strong> <code>BIMROCKET_DATA_PATH=&lt;la_meva_ubicació&gt;</code></li>
 <li><strong>Propietat JVM:</strong> en instal·lacions de Tomcat, edita <code>&lt;TOMCAT_HOME&gt;/conf/catalina.properties</code> i afegeix aquesta línia: <code>BIMROCKET_DATA_PATH=&lt;la_meva_ubicació&gt;</code></li>
 </ul>
-<p>Per defecte, les bases de dades incrustades d’<strong>OrientDB</strong> es creen automàticament a <code>${BIMROCKET_DATA_PATH}/db</code>.
+<p>En la configuració per defecte, <strong>Bimrocket</strong> crea automàticament bases de dades incrustades d’<strong>OrientDB</strong> en la ruta <code>${BIMROCKET_DATA_PATH}/db</code>.
 Pots canviar les URL de les bases de dades al fitxer <code>bimrocket-server.yaml</code> per crear-les en un servidor remot d’OrientDB.</p>
 <p>La contrasenya per defecte de l’usuari <code>admin</code> és <code>bimrocket</code>.
 Aquesta es pot canviar mitjançant la propietat <code>services.security.adminPassword</code> del fitxer <code>bimrocket-server.yaml</code>.</p>
+<h3>Paràmetres de configuració dels serveis</h3>
+<p>A continuació es descriuen els paràmetres de configuració que accepta cada servei.<br>
+Aquests paràmetres es poden modificar directament al fitxer <code>bimrocket-server.yaml</code> o bé mitjançant qualsevol altre mecanisme previst per la
+llibreria <em>smallrye config</em> (propietats d’entorn, variables de la JVM, etc.).<br>
+En molts casos, és necessari reiniciar els serveis perquè els canvis de configuració tinguin efecte.</p>
+<h4>SecurityService</h4>
+<p>Servei que gestiona la informació dels usuaris i els rols d’accés.<br>
+Ruta base: <code>services.security</code></p>
+<ul>
+<li><code>.adminPassword</code> {String}: Contrasenya de l’usuari <code>admin</code>. Aquest usuari té privilegis totals sobre tots els serveis.</li>
+<li><code>.passwordPattern</code> {String}: Expressió regular de Java que determina el format acceptat de les contrasenyes dels usuaris.</li>
+<li><code>.authorizationCacheTimeout</code> {Long}: Temps de refresc (en segons) de la memòria cau d’autorització.</li>
+<li><code>.userCacheTimeout</code> {Long}: Temps de refresc (en segons) de la memòria cau d’usuaris.</li>
+<li><code>.roleCacheTimeout</code> {Long}: Temps de refresc (en segons) de la memòria cau de rols.</li>
+<li><code>.ldap.enabled</code> {Boolean}: Paràmetre que indica si les contrasenyes dels usuaris es validen contra un servidor LDAP.<br>
+Quan aquest paràmetre està activat, no és necessari que els usuaris es creïn a la base de dades.</li>
+<li><code>.ldap.url</code> {String}: URL del servidor LDAP.</li>
+<li><code>.ldap.domain</code> {String}: Domini del servidor LDAP.</li>
+<li><code>.ldap.searchBase</code> {String}: Ruta base del directori LDAP on es busquen els usuaris.</li>
+<li><code>.ldap.adminUsername</code> {String}: Usuari per accedir al servidor LDAP.</li>
+<li><code>.ldap.adminPassword</code> {String}: Contrasenya per accedir al servidor LDAP.</li>
+<li><code>.store.class</code> {Class}: Classe que implementa l’emmagatzematge dels usuaris i rols:
+<ul>
+<li>Per a l’emmagatzematge a OrientDB: <code>org.bimrocket.service.security.store.orient.SecurityOrientDaoStore</code></li>
+<li>Per a l’emmagatzematge a MongoDB: <code>org.bimrocket.service.security.store.mongo.SecurityMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code> {String}: Àlies de la base de dades OrientDB que es defineix a la secció <code>databases</code>.</li>
+<li><code>.store.mongo.database</code> {String}: Àlies de la base de dades MongoDB que es defineix a la secció <code>databases</code>.</li>
+</ul>
+<h4>FileService</h4>
+<p>Servei que gestiona l’emmagatzematge de fitxers i carpetes.<br>
+Ruta base: <code>services.file</code></p>
+<ul>
+<li><code>.folders</code> {List&lt;String&gt;}: Llista de carpetes a crear al directori base del servei.</li>
+<li><code>.store</code> {Class}: Classe que implementa l’emmagatzematge de carpetes i fitxers:
+<ul>
+<li>Per a l’emmagatzematge al sistema de fitxers: <code>org.bimrocket.service.file.store.filesystem.FileSystemFileStore</code></li>
+</ul>
+</li>
+<li><code>.store.filesystem.directory</code> {String}: Directori base on s’emmagatzemen les carpetes i els fitxers.</li>
+</ul>
+<h4>BcfService</h4>
+<p>Servei que gestiona l’emmagatzematge d’incidències BCF.<br>
+Ruta base: <code>services.bcf</code></p>
+<ul>
+<li><code>.projectTemplate</code> {String}: Nom del projecte que es pren com a plantilla.<br>
+En crear un nou projecte BCF, aquest heretarà les extensions (<em>BcfExtensions</em>) del projecte plantilla.</li>
+<li><code>.store</code> {Class}: Classe que implementa l’emmagatzematge de les incidències BCF:
+<ul>
+<li>Per a l’emmagatzematge a OrientDB: <code>org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore</code></li>
+<li>Per a l’emmagatzematge a MongoDB: <code>org.bimrocket.service.bcf.store.mongo.BcfMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code>: Àlies de la base de dades OrientDB que es defineix a la secció <code>databases</code>.</li>
+<li><code>.store.mongo.database</code>: Àlies de la base de dades MongoDB que es defineix a la secció <code>databases</code>.</li>
+<li><code>.mail.createTopic.subject</code> {String}: Patró que determina l’assumpte del missatge que s’enviarà als participants
+de la incidència en el moment de la seva creació. El patró pot incloure expressions <code>#{&lt;property&gt;}</code> on <code>property</code> és qualsevol propietat del <em>Topic</em> (incidència).</li>
+<li><code>.mail.createTopic.body</code> {String}: Patró que determina el cos del missatge que s’enviarà als
+participants de la incidència en el moment de la seva creació. El patró pot incloure expressions <code>#{&lt;property&gt;}</code> on <code>property</code> és qualsevol propietat del <em>Topic</em> (incidència).</li>
+</ul>
+<h4>IfcdbService</h4>
+<p>Servei que gestiona l’emmagatzematge d’objectes d’un model IFC en una base de dades.<br>
+Ruta base: <code>services.ifcdb</code></p>
+<ul>
+<li><code>.schemas</code> {List&lt;String&gt;}: Llista d’esquemes IFC suportats (IFC2X3, IFC4 o IFC4X3_ADD2).<br>
+Per a cada esquema es crearà una base de dades diferent.<br>
+L’<code>àlies</code> de la base de dades utilitzada coincidirà amb el nom de l’esquema IFC.</li>
+<li><code>.maxFileSizeMb</code> {Integer}: Mida màxima en MB dels models IFC que es poden emmagatzemar a la base de dades.</li>
+<li><code>.store</code> {Class}: Classe que determina la implementació de l’emmagatzematge dels models:
+<ul>
+<li>Per a l’emmagatzematge a OrientDB: <code>org.bimrocket.service.ifcdb.store.orient.OrientIfcStore</code></li>
+<li>Per a l’emmagatzematge a MongoDB: <code>org.bimrocket.service.ifcdb.store.mongo.MongoIfcStore</code></li>
+</ul>
+</li>
+</ul>
+<h4>TaskService</h4>
+<p>Servei que gestiona l’execució de tasques al servidor.<br>
+Ruta base: <code>services.task</code></p>
+<ul>
+<li><code>.taskCacheSize</code> {Integer}: Nombre de tasques que es desen en memòria cau amb una estructura LRU.</li>
+<li><code>.store.class</code> {Class}: Classe que determina la implementació de l’emmagatzematge de les dades de les tasques:
+<ul>
+<li>Per a l’emmagatzematge a OrientDB: <code>org.bimrocket.service.task.store.orient.TaskOrientDaoStore</code></li>
+<li>Per a l’emmagatzematge a MongoDB: <code>org.bimrocket.service.task.store.mongo.TaskMongoDaoStore</code></li>
+</ul>
+</li>
+<li><code>.store.orient.database</code> {String}: Àlies de la base de dades OrientDB que es defineix a la secció <code>databases</code>.</li>
+<li><code>.store.mongo.database</code> {String}: Àlies de la base de dades MongoDB que es defineix a la secció <code>databases</code>.</li>
+</ul>
+<h4>ProxyService</h4>
+<p>Servei per accedir a URL externes.<br>
+Ruta base: <code>services.proxy</code></p>
+<ul>
+<li><code>.validUrls</code> {List&lt;String&gt;}: Llista de les URLs acceptades pel servidor <em>proxy</em>.</li>
+<li><code>.aliases.&lt;alias&gt;</code> {Object}: Definició d’una connexió externa associada a <code>alias</code>.</li>
+<li><code>.aliases.&lt;alias&gt;.url</code> {String}: URL externa a la qual es vol accedir.</li>
+<li><code>.aliases.&lt;alias&gt;.ipFilter</code> {String}: Expressió regular de Java que determina quines adreces IP poden accedir a la URL.</li>
+<li><code>.aliases.&lt;alias&gt;.authorization</code> {String}: Capçalera HTTP <em>Authorization</em> que s’enviarà en accedir a la URL (Bearer o Basic).</li>
+</ul>
+<h4>MailService</h4>
+<p>Servei per enviar correus electrònics.<br>
+Ruta base: <code>services.mail</code></p>
+<ul>
+<li><code>.enabled</code> {Boolean}: Paràmetre que controla l’activació del servei.</li>
+<li><code>.host</code> {String}: Nom del servidor de correu SMTP.</li>
+<li><code>.port</code> {Integer}: Port d’escolta del servidor de correu.</li>
+<li><code>.startTls</code> {Boolean}: Paràmetre que controla l’ús del protocol TLS.</li>
+<li><code>.auth</code> {Boolean}: Paràmetre que indica si la connexió s’estableix passant credencials.</li>
+<li><code>.username</code> {String}: Nom de l’usuari que s’autentica al servidor.</li>
+<li><code>.password</code> {String}: Contrasenya de l’usuari que s’autentica al servidor.</li>
+<li><code>.from</code> {String}: Adreça de correu del remitent per defecte.</li>
+<li><code>.contentType</code> {String}: <em>Content-Type</em> del cos del missatge.</li>
+</ul>
+<h4>PrintService</h4>
+<p>Servei per generar fitxers PDF amb geometries vectorials.<br>
+Ruta base: <code>services.print</code></p>
+<ul>
+<li><code>.directory</code> {String}: Directori on s’emmagatzemen els fitxers PDF generats.</li>
+<li><code>.title</code> {String}: Títol que es mostrarà al document PDF.</li>
+<li><code>.creator</code> {String}: Propietat <code>creator</code> que s’incorporarà al document PDF.</li>
+</ul>
 
     </div>
   </main>
