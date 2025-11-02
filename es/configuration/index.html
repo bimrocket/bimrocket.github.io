@@ -213,7 +213,9 @@ Se puede cambiar mediante la propiedad <code>services.security.adminPassword</co
 Estos parámetros pueden modificarse directamente en el fichero <code>bimrocket-server.yaml</code> o bien mediante cualquier
 otro mecanismo previsto por la libreria <em>smallrye config</em> (propiedades de entorno, variables de la JVM, etc...).
 En muchos casos, es necesario reiniciar los servicios para que los cambios de la configuración tengan efecto.</p>
-<h4>SecurityService</h4>
+<h4 id="security">SecurityService
+  <a href="#security" class="anchor">🔗</a>
+</h4>
 <p>Servicio que gestiona la información de los usuarios y los roles de acceso.<br>
 Ruta base: <code>services.security</code></p>
 <ul>
@@ -238,7 +240,9 @@ Cuando este parámetro está activado, no es necesario que los usuarios se creen
 <li><code>.store.orient.database</code> {String}: Alias de la base de datos OrientDB que se define en la sección <code>databases</code>.</li>
 <li><code>.store.mongo.database</code> {String}: Alias de la base de datos MongoDB que se define en la sección <code>databases</code>.</li>
 </ul>
-<h4>FileService</h4>
+<h4 id="file">FileService
+  <a href="#file" class="anchor">🔗</a>
+</h4>
 <p>Servicio que gestiona el almacenamiento de ficheros y carpetas.<br>
 Ruta base: <code>services.file</code></p>
 <ul>
@@ -250,7 +254,9 @@ Ruta base: <code>services.file</code></p>
 </li>
 <li><code>.store.filesystem.directory</code> {String}: Directorio base donde se almacenan las carpetas y los ficheros.</li>
 </ul>
-<h4>BcfService</h4>
+<h4 id="bcf">BcfService
+  <a href="#bcf" class="anchor">🔗</a>
+</h4>
 <p>Servicio que gestiona el almacenamiento de incidencias BCF.<br>
 Ruta base: <code>services.bcf</code></p>
 <ul>
@@ -269,7 +275,9 @@ de la incidencia en el momento de su creación. El patrón puede incluir expresi
 <li><code>.mail.createTopic.body</code> {String}: Patrón que determina el cuerpo del mensaje que se enviará a los
 participantes de la incidencia en el momento de su creación. El patrón puede incluir expresiones <code>#{&lt;property&gt;}</code> donde <code>property</code> es cualquier propiedad del Topic (incidencia).</li>
 </ul>
-<h4>IfcdbService</h4>
+<h4 id="ifcdb">IfcdbService
+  <a href="#ifcdb" class="anchor">🔗</a>
+</h4>
 <p>Servicio que gestiona el almacenamiento de objetos de un modelo IFC en una base de datos.<br>
 Ruta base: <code>services.ifcdb</code></p>
 <ul>
@@ -284,7 +292,9 @@ El <code>alias</code> de la base de datos utilitzada coincidirá con el nombre d
 </ul>
 </li>
 </ul>
-<h4>TaskService</h4>
+<h4 id="task">TaskService
+  <a href="#task" class="anchor">🔗</a>
+</h4>
 <p>Servicio que gestiona la ejecución de tareas en el servidor.<br>
 Ruta base: <code>services.task</code></p>
 <ul>
@@ -298,7 +308,9 @@ Ruta base: <code>services.task</code></p>
 <li><code>.store.orient.database</code> {String}: Alias de la base de datos OrientDB que se define en la sección <code>databases</code>.</li>
 <li><code>.store.mongo.database</code> {String}: Alias de la base de datos MongoDB que se define en la sección <code>databases</code>.</li>
 </ul>
-<h4>ProxyService</h4>
+<h4 id="proxy">ProxyService
+  <a href="#proxy" class="anchor">🔗</a>
+</h4>
 <p>Servicio para acceder a URL externas.<br>
 Ruta base: <code>services.proxy</code></p>
 <ul>
@@ -308,7 +320,9 @@ Ruta base: <code>services.proxy</code></p>
 <li><code>.aliases.&lt;alias&gt;.ipFilter</code> {String}: Expression regular de Java que determina qué direcciones IP pueden acceder a la URL.</li>
 <li><code>.aliases.&lt;alias&gt;.authorization</code> {String}: Cabecera HTTP <em>Authorization</em> que se enviará al acceder a la URL (Bearer o Basic).</li>
 </ul>
-<h4>MailService</h4>
+<h4 id="mail">MailService
+  <a href="#mail" class="anchor">🔗</a>
+</h4>
 <p>Servicio para enviar correos electrónicos.<br>
 Ruta base: <code>services.mail</code></p>
 <ul>
@@ -322,7 +336,9 @@ Ruta base: <code>services.mail</code></p>
 <li><code>.from</code> {String}: Dirección de correo del remitente por defecto.</li>
 <li><code>.contentType</code> {String}: Content-Type del cuerpo del mensaje.</li>
 </ul>
-<h4>PrintService</h4>
+<h4 id="print">PrintService
+  <a href="#print" class="anchor">🔗</a>
+</h4>
 <p>Servicio para generar ficheros PDF con geometrias vectoriales.<br>
 Ruta base: <code>services.print</code></p>
 <ul>

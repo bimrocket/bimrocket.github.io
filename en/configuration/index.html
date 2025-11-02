@@ -208,10 +208,12 @@ You can change the database urls in <code>bimrocket-server.yaml</code> file to c
 <p>The default password of the <code>admin</code> user is <code>bimrocket</code>.
 It can be changed through the <code>services.security.adminPassword</code> property of the <code>bimrocket-server.yaml</code> file.</p>
 <h3>Service configuration parameters</h3>
-<p>The following section describes the configuration parameters accepted by each service.<br>
-These parameters can be modified directly in the <code>bimrocket-server.yaml</code> file or through any other mechanism provided by the <em>smallrye config</em> library (environment properties, JVM variables, etc.).<br>
+<p>The following section describes the configuration parameters accepted by each service.
+These parameters can be modified directly in the <code>bimrocket-server.yaml</code> file or through any other mechanism provided by the <em>smallrye config</em> library (environment properties, JVM variables, etc.).
 In many cases, it is necessary to restart the services for configuration changes to take effect.</p>
-<h4>SecurityService</h4>
+<h4 id="security">SecurityService
+  <a href="#security" class="anchor">🔗</a>
+</h4>
 <p>Service that manages user information and access roles.<br>
 Base path: <code>services.security</code></p>
 <ul>
@@ -220,7 +222,7 @@ Base path: <code>services.security</code></p>
 <li><code>.authorizationCacheTimeout</code> {Long}: Refresh time (in seconds) of the authorization cache.</li>
 <li><code>.userCacheTimeout</code> {Long}: Refresh time (in seconds) of the user cache.</li>
 <li><code>.roleCacheTimeout</code> {Long}: Refresh time (in seconds) of the role cache.</li>
-<li><code>.ldap.enabled</code> {Boolean}: Parameter that indicates whether user passwords are validated against an LDAP server.<br>
+<li><code>.ldap.enabled</code> {Boolean}: Parameter that indicates whether user passwords are validated against an LDAP server.
 When this parameter is enabled, users do not need to be created in the database.</li>
 <li><code>.ldap.url</code> {String}: URL of the LDAP server.</li>
 <li><code>.ldap.domain</code> {String}: Domain of the LDAP server.</li>
@@ -236,7 +238,9 @@ When this parameter is enabled, users do not need to be created in the database.
 <li><code>.store.orient.database</code> {String}: Alias of the OrientDB database defined in the <code>databases</code> section.</li>
 <li><code>.store.mongo.database</code> {String}: Alias of the MongoDB database defined in the <code>databases</code> section.</li>
 </ul>
-<h4>FileService</h4>
+<h4 id="file">FileService
+  <a href="#file" class="anchor">🔗</a>
+</h4>
 <p>Service that manages the storage of files and folders.<br>
 Base path: <code>services.file</code></p>
 <ul>
@@ -248,11 +252,13 @@ Base path: <code>services.file</code></p>
 </li>
 <li><code>.store.filesystem.directory</code> {String}: Base directory where folders and files are stored.</li>
 </ul>
-<h4>BcfService</h4>
+<h4 id="bcf">BcfService
+  <a href="#bcf" class="anchor">🔗</a>
+</h4>
 <p>Service that manages the storage of BCF issues.<br>
 Base path: <code>services.bcf</code></p>
 <ul>
-<li><code>.projectTemplate</code> {String}: Name of the project used as a template.<br>
+<li><code>.projectTemplate</code> {String}: Name of the project used as a template.
 When a new BCF project is created, it inherits the extensions (<em>BcfExtensions</em>) of the template project.</li>
 <li><code>.store</code> {Class}: Class that implements the storage of BCF issues:
 <ul>
@@ -267,12 +273,14 @@ when the issue is created. The pattern can include expressions <code>#{&lt;prope
 <li><code>.mail.createTopic.body</code> {String}: Pattern that defines the body of the message sent to participants
 when the issue is created. The pattern can include expressions <code>#{&lt;property&gt;}</code> where <code>property</code> is any property of the <em>Topic</em> (issue).</li>
 </ul>
-<h4>IfcdbService</h4>
+<h4 id="ifcdb">IfcdbService
+  <a href="#ifcdb" class="anchor">🔗</a>
+</h4>
 <p>Service that manages the storage of IFC model objects in a database.<br>
 Base path: <code>services.ifcdb</code></p>
 <ul>
-<li><code>.schemas</code> {List&lt;String&gt;}: List of supported IFC schemas (IFC2X3, IFC4, or IFC4X3_ADD2).<br>
-A separate database will be created for each schema.<br>
+<li><code>.schemas</code> {List&lt;String&gt;}: List of supported IFC schemas (IFC2X3, IFC4, or IFC4X3_ADD2).
+A separate database will be created for each schema.
 The <code>alias</code> of the database used will match the name of the IFC schema.</li>
 <li><code>.maxFileSizeMb</code> {Integer}: Maximum size in MB of IFC models that can be stored in the database.</li>
 <li><code>.store</code> {Class}: Class that defines the implementation of model storage:
@@ -282,7 +290,9 @@ The <code>alias</code> of the database used will match the name of the IFC schem
 </ul>
 </li>
 </ul>
-<h4>TaskService</h4>
+<h4 id="task">TaskService
+  <a href="#task" class="anchor">🔗</a>
+</h4>
 <p>Service that manages task execution on the server.<br>
 Base path: <code>services.task</code></p>
 <ul>
@@ -296,7 +306,9 @@ Base path: <code>services.task</code></p>
 <li><code>.store.orient.database</code> {String}: Alias of the OrientDB database defined in the <code>databases</code> section.</li>
 <li><code>.store.mongo.database</code> {String}: Alias of the MongoDB database defined in the <code>databases</code> section.</li>
 </ul>
-<h4>ProxyService</h4>
+<h4 id="proxy">ProxyService
+  <a href="#proxy" class="anchor">🔗</a>
+</h4>
 <p>Service for accessing external URLs.<br>
 Base path: <code>services.proxy</code></p>
 <ul>
@@ -306,7 +318,9 @@ Base path: <code>services.proxy</code></p>
 <li><code>.aliases.&lt;alias&gt;.ipFilter</code> {String}: Java regular expression that defines which IP addresses are allowed to access the URL.</li>
 <li><code>.aliases.&lt;alias&gt;.authorization</code> {String}: <em>Authorization</em> header sent when accessing the URL (Bearer or Basic).</li>
 </ul>
-<h4>MailService</h4>
+<h4 id="mail">MailService
+  <a href="#mail" class="anchor">🔗</a>
+</h4>
 <p>Service for sending email messages.<br>
 Base path: <code>services.mail</code></p>
 <ul>
@@ -320,7 +334,9 @@ Base path: <code>services.mail</code></p>
 <li><code>.from</code> {String}: Default sender email address.</li>
 <li><code>.contentType</code> {String}: <em>Content-Type</em> of the message body.</li>
 </ul>
-<h4>PrintService</h4>
+<h4 id="print">PrintService
+  <a href="#print" class="anchor">🔗</a>
+</h4>
 <p>Service for generating PDF files with vector geometries.<br>
 Base path: <code>services.print</code></p>
 <ul>

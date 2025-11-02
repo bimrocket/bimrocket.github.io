@@ -207,11 +207,13 @@ Pots canviar les URL de les bases de dades al fitxer <code>bimrocket-server.yaml
 <p>La contrasenya per defecte de l’usuari <code>admin</code> és <code>bimrocket</code>.
 Aquesta es pot canviar mitjançant la propietat <code>services.security.adminPassword</code> del fitxer <code>bimrocket-server.yaml</code>.</p>
 <h3>Paràmetres de configuració dels serveis</h3>
-<p>A continuació es descriuen els paràmetres de configuració que accepta cada servei.<br>
+<p>A continuació es descriuen els paràmetres de configuració que accepta cada servei.
 Aquests paràmetres es poden modificar directament al fitxer <code>bimrocket-server.yaml</code> o bé mitjançant qualsevol altre mecanisme previst per la
-llibreria <em>smallrye config</em> (propietats d’entorn, variables de la JVM, etc.).<br>
+llibreria <em>smallrye config</em> (propietats d’entorn, variables de la JVM, etc.).
 En molts casos, és necessari reiniciar els serveis perquè els canvis de configuració tinguin efecte.</p>
-<h4>SecurityService</h4>
+<h4 id="security">SecurityService
+  <a href="#security" class="anchor">🔗</a>
+</h4>
 <p>Servei que gestiona la informació dels usuaris i els rols d’accés.<br>
 Ruta base: <code>services.security</code></p>
 <ul>
@@ -220,7 +222,7 @@ Ruta base: <code>services.security</code></p>
 <li><code>.authorizationCacheTimeout</code> {Long}: Temps de refresc (en segons) de la memòria cau d’autorització.</li>
 <li><code>.userCacheTimeout</code> {Long}: Temps de refresc (en segons) de la memòria cau d’usuaris.</li>
 <li><code>.roleCacheTimeout</code> {Long}: Temps de refresc (en segons) de la memòria cau de rols.</li>
-<li><code>.ldap.enabled</code> {Boolean}: Paràmetre que indica si les contrasenyes dels usuaris es validen contra un servidor LDAP.<br>
+<li><code>.ldap.enabled</code> {Boolean}: Paràmetre que indica si les contrasenyes dels usuaris es validen contra un servidor LDAP.
 Quan aquest paràmetre està activat, no és necessari que els usuaris es creïn a la base de dades.</li>
 <li><code>.ldap.url</code> {String}: URL del servidor LDAP.</li>
 <li><code>.ldap.domain</code> {String}: Domini del servidor LDAP.</li>
@@ -236,7 +238,9 @@ Quan aquest paràmetre està activat, no és necessari que els usuaris es creïn
 <li><code>.store.orient.database</code> {String}: Àlies de la base de dades OrientDB que es defineix a la secció <code>databases</code>.</li>
 <li><code>.store.mongo.database</code> {String}: Àlies de la base de dades MongoDB que es defineix a la secció <code>databases</code>.</li>
 </ul>
-<h4>FileService</h4>
+<h4 id="file">FileService
+  <a href="#file" class="anchor">🔗</a>
+</h4>
 <p>Servei que gestiona l’emmagatzematge de fitxers i carpetes.<br>
 Ruta base: <code>services.file</code></p>
 <ul>
@@ -248,11 +252,13 @@ Ruta base: <code>services.file</code></p>
 </li>
 <li><code>.store.filesystem.directory</code> {String}: Directori base on s’emmagatzemen les carpetes i els fitxers.</li>
 </ul>
-<h4>BcfService</h4>
+<h4 id="bcf">BcfService
+  <a href="#bcf" class="anchor">🔗</a>
+</h4>
 <p>Servei que gestiona l’emmagatzematge d’incidències BCF.<br>
 Ruta base: <code>services.bcf</code></p>
 <ul>
-<li><code>.projectTemplate</code> {String}: Nom del projecte que es pren com a plantilla.<br>
+<li><code>.projectTemplate</code> {String}: Nom del projecte que es pren com a plantilla.
 En crear un nou projecte BCF, aquest heretarà les extensions (<em>BcfExtensions</em>) del projecte plantilla.</li>
 <li><code>.store</code> {Class}: Classe que implementa l’emmagatzematge de les incidències BCF:
 <ul>
@@ -267,12 +273,14 @@ de la incidència en el moment de la seva creació. El patró pot incloure expre
 <li><code>.mail.createTopic.body</code> {String}: Patró que determina el cos del missatge que s’enviarà als
 participants de la incidència en el moment de la seva creació. El patró pot incloure expressions <code>#{&lt;property&gt;}</code> on <code>property</code> és qualsevol propietat del <em>Topic</em> (incidència).</li>
 </ul>
-<h4>IfcdbService</h4>
+<h4 id="ifcdb">IfcdbService
+  <a href="#ifcdb" class="anchor">🔗</a>
+</h4>
 <p>Servei que gestiona l’emmagatzematge d’objectes d’un model IFC en una base de dades.<br>
 Ruta base: <code>services.ifcdb</code></p>
 <ul>
-<li><code>.schemas</code> {List&lt;String&gt;}: Llista d’esquemes IFC suportats (IFC2X3, IFC4 o IFC4X3_ADD2).<br>
-Per a cada esquema es crearà una base de dades diferent.<br>
+<li><code>.schemas</code> {List&lt;String&gt;}: Llista d’esquemes IFC suportats (IFC2X3, IFC4 o IFC4X3_ADD2).
+Per a cada esquema es crearà una base de dades diferent.
 L’<code>àlies</code> de la base de dades utilitzada coincidirà amb el nom de l’esquema IFC.</li>
 <li><code>.maxFileSizeMb</code> {Integer}: Mida màxima en MB dels models IFC que es poden emmagatzemar a la base de dades.</li>
 <li><code>.store</code> {Class}: Classe que determina la implementació de l’emmagatzematge dels models:
@@ -282,7 +290,9 @@ L’<code>àlies</code> de la base de dades utilitzada coincidirà amb el nom de
 </ul>
 </li>
 </ul>
-<h4>TaskService</h4>
+<h4 id="task">TaskService
+  <a href="#task" class="anchor">🔗</a>
+</h4>
 <p>Servei que gestiona l’execució de tasques al servidor.<br>
 Ruta base: <code>services.task</code></p>
 <ul>
@@ -296,7 +306,9 @@ Ruta base: <code>services.task</code></p>
 <li><code>.store.orient.database</code> {String}: Àlies de la base de dades OrientDB que es defineix a la secció <code>databases</code>.</li>
 <li><code>.store.mongo.database</code> {String}: Àlies de la base de dades MongoDB que es defineix a la secció <code>databases</code>.</li>
 </ul>
-<h4>ProxyService</h4>
+<h4 id="proxy">ProxyService
+  <a href="#proxy" class="anchor">🔗</a>
+</h4>
 <p>Servei per accedir a URL externes.<br>
 Ruta base: <code>services.proxy</code></p>
 <ul>
@@ -306,7 +318,9 @@ Ruta base: <code>services.proxy</code></p>
 <li><code>.aliases.&lt;alias&gt;.ipFilter</code> {String}: Expressió regular de Java que determina quines adreces IP poden accedir a la URL.</li>
 <li><code>.aliases.&lt;alias&gt;.authorization</code> {String}: Capçalera HTTP <em>Authorization</em> que s’enviarà en accedir a la URL (Bearer o Basic).</li>
 </ul>
-<h4>MailService</h4>
+<h4 id="mail">MailService
+  <a href="#mail" class="anchor">🔗</a>
+</h4>
 <p>Servei per enviar correus electrònics.<br>
 Ruta base: <code>services.mail</code></p>
 <ul>
@@ -320,7 +334,9 @@ Ruta base: <code>services.mail</code></p>
 <li><code>.from</code> {String}: Adreça de correu del remitent per defecte.</li>
 <li><code>.contentType</code> {String}: <em>Content-Type</em> del cos del missatge.</li>
 </ul>
-<h4>PrintService</h4>
+<h4 id="print">PrintService
+  <a href="#print" class="anchor">🔗</a>
+</h4>
 <p>Servei per generar fitxers PDF amb geometries vectorials.<br>
 Ruta base: <code>services.print</code></p>
 <ul>
