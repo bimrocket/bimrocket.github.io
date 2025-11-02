@@ -29,21 +29,24 @@ Se puede cambiar mediante la propiedad `services.security.adminPassword` del arc
 
 ### Parámetros de configuración de los servicios
 
-A continuación se describen los parámetros de configuración que acepta cada servicio. 
+A continuación se describen los parámetros de configuración que acepta cada servicio.
 Estos parámetros pueden modificarse directamente en el fichero `bimrocket-server.yaml` o bien mediante cualquier
 otro mecanismo previsto por la libreria *smallrye config* (propiedades de entorno, variables de la JVM, etc...).
 En muchos casos, es necesario reiniciar los servicios para que los cambios de la configuración tengan efecto.
 
-#### SecurityService 
+<h4 id="security">SecurityService
+  <a href="#security" class="anchor">🔗</a>
+</h4>
+
 Servicio que gestiona la información de los usuarios y los roles de acceso.<br>
 Ruta base: `services.security`
 
-- `.adminPassword` {String}: Contraseña del usuario `admin`. Este usuario tiene privilegios totales sobre todos los servicios. 
+- `.adminPassword` {String}: Contraseña del usuario `admin`. Este usuario tiene privilegios totales sobre todos los servicios.
 - `.passwordPattern` {String}: Expresión regular de Java que determina el formato aceptado de las contraseñas de los usuarios.
-- `.authorizationCacheTimeout` {Long}: Tiempo de refresco (en segundos) de la cache de autorización. 
+- `.authorizationCacheTimeout` {Long}: Tiempo de refresco (en segundos) de la cache de autorización.
 - `.userCacheTimeout` {Long}: Tiempo de refresco (en segundos) de la cache de usuarios.
 - `.roleCacheTimeout` {Long}: Tiempo de refresco (en segundos) de la cache de roles.
-- `.ldap.enabled` {Boolean}: Parámetro que indica si las contraseñas de los usuarios se validan contra un servidor LDAP. 
+- `.ldap.enabled` {Boolean}: Parámetro que indica si las contraseñas de los usuarios se validan contra un servidor LDAP.
    Cuando este parámetro está activado, no es necesario que los usuarios se creen en la base de datos.
 - `.ldap.url` {String}: URL del servidor LDAP.
 - `.ldap.domain` {String}: Dominio del servidor LDAP.
@@ -56,7 +59,10 @@ Ruta base: `services.security`
 - `.store.orient.database` {String}: Alias de la base de datos OrientDB que se define en la sección `databases`.
 - `.store.mongo.database` {String}: Alias de la base de datos MongoDB que se define en la sección `databases`.
 
-#### FileService 
+<h4 id="file">FileService
+  <a href="#file" class="anchor">🔗</a>
+</h4>
+
 Servicio que gestiona el almacenamiento de ficheros y carpetas.<br>
 Ruta base: `services.file`
 
@@ -65,56 +71,72 @@ Ruta base: `services.file`
   - Para el almacenamiento en el sistema de ficheros: `org.bimrocket.service.file.store.filesystem.FileSystemFileStore`
 - `.store.filesystem.directory` {String}: Directorio base donde se almacenan las carpetas y los ficheros.
 
-#### BcfService 
+<h4 id="bcf">BcfService
+  <a href="#bcf" class="anchor">🔗</a>
+</h4>
+
 Servicio que gestiona el almacenamiento de incidencias BCF.<br>
 Ruta base: `services.bcf`
 
-- `.projectTemplate` {String}: Nombre del proyecto que se toma como plantilla. 
-  Al crear un nuevo proyecto BCF, éste heredará las extensiones (BcfExtensions) del proyecto plantilla. 
+- `.projectTemplate` {String}: Nombre del proyecto que se toma como plantilla.
+  Al crear un nuevo proyecto BCF, éste heredará las extensiones (BcfExtensions) del proyecto plantilla.
 - `.store` {Class}: Clase que implementa el almacenamiento de las incidencias BCF:
   - Para el almacenamiento en OrientDB: `org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore`
   - Para el almacenamiento en MongoDB: `org.bimrocket.service.bcf.store.mongo.BcfMongoDaoStore`
 - `.store.orient.database`: Alias de la base de datos OrientDB que se define en la sección `databases`.
 - `.store.mongo.database`: Alias de la base de datos MongoDB que se define en la sección `databases`.
-- `.mail.createTopic.subject` {String}: Patrón que determina el asunto del mensaje que se enviará a los participantes 
+- `.mail.createTopic.subject` {String}: Patrón que determina el asunto del mensaje que se enviará a los participantes
   de la incidencia en el momento de su creación. El patrón puede incluir expresiones `#{<property>}`donde `property` es cualquier propiedad del Topic (incidencia).
-- `.mail.createTopic.body` {String}: Patrón que determina el cuerpo del mensaje que se enviará a los 
+- `.mail.createTopic.body` {String}: Patrón que determina el cuerpo del mensaje que se enviará a los
   participantes de la incidencia en el momento de su creación. El patrón puede incluir expresiones `#{<property>}` donde `property` es cualquier propiedad del Topic (incidencia).
 
-#### IfcdbService
+<h4 id="ifcdb">IfcdbService
+  <a href="#ifcdb" class="anchor">🔗</a>
+</h4>
+
 Servicio que gestiona el almacenamiento de objetos de un modelo IFC en una base de datos.<br>
 Ruta base: `services.ifcdb`
 
-- `.schemas` {List&lt;String&gt;}: Lista de esquemas IFC soportados (IFC2X3, IFC4 o IFC4X3_ADD2). 
-Para cada esquema se creará una base de datos diferente. 
+- `.schemas` {List&lt;String&gt;}: Lista de esquemas IFC soportados (IFC2X3, IFC4 o IFC4X3_ADD2).
+Para cada esquema se creará una base de datos diferente.
 El `alias` de la base de datos utilitzada coincidirá con el nombre del esquema IFC.
 - `.maxFileSizeMb` {Integer}: Tamaño máximo en Mb de los modelos IFC que se podrán almacenar en la base de datos.
-- `.store` {Class}: Clase que determina la implementación del almacenamiento de los modelos: 
+- `.store` {Class}: Clase que determina la implementación del almacenamiento de los modelos:
   - Para el almacenamiento en OrientDB: `org.bimrocket.service.ifcdb.store.orient.OrientIfcStore`
   - Para el almacenamiento en MongoDB: `org.bimrocket.service.ifcdb.store.mongo.MongoIfcStore`
 
-#### TaskService 
+
+<h4 id="task">TaskService
+  <a href="#task" class="anchor">🔗</a>
+</h4>
+
 Servicio que gestiona la ejecución de tareas en el servidor.<br>
 Ruta base: `services.task`
 
-- `.taskCacheSize` {Integer}: Número de tareas que se cachean en una estructura LRU. 
+- `.taskCacheSize` {Integer}: Número de tareas que se cachean en una estructura LRU.
 - `.store.class` {Class}: Classe que determina la implementación del almacenamiento de los datos de las tareas:
   - Para el almacenamiento en OrientDB: `org.bimrocket.service.task.store.orient.TaskOrientDaoStore`
   - Para el almacenamiento en MongoDB: `org.bimrocket.service.task.store.mongo.TaskMongoDaoStore`
 - `.store.orient.database` {String}: Alias de la base de datos OrientDB que se define en la sección `databases`.
 - `.store.mongo.database` {String}: Alias de la base de datos MongoDB que se define en la sección `databases`.
 
-#### ProxyService 
+<h4 id="proxy">ProxyService
+  <a href="#proxy" class="anchor">🔗</a>
+</h4>
+
 Servicio para acceder a URL externas.<br>
 Ruta base: `services.proxy`
 
 - `.validUrls` {List&lt;String&gt;}: Lista de URLs acceptadas por el proxy.
-- `.aliases.<alias>` {Object}: Definición de una conexión externa asociada a `alias`.  
+- `.aliases.<alias>` {Object}: Definición de una conexión externa asociada a `alias`.
 - `.aliases.<alias>.url` {String}: URL externa a la que se quiere acceder.
 - `.aliases.<alias>.ipFilter` {String}: Expression regular de Java que determina qué direcciones IP pueden acceder a la URL.
-- `.aliases.<alias>.authorization` {String}: Cabecera HTTP *Authorization* que se enviará al acceder a la URL (Bearer o Basic).  
+- `.aliases.<alias>.authorization` {String}: Cabecera HTTP *Authorization* que se enviará al acceder a la URL (Bearer o Basic).
 
-#### MailService 
+<h4 id="mail">MailService
+  <a href="#mail" class="anchor">🔗</a>
+</h4>
+
 Servicio para enviar correos electrónicos.<br>
 Ruta base: `services.mail`
 
@@ -128,7 +150,10 @@ Ruta base: `services.mail`
 - `.from` {String}: Dirección de correo del remitente por defecto.
 - `.contentType` {String}: Content-Type del cuerpo del mensaje.
 
-#### PrintService
+<h4 id="print">PrintService
+  <a href="#print" class="anchor">🔗</a>
+</h4>
+
 Servicio para generar ficheros PDF con geometrias vectoriales.<br>
 Ruta base: `services.print`
 

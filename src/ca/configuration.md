@@ -27,21 +27,24 @@ Aquesta es pot canviar mitjançant la propietat `services.security.adminPassword
 
 ### Paràmetres de configuració dels serveis
 
-A continuació es descriuen els paràmetres de configuració que accepta cada servei.  
-Aquests paràmetres es poden modificar directament al fitxer `bimrocket-server.yaml` o bé mitjançant qualsevol altre mecanisme previst per la 
-llibreria *smallrye config* (propietats d’entorn, variables de la JVM, etc.).  
+A continuació es descriuen els paràmetres de configuració que accepta cada servei.
+Aquests paràmetres es poden modificar directament al fitxer `bimrocket-server.yaml` o bé mitjançant qualsevol altre mecanisme previst per la
+llibreria *smallrye config* (propietats d’entorn, variables de la JVM, etc.).
 En molts casos, és necessari reiniciar els serveis perquè els canvis de configuració tinguin efecte.
 
-#### SecurityService 
+<h4 id="security">SecurityService
+  <a href="#security" class="anchor">🔗</a>
+</h4>
+
 Servei que gestiona la informació dels usuaris i els rols d’accés.<br>
 Ruta base: `services.security`
 
-- `.adminPassword` {String}: Contrasenya de l’usuari `admin`. Aquest usuari té privilegis totals sobre tots els serveis. 
+- `.adminPassword` {String}: Contrasenya de l’usuari `admin`. Aquest usuari té privilegis totals sobre tots els serveis.
 - `.passwordPattern` {String}: Expressió regular de Java que determina el format acceptat de les contrasenyes dels usuaris.
-- `.authorizationCacheTimeout` {Long}: Temps de refresc (en segons) de la memòria cau d’autorització. 
+- `.authorizationCacheTimeout` {Long}: Temps de refresc (en segons) de la memòria cau d’autorització.
 - `.userCacheTimeout` {Long}: Temps de refresc (en segons) de la memòria cau d’usuaris.
 - `.roleCacheTimeout` {Long}: Temps de refresc (en segons) de la memòria cau de rols.
-- `.ldap.enabled` {Boolean}: Paràmetre que indica si les contrasenyes dels usuaris es validen contra un servidor LDAP.  
+- `.ldap.enabled` {Boolean}: Paràmetre que indica si les contrasenyes dels usuaris es validen contra un servidor LDAP.
    Quan aquest paràmetre està activat, no és necessari que els usuaris es creïn a la base de dades.
 - `.ldap.url` {String}: URL del servidor LDAP.
 - `.ldap.domain` {String}: Domini del servidor LDAP.
@@ -54,7 +57,11 @@ Ruta base: `services.security`
 - `.store.orient.database` {String}: Àlies de la base de dades OrientDB que es defineix a la secció `databases`.
 - `.store.mongo.database` {String}: Àlies de la base de dades MongoDB que es defineix a la secció `databases`.
 
-#### FileService 
+
+<h4 id="file">FileService
+  <a href="#file" class="anchor">🔗</a>
+</h4>
+
 Servei que gestiona l’emmagatzematge de fitxers i carpetes.<br>
 Ruta base: `services.file`
 
@@ -63,56 +70,71 @@ Ruta base: `services.file`
   - Per a l’emmagatzematge al sistema de fitxers: `org.bimrocket.service.file.store.filesystem.FileSystemFileStore`
 - `.store.filesystem.directory` {String}: Directori base on s’emmagatzemen les carpetes i els fitxers.
 
-#### BcfService 
+<h4 id="bcf">BcfService
+  <a href="#bcf" class="anchor">🔗</a>
+</h4>
+
 Servei que gestiona l’emmagatzematge d’incidències BCF.<br>
 Ruta base: `services.bcf`
 
-- `.projectTemplate` {String}: Nom del projecte que es pren com a plantilla.  
-  En crear un nou projecte BCF, aquest heretarà les extensions (*BcfExtensions*) del projecte plantilla. 
+- `.projectTemplate` {String}: Nom del projecte que es pren com a plantilla.
+  En crear un nou projecte BCF, aquest heretarà les extensions (*BcfExtensions*) del projecte plantilla.
 - `.store` {Class}: Classe que implementa l’emmagatzematge de les incidències BCF:
   - Per a l’emmagatzematge a OrientDB: `org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore`
   - Per a l’emmagatzematge a MongoDB: `org.bimrocket.service.bcf.store.mongo.BcfMongoDaoStore`
 - `.store.orient.database`: Àlies de la base de dades OrientDB que es defineix a la secció `databases`.
 - `.store.mongo.database`: Àlies de la base de dades MongoDB que es defineix a la secció `databases`.
-- `.mail.createTopic.subject` {String}: Patró que determina l’assumpte del missatge que s’enviarà als participants 
+- `.mail.createTopic.subject` {String}: Patró que determina l’assumpte del missatge que s’enviarà als participants
   de la incidència en el moment de la seva creació. El patró pot incloure expressions `#{<property>}` on `property` és qualsevol propietat del *Topic* (incidència).
-- `.mail.createTopic.body` {String}: Patró que determina el cos del missatge que s’enviarà als 
+- `.mail.createTopic.body` {String}: Patró que determina el cos del missatge que s’enviarà als
   participants de la incidència en el moment de la seva creació. El patró pot incloure expressions `#{<property>}` on `property` és qualsevol propietat del *Topic* (incidència).
 
-#### IfcdbService
+<h4 id="ifcdb">IfcdbService
+  <a href="#ifcdb" class="anchor">🔗</a>
+</h4>
+
 Servei que gestiona l’emmagatzematge d’objectes d’un model IFC en una base de dades.<br>
 Ruta base: `services.ifcdb`
 
-- `.schemas` {List&lt;String&gt;}: Llista d’esquemes IFC suportats (IFC2X3, IFC4 o IFC4X3_ADD2).  
-Per a cada esquema es crearà una base de dades diferent.  
+- `.schemas` {List&lt;String&gt;}: Llista d’esquemes IFC suportats (IFC2X3, IFC4 o IFC4X3_ADD2).
+Per a cada esquema es crearà una base de dades diferent.
 L’`àlies` de la base de dades utilitzada coincidirà amb el nom de l’esquema IFC.
 - `.maxFileSizeMb` {Integer}: Mida màxima en MB dels models IFC que es poden emmagatzemar a la base de dades.
-- `.store` {Class}: Classe que determina la implementació de l’emmagatzematge dels models: 
+- `.store` {Class}: Classe que determina la implementació de l’emmagatzematge dels models:
   - Per a l’emmagatzematge a OrientDB: `org.bimrocket.service.ifcdb.store.orient.OrientIfcStore`
   - Per a l’emmagatzematge a MongoDB: `org.bimrocket.service.ifcdb.store.mongo.MongoIfcStore`
 
-#### TaskService 
+<h4 id="task">TaskService
+  <a href="#task" class="anchor">🔗</a>
+</h4>
+
 Servei que gestiona l’execució de tasques al servidor.<br>
 Ruta base: `services.task`
 
-- `.taskCacheSize` {Integer}: Nombre de tasques que es desen en memòria cau amb una estructura LRU. 
+- `.taskCacheSize` {Integer}: Nombre de tasques que es desen en memòria cau amb una estructura LRU.
 - `.store.class` {Class}: Classe que determina la implementació de l’emmagatzematge de les dades de les tasques:
   - Per a l’emmagatzematge a OrientDB: `org.bimrocket.service.task.store.orient.TaskOrientDaoStore`
   - Per a l’emmagatzematge a MongoDB: `org.bimrocket.service.task.store.mongo.TaskMongoDaoStore`
 - `.store.orient.database` {String}: Àlies de la base de dades OrientDB que es defineix a la secció `databases`.
 - `.store.mongo.database` {String}: Àlies de la base de dades MongoDB que es defineix a la secció `databases`.
 
-#### ProxyService 
+<h4 id="proxy">ProxyService
+  <a href="#proxy" class="anchor">🔗</a>
+</h4>
+
 Servei per accedir a URL externes.<br>
 Ruta base: `services.proxy`
 
 - `.validUrls` {List&lt;String&gt;}: Llista de les URLs acceptades pel servidor *proxy*.
-- `.aliases.<alias>` {Object}: Definició d’una connexió externa associada a `alias`.  
+- `.aliases.<alias>` {Object}: Definició d’una connexió externa associada a `alias`.
 - `.aliases.<alias>.url` {String}: URL externa a la qual es vol accedir.
 - `.aliases.<alias>.ipFilter` {String}: Expressió regular de Java que determina quines adreces IP poden accedir a la URL.
-- `.aliases.<alias>.authorization` {String}: Capçalera HTTP *Authorization* que s’enviarà en accedir a la URL (Bearer o Basic).  
+- `.aliases.<alias>.authorization` {String}: Capçalera HTTP *Authorization* que s’enviarà en accedir a la URL (Bearer o Basic).
 
-#### MailService 
+<h4 id="mail">MailService
+  <a href="#mail" class="anchor">🔗</a>
+</h4>
+
 Servei per enviar correus electrònics.<br>
 Ruta base: `services.mail`
 
@@ -126,7 +148,10 @@ Ruta base: `services.mail`
 - `.from` {String}: Adreça de correu del remitent per defecte.
 - `.contentType` {String}: *Content-Type* del cos del missatge.
 
-#### PrintService
+<h4 id="print">PrintService
+  <a href="#print" class="anchor">🔗</a>
+</h4>
+
 Servei per generar fitxers PDF amb geometries vectorials.<br>
 Ruta base: `services.print`
 

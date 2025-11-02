@@ -424,7 +424,7 @@ main ul > li, main ol > li
   margin-bottom: 0.4rem;
 }
 
-h2, h3
+h2, h3, h4
 {
   scroll-margin-top: calc(var(--header-height) + 50px);
 }
@@ -602,7 +602,7 @@ figure figcaption
     margin-top: var(--header-height);
   }
 
-  h2, h3
+  h2, h3, h4
   {
     scroll-margin-top: calc(var(--header-height) + 8px);
   }
