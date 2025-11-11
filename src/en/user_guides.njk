@@ -5,4 +5,32 @@ icon: support
 language: en
 ---
 
-<p>Coming soon...</p>
+  {% macro video_player(video_id, title) %}
+  <div class="video-player">
+    <div>{{ title }}</div>
+    <iframe 
+      src="https://www.youtube.com/embed/{{ video_id }}?modestbranding=1"
+      title="{{ title }}"
+      frameborder="0" 
+      style="width:100%;height:100%"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+  {% endmacro %}
+
+  <div class="videos">
+    {{ video_player("WTdsrDGMsKo", "File explorer") }}
+
+    {{ video_player("PXCVljhXQQc", "Access to local disk") }}
+
+    {{ video_player("rTY5F6jv7tg", "New scene and options") }}
+
+    {{ video_player("u3Dhd9JeuXs", "Select, orbit, fly") }}
+
+    {{ video_player("xWkukAaIjq0", "Zoom all, center, focus") }}
+
+    {{ video_player("KQGJ9l5C5lw", "Show and hide") }}
+
+    {{ video_player("69MN-5MMMJs", "Transform objects") }}
+  </div>

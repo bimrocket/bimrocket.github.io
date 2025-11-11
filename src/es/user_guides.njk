@@ -5,4 +5,32 @@ icon: support
 language: es
 ---
 
-<p>Próximamente...</p>
+  {% macro video_player(video_id, title) %}
+  <div class="video-player">
+    <div>{{ title }}</div>
+    <iframe 
+      src="https://www.youtube.com/embed/{{ video_id }}?modestbranding=1"
+      title="{{ title }}"
+      frameborder="0" 
+      style="width:100%;height:100%"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+  {% endmacro %}
+
+  <div class="videos">
+    {{ video_player("WTdsrDGMsKo", "Explorador de ficheros") }}
+
+    {{ video_player("Rz-iAeWdPXk", "Acceso al disco local") }}
+
+    {{ video_player("I4vAbrI-FQE", "Nueva escena y opciones") }}
+
+    {{ video_player("ZwWEr2bJ-Rw", "Seleccionar, orbitar, volar") }}
+
+    {{ video_player("AXu6LaI7bcA", "Encuadrar, centrar, focalizar") }}
+
+    {{ video_player("pkKX4lwfqSA", "Mostrar y ocultar") }}
+
+    {{ video_player("n9MfX4njUMU", "Transformar objetos") }}
+  </div>
