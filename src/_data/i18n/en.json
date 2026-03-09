@@ -2,6 +2,8 @@
   "lemma" : "The BIM platform for everyone",
   "language_selector" : "Language selector",
 
+  "head.description" : "BIMROCKET is an open source platform to manage BIM projects. View, analyze and edit IFC files instantly from your web browser without registration.",
+
   "menu.home": "Home",
   "menu.product": "Product",
   "menu.features": "Features",
