@@ -35,6 +35,7 @@ language: ca
 - Càrrega/exportació de models IFC. Compatibilitat amb múltiples esquemes IFC (IFC2X3, IFC4 i IFC4X3_ADD2).
 - Càrrega/exportació de models en format BRF (format JSON de Bimrocket).
 - Càrrega/exportació de models en formats STL, GLB, Wavefront OBJ i Collada.
+- Càrrega/exportació de dades GIS: GeoJSON, GML, map tiles.
 - Integració amb serveis externs (alguns proporcionats per **bimrocket-server**):
   - Servidor WebDAV on s’emmagatzemen models, scripts, informes i altres fitxers.
   - Servei [BCF](https://en.wikipedia.org/wiki/BIM_Collaboration_Format) (*BIM Collaboration Service*).

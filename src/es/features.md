@@ -35,6 +35,7 @@ language: es
 - Carga/exportación de modelos IFC. Compatibilidad con múltiples esquemas IFC (IFC2X3, IFC4 e IFC4X3_ADD2).
 - Carga/exportación de modelos en formato BRF (formato JSON de Bimrocket).
 - Carga/exportación de modelos en formatos STL, GLB, Wavefront OBJ y Collada.
+- Carga/exportación de datos GIS: GeoJSON, GML, map tiles.
 - Integración con servicios externos (algunos proporcionados por **bimrocket-server**):
   - Servidor WebDAV donde se almacenan modelos, scripts, informes y otros archivos.
   - Servicio [BCF](https://en.wikipedia.org/wiki/BIM_Collaboration_Format) (*BIM Collaboration Service*).

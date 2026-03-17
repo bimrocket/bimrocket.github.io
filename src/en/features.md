@@ -35,6 +35,7 @@ language: en
 - Load/Export IFC models. Support for multiple IFC schemas (IFC2X3, IFC4 and IFC4X3_ADD2).
 - Load/Export models in BRF format (JSON Bimrocket format).
 - Load/Export models in STL, GLB, Wavefront OBJ and Collada formats.
+- Load/Export GIS data: GeoJSON, GML, map tiles.
 - Integrated with external services (some of them provided by **bimrocket-server**)
   - Webdav server where models, scripts, reports and other files are stored.
   - [BCF](https://en.wikipedia.org/wiki/BIM_Collaboration_Format) service (*BIM Collaboration Service*)
