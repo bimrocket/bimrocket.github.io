@@ -20,9 +20,9 @@ function registerListeners()
     }
   });
 
-  langSelect.addEventListener('change', e =>
+  langSelect.addEventListener('change', event =>
   {
-    const selected = e.target.value;
+    const selected = event.target.value;
     const path = location.pathname.replace(/^\/(en|es|ca)\//, '');
     location.href = `/${selected}/${path}`;
   });
@@ -40,6 +40,7 @@ function registerListeners()
   {
     event.preventDefault();
     menu.classList.toggle("active");
+    menu.classList.add("animated");
     if (menu.classList.contains("active"))
     {
       menuButton.querySelector("span").textContent = "close";
@@ -58,16 +59,19 @@ function registerListeners()
     setTheme(theme);
   });
 
-  main.addEventListener("click", () =>
+  document.body.addEventListener("click", event =>
   {
-    menu.classList.remove("active");
-    menuButton.querySelector("span").textContent = "menu";
-    clearDrops();
+    if (!menu.contains(event.target) && !menuButton.contains(event.target))
+    {
+      menu.classList.remove("active");
+      menuButton.querySelector("span").textContent = "menu";
+      clearDrops();
+    }
   });
 
-  footer.addEventListener("click", () =>
-  {
+  window.addEventListener("resize", () => {
     menu.classList.remove("active");
+    menu.classList.remove("animated");
     menuButton.querySelector("span").textContent = "menu";
     clearDrops();
   });

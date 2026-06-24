@@ -43,16 +43,9 @@
 </head>
 <body>
   <header>
-    <a href="/es"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
-
-    <select id="lang-select" title="Selector de idioma">
-      <option value="en" data-short="EN" >EN</option>
-      <option value="es" data-short="ES" selected>ES</option>
-      <option value="ca" data-short="CA" >CA</option>
-    </select>
-
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
-    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
+    <a href="/es" title="BIMROCKET"><span class="logo"></span></a>
 
     <nav>
       <ul id="menu">
@@ -71,11 +64,20 @@
             <li><a href="/es/install">Instalación</a></li>
             <li><a href="/es/configuration">Configuración</a></li>
             <li><a href="/es/user_guides">Guias de usuario</a></li>
+            <li><a href="/es/console">Consola</a></li>
           </ul>
         </li>
-        <li><a href="/es/download">Descargas</a></li>
+        <li><a href="/es/downloads">Descargas</a></li>
       </ul>
     </nav>
+
+    <select id="lang-select" title="Selector de idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" selected>ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
+
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
   </header>
 
   <main>
@@ -111,6 +113,8 @@
 <li>Herramienta BIM Delta para detectar cambios entre dos versiones de un archivo IFC.</li>
 <li>Herramienta de búsqueda para encontrar propiedades del modelo por nombre o por valor.</li>
 <li>Herramienta de histograma para visualizar la distribución de valores de una propiedad determinada.</li>
+<li>Gestión de usuarios y roles de acceso.</li>
+<li>Multiples sistemas de autenticación soportados: Básica, Token Bearer, Cookie de sesión, LDAP y OAuth2 (integración con VALid, Gicar, Keycloak).</li>
 <li>Se soportan múltiples sistemas de almacenamiento de archivos: servidor WebDAV, sistema de archivos local e IndexedDB.</li>
 <li>Carga/exportación de modelos IFC. Compatibilidad con múltiples esquemas IFC (IFC2X3, IFC4 e IFC4X3_ADD2).</li>
 <li>Carga/exportación de modelos en formato BRF (formato JSON de Bimrocket).</li>
@@ -133,6 +137,7 @@
 <li>Aplicación web con una interfaz de usuario adaptable (<em>responsive</em>). Compatibilidad con dispositivos táctiles.</li>
 <li>Soporte multilingüe (actualmente disponible en inglés, castellano y catalán).</li>
 <li>Basada en la librería gráfica <a href="https://threejs.org">THREE.js</a>.</li>
+<li>También disponible una aplicación de consola para la manipulación avanzada de ficheros IFC (bimrocket-console).</li>
 <li>Proyecto generado con Maven.</li>
 </ul>
 

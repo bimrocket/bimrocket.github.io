@@ -43,16 +43,9 @@
 </head>
 <body>
   <header>
-    <a href="/ca"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
-
-    <select id="lang-select" title="Selector d&#39;idioma">
-      <option value="en" data-short="EN" >EN</option>
-      <option value="es" data-short="ES" >ES</option>
-      <option value="ca" data-short="CA" selected>CA</option>
-    </select>
-
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
-    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
+    <a href="/ca" title="BIMROCKET"><span class="logo"></span></a>
 
     <nav>
       <ul id="menu">
@@ -71,11 +64,20 @@
             <li><a href="/ca/install">Instal·lació</a></li>
             <li><a href="/ca/configuration">Configuració</a></li>
             <li><a href="/ca/user_guides">Guies d&#39;usuari</a></li>
+            <li><a href="/ca/console">Consola</a></li>
           </ul>
         </li>
-        <li><a href="/ca/download">Baixades</a></li>
+        <li><a href="/ca/downloads">Baixades</a></li>
       </ul>
     </nav>
+
+    <select id="lang-select" title="Selector d&#39;idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" >ES</option>
+      <option value="ca" data-short="CA" selected>CA</option>
+    </select>
+
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
   </header>
 
   <main>
@@ -111,6 +113,8 @@
 <li>Eina BIM Delta per detectar canvis entre dues versions d’un fitxer IFC.</li>
 <li>Eina de cerca per trobar propietats del model per nom o per valor.</li>
 <li>Eina d’histograma per visualitzar la distribució de valors d’una propietat determinada.</li>
+<li>Gestió d'usuaris i rols d'accés.</li>
+<li>Multiples sistemes d'autenticació soportats: Bàsica, Token Bearer, Cookie de sessió, LDAP i OAuth2 (integració amb VALid, Gicar, Keycloak).</li>
 <li>S’admeten múltiples sistemes d’emmagatzematge de fitxers: servidor WebDAV, sistema de fitxers local i IndexedDB.</li>
 <li>Càrrega/exportació de models IFC. Compatibilitat amb múltiples esquemes IFC (IFC2X3, IFC4 i IFC4X3_ADD2).</li>
 <li>Càrrega/exportació de models en format BRF (format JSON de Bimrocket).</li>
@@ -133,6 +137,7 @@
 <li>Aplicació web amb una interfície d’usuari adaptable (<em>responsive</em>). Compatibilitat amb dispositius tàctils.</li>
 <li>Suport multilingüe (actualment disponible en anglès, castellà i català).</li>
 <li>Basada en la llibreria gràfica <a href="https://threejs.org">THREE.js</a>.</li>
+<li>També disponible una aplicació de consola per a la manipulació avançada de fitxers IFC (bimrocket-console).</li>
 <li>Projecte generat amb Maven.</li>
 </ul>
 

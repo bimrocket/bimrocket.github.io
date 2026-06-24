@@ -43,16 +43,9 @@
 </head>
 <body>
   <header>
-    <a href="/es"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
-
-    <select id="lang-select" title="Selector de idioma">
-      <option value="en" data-short="EN" >EN</option>
-      <option value="es" data-short="ES" selected>ES</option>
-      <option value="ca" data-short="CA" >CA</option>
-    </select>
-
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
-    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
+    <a href="/es" title="BIMROCKET"><span class="logo"></span></a>
 
     <nav>
       <ul id="menu">
@@ -71,11 +64,20 @@
             <li><a href="/es/install">Instalación</a></li>
             <li><a href="/es/configuration">Configuración</a></li>
             <li><a href="/es/user_guides">Guias de usuario</a></li>
+            <li><a href="/es/console">Consola</a></li>
           </ul>
         </li>
-        <li><a href="/es/download">Descargas</a></li>
+        <li><a href="/es/downloads">Descargas</a></li>
       </ul>
     </nav>
+
+    <select id="lang-select" title="Selector de idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" selected>ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
+
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
   </header>
 
   <main>
@@ -88,6 +90,9 @@
 Por defecto, Bimrocket define estos parámetros en un archivo YAML como este:</p>
 <pre><code class="language-yaml"># bimrocket-server config
 
+# BIMROCKET_DATA_PATH is set by default to ${user.home}/bimrocket
+# but can be changed via JVM property or environ variable.
+
 # service config
 services:
 
@@ -95,9 +100,19 @@ services:
   security:
     adminPassword: bimrocket
     passwordPattern: '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&amp;+=_\-\.])(?=\S+$).{8,}$'
-    authorizationCacheTimeout: 300
+    credentialsCacheTimeout: 300
     userCacheTimeout: 300
     roleCacheTimeout: 300
+    tokenTimeout: 1800
+    maxTokenAge: 28800
+    cookie:
+      secure: false
+      httpOnly: true
+      sameSite: STRICT
+    store:
+      class: org.bimrocket.service.security.store.orient.SecurityOrientDaoStore
+      orient:
+        database: bimdb
     ldap:
       enabled: false
       url: ldap://dc1.santfeliu.local
@@ -105,34 +120,44 @@ services:
       searchBase: DC=santfeliu,DC=local
       adminUsername: admin
       adminPassword: changeit
-    store:
-      class: org.bimrocket.service.security.store.orient.SecurityOrientDaoStore
-      orient:
-        database: bimdb
+    oauth2:
+      active: []
+      providers:
+        valid:
+          logoUrl: changeit
+          baseUrl: https://valid-pre.aoc.cat
+          authUrl: /o/oauth2/auth
+          tokenUrl: /o/oauth2/token
+          getUserInfoUrl: /serveis-rest/getUserInfo
+          scope: autenticacio_usuari
+          clientId: changeit
+          secretId: changeit
+          roles: []
 
   # file service
   file:
-    store:
-      class: org.bimrocket.service.file.store.filesystem.FileSystemFileStore
-      filesystem:
-        directory: ${BIMROCKET_DATA_PATH}/cloudfs
     folders:
       - models
       - scripts
       - reports
       - ifc_snapshots
+      - tasks
+    store:
+      class: org.bimrocket.service.file.store.filesystem.FileSystemFileStore
+      filesystem:
+        directory: ${BIMROCKET_DATA_PATH}/cloudfs
 
   # bcf service
   bcf:
-    projectTemplate:
-    store:
-      class: org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore
-      orient:
-        database: bimdb
+    templateProjectName: template
     mail:
       createTopic:
         subject: '#{project.name}##{index}: #{title} [#{priority}]'
         body: '#{description}'
+    store:
+      class: org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore
+      orient:
+        database: bimdb
 
   # ifcdb service
   ifcdb:
@@ -195,6 +220,7 @@ databases:
     username: root
     password: orientdb
 
+
 </code></pre>
 <h3>Configuración inicial</h3>
 <p>Durante el arranque del servidor, se crea un archivo de configuración YAML (si no existe) en esta ruta: <code>${BIMROCKET_DATA_PATH}/bimrocket-server.yaml</code>
@@ -222,9 +248,14 @@ Ruta base: <code>services.security</code></p>
 <ul>
 <li><code>.adminPassword</code> {String}: Contraseña del usuario <code>admin</code>. Este usuario tiene privilegios totales sobre todos los servicios.</li>
 <li><code>.passwordPattern</code> {String}: Expresión regular de Java que determina el formato aceptado de las contraseñas de los usuarios.</li>
-<li><code>.authorizationCacheTimeout</code> {Long}: Tiempo de refresco (en segundos) de la cache de autorización.</li>
-<li><code>.userCacheTimeout</code> {Long}: Tiempo de refresco (en segundos) de la cache de usuarios.</li>
-<li><code>.roleCacheTimeout</code> {Long}: Tiempo de refresco (en segundos) de la cache de roles.</li>
+<li><code>.credentialsCacheTimeout</code> {Integer}: Tiempo de refresco (en segundos) de la cache de credenciales.</li>
+<li><code>.userCacheTimeout</code> {Integer}: Tiempo de refresco (en segundos) de la cache de usuarios.</li>
+<li><code>.roleCacheTimeout</code> {Integer}: Tiempo de refresco (en segundos) de la cache de roles.</li>
+<li><code>.tokenTimeout</code> {Integer}: Caducidad de un token de sesión (en segundos) por inactividad.</li>
+<li><code>.maxTokenAge</code> {Integer}: Duración máxima de un token de sesión (en segundos).</li>
+<li><code>.cookie.secure</code> {Boolean}: propiedad <code>secure</code> de la cookie generada.</li>
+<li><code>.cookie.httpOnly</code> {Boolean}: propiedad <code>httpOnly</code> de la cookie generada.</li>
+<li><code>.cookie.sameSite</code> {String}: propiedad <code>sameSite</code> de la cookie generada.</li>
 <li><code>.ldap.enabled</code> {Boolean}: Parámetro que indica si las contraseñas de los usuarios se validan contra un servidor LDAP.
 Cuando este parámetro está activado, no es necesario que los usuarios se creen en la base de datos.</li>
 <li><code>.ldap.url</code> {String}: URL del servidor LDAP.</li>
@@ -232,6 +263,14 @@ Cuando este parámetro está activado, no es necesario que los usuarios se creen
 <li><code>.ldap.searchBase</code> {String}: Ruta base del directorio LDAP donde buscar los usuarios.</li>
 <li><code>.ldap.adminUsername</code> {String}: Usuario para acceder al servidor LDAP.</li>
 <li><code>.ldap.adminPassword</code> {String}: Contraseña para acceder al servidor LDAP.</li>
+<li><code>.oauth2.active</code> {String[]}: Nombres de los proveedores OAuth2 habilitados.</li>
+<li><code>.oauth2.providers.&lt;providerName&gt;.logoUrl</code>: {String}: URL de la imagen representativa del proveedor OAuth2.</li>
+<li><code>.oauth2.providers.&lt;providerName&gt;.baseUrl</code>: {String}: URL base de las siguientes URLs.</li>
+<li><code>.oauth2.providers.&lt;providerName&gt;.authUrl</code>: {String}: URL de autorización.</li>
+<li><code>.oauth2.providers.&lt;providerName&gt;.tokenUrl</code>: {String}: URL de obtención del token.</li>
+<li><code>.oauth2.providers.&lt;providerName&gt;.clientId</code>: {String}: Id cliente.</li>
+<li><code>.oauth2.providers.&lt;providerName&gt;.secretId</code>: {String}: Id secreto.</li>
+<li><code>.oauth2.providers.&lt;providerName&gt;.roles</code>: {String[]}: Lista de roles asignados a los usuarios identificados mediante este proveedor.</li>
 <li><code>.store.class</code> {Class}: Clase que implementa el almacenamiento de los usuarios y roles:
 <ul>
 <li>Para el almacenamiento en OrientDB: <code>org.bimrocket.service.security.store.orient.SecurityOrientDaoStore</code></li>

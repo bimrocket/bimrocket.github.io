@@ -43,16 +43,9 @@
 </head>
 <body>
   <header>
-    <a href="/en"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
-
-    <select id="lang-select" title="Language selector">
-      <option value="en" data-short="EN" selected>EN</option>
-      <option value="es" data-short="ES" >ES</option>
-      <option value="ca" data-short="CA" >CA</option>
-    </select>
-
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
-    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
+    <a href="/en" title="BIMROCKET"><span class="logo"></span></a>
 
     <nav>
       <ul id="menu">
@@ -71,11 +64,20 @@
             <li><a href="/en/install">Install</a></li>
             <li><a href="/en/configuration">Configuration</a></li>
             <li><a href="/en/user_guides">User guides</a></li>
+            <li><a href="/en/console">Console</a></li>
           </ul>
         </li>
-        <li><a href="/en/download">Download</a></li>
+        <li><a href="/en/downloads">Downloads</a></li>
       </ul>
     </nav>
+
+    <select id="lang-select" title="Language selector">
+      <option value="en" data-short="EN" selected>EN</option>
+      <option value="es" data-short="ES" >ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
+
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
   </header>
 
   <main>
@@ -85,44 +87,39 @@
       
 
       <p>Bimrocket can be installed using any of the following methods:</p>
-<h3>1. zip package</h3>
+<h3>1. quarkus zip package</h3>
 <p>This is the simplest method to install Bimrocket.</p>
 <ol>
-<li>Download the zip package from the latest release: <a href="https://github.com/bimrocket/bimrocket/releases">https://github.com/bimrocket/bimrocket/releases</a>.
-There are two versions available:
-<ul>
-<li>One specific for Windows x64 (<code>bimrocket-tomcat-{version}-windows-x64.zip</code>) (the JDK is included in this package).</li>
-<li>A generic one (<code>bimrocket-tomcat-{version}-generic.zip</code>) for other operating systems (JDK-17 must be installed separately).</li>
-</ul>
-</li>
+<li>Download the latest release of the quarkus zip package from: <a href="https://github.com/bimrocket/bimrocket/releases">https://github.com/bimrocket/bimrocket/releases</a>.</li>
 <li>Uncompress the zip package.</li>
-<li>Execute the file <code>&lt;BIMROCKET_TOMCAT&gt;/bin/startup(.bat|sh)</code> to start the tomcat server.</li>
+<li>Execute the file <code>&lt;bimrocket-quarkus-*&gt;/startup(.sh|.cmd)</code> to start the server.</li>
 <li>Once started, enter the application by opening this URL: <a href="http://localhost:8080">http://localhost:8080</a></li>
-<li>To stop the tomcat server execute the file <code>&lt;BIMROCKET_TOMCAT&gt;/bin/shutdown(.bat|sh)</code>.</li>
+<li>To stop the server execute the file <code>&lt;bimrocket-quarkus-*&gt;/shutdown(.sh|.cmd)</code>.</li>
 </ol>
 <h3>2. war files</h3>
 <p>This method allows you to install Bimrocket in a Java servlet container such as Apache Tomcat.</p>
 <ol>
-<li>Install JDK 17:
+<li>Install JDK 21:
 <ul>
 <li>Linux: Most distributions include the JDK in their packaging system:
 <ul>
-<li>Debian/Ubuntu: <code>sudo apt install openjdk-17-jdk</code></li>
-<li>Fedora: <code>sudo dnf install java-17-openjdk</code></li>
-<li>RedHat: <code>sudo yum install java-17-openjdk</code></li>
-<li>Arch linux: <code>sudo pacman -S jre17-openjdk</code></li>
+<li>Debian/Ubuntu: <code>sudo apt install openjdk-21-jdk</code></li>
+<li>Fedora: <code>sudo dnf install java-21-openjdk</code></li>
+<li>RedHat: <code>sudo yum install java-21-openjdk</code></li>
+<li>Arch linux: <code>sudo pacman -S jre21-openjdk</code></li>
+<li>OpenSuse: <code>sudo zypper install java-21-openjdk</code></li>
 </ul>
 </li>
-<li>Other operting systems (Windows, MacOS, ...): Install the jdk-17 installation package from <a href="https://adoptium.net/temurin/releases/">https://adoptium.net/temurin/releases/</a></li>
+<li>Other operting systems (Windows, MacOS, ...): Install the jdk-21 installation package from <a href="https://adoptium.net/temurin/releases/">https://adoptium.net/temurin/releases/</a></li>
 </ul>
 </li>
 <li>Install Apache Tomcat 10.1.x from <a href="https://tomcat.apache.org/download-10.cgi">https://tomcat.apache.org/download-10.cgi</a>.</li>
 <li>Download the Bimrocket war files from the latest release: <a href="https://github.com/bimrocket/bimrocket/releases">https://github.com/bimrocket/bimrocket/releases</a></li>
 <li>Copy <code>bimrocket.war</code> inside <code>&lt;TOMCAT_HOME&gt;/webapps</code> folder.</li>
 <li>Copy <code>bimrocket-server.war</code> inside <code>&lt;TOMCAT_HOME&gt;/webapps</code> folder.</li>
-<li>Start the tomcat server (<code>&lt;TOMCAT_HOME&gt;/bin/startup(.bat|sh)</code>)</li>
+<li>Start the tomcat server (<code>&lt;TOMCAT_HOME&gt;/bin/startup(.sh|.bat)</code>).</li>
 <li>Once started, enter the application by opening this URL: <a href="http://localhost:8080/bimrocket">http://localhost:8080/bimrocket</a></li>
-<li>To stop the tomcat server execute the file <code>&lt;TOMCAT_HOME&gt;/bin/shutdown(.bat|sh)</code>.</li>
+<li>To stop the tomcat server execute the file <code>&lt;TOMCAT_HOME&gt;/bin/shutdown(.sh|.bat)</code>.</li>
 </ol>
 <h3>3. docker containers</h3>
 <p>This section describes the procedure to install Bimrocket using docker containers.</p>

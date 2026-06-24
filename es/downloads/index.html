@@ -43,16 +43,9 @@
 </head>
 <body>
   <header>
-    <a href="/es"><h1><img src="/assets/img/bimrocket.svg" alt="BIMROCKET" class="logo"></h1></a>
-
-    <select id="lang-select" title="Selector de idioma">
-      <option value="en" data-short="EN" >EN</option>
-      <option value="es" data-short="ES" selected>ES</option>
-      <option value="ca" data-short="CA" >CA</option>
-    </select>
-
     <button class="image-button menu-toggle" title="menu toggler"><span class="material-symbols-outlined">menu</span></button>
-    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
+
+    <a href="/es" title="BIMROCKET"><span class="logo"></span></a>
 
     <nav>
       <ul id="menu">
@@ -71,11 +64,20 @@
             <li><a href="/es/install">Instalación</a></li>
             <li><a href="/es/configuration">Configuración</a></li>
             <li><a href="/es/user_guides">Guias de usuario</a></li>
+            <li><a href="/es/console">Consola</a></li>
           </ul>
         </li>
-        <li><a href="/es/download">Descargas</a></li>
+        <li><a href="/es/downloads">Descargas</a></li>
       </ul>
     </nav>
+
+    <select id="lang-select" title="Selector de idioma">
+      <option value="en" data-short="EN" >EN</option>
+      <option value="es" data-short="ES" selected>ES</option>
+      <option value="ca" data-short="CA" >CA</option>
+    </select>
+
+    <button class="image-button theme-toggle" title="theme selector"><span class="material-symbols-outlined">dark_mode</span></button>
   </header>
 
   <main>
@@ -85,19 +87,35 @@
       
 
       
-<p>Versión actual: <strong>v1.0-alpha-12-r808</strong></p>
-<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/v1.0-alpha-12">Notas de la versión</a></p>
+<p>Versión actual: <strong>v1.0-alpha-13-r863</strong></p>
+<p><a href="https://github.com/bimrocket/bimrocket/releases/tag/v1.0-alpha-13">Notas de la versión</a></p>
 
 <section class="download">
-  <span class="material-symbols-outlined">deployed_code</span>
+  <span class="material-symbols-outlined">folder_zip</span>
   <div>
     <h3>
-      Paquete zip de BIMROCKET para Windows x64.
+      Paquete zip de BIMROCKET <b>quarkus</b> para todas las plataformas (unix y windows).
     </h3>
-    <p>Contiene la aplicación de frontend y los servicios de backend. Incluye openjdk-17 para Windows x64.</p>
-    <p>Tamaño: 120 Mb</p>
+    <p>Contiene la aplicación de frontend y los servicios de backend desplegados sobre un entorno de ejecución Quarkus.</p>
+    <p>Tamaño: 68 Mb</p>
     <div>
-      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-12/bimrocket-tomcat-1.0-windows-x64.zip" class="link-button">
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-13/bimrocket-quarkus-1.0.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> Descargar
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">folder_zip</span>
+  <div>
+    <h3>
+      Paquete zip de BIMROCKET <b>console</b> para todas las plataformas (unix y windows).
+    </h3>
+    <p>Contiene la aplicación bimrocket-console para la manipulación avanzada de ficheros IFC.</p>
+    <p>Tamaño: 30 Mb</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-13/bimrocket-console-1.0.zip" class="link-button">
         <span class="material-symbols-outlined pr-1">download</span> Descargar
       </a>
     </div>
@@ -108,28 +126,12 @@
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      Paquete zip genérico de BIMROCKET para todas las plataformas (Linux, MacOS, Windows).
-    </h3>
-    <p>Contiene la aplicación de frontend y los servicios de backend. Requiere de la instalación de una máquina virtual de Java versión 17 o superior.</p>
-    <p>Tamaño: 78 Mb</p>
-    <div>
-      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-12/bimrocket-tomcat-1.0-generic.zip" class="link-button">
-        <span class="material-symbols-outlined pr-1">download</span> Descargar
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="download">
-  <span class="material-symbols-outlined pr-1">deployed_code</span>
-  <div>
-    <h3>
-      Aplicación de frontend de BIMROCKET en formato war
+      Aplicación de <b>frontend</b> de BIMROCKET en formato war
     </h3>
     <p>Requiere un contenedor de servlets Jakarta 10 (como Apache tomcat 10.1).</p>
     <p>Tamaño: 5 Mb</p>
     <div>
-      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-12/bimrocket.war" class="link-button">
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-13/bimrocket.war" class="link-button">
         <span class="material-symbols-outlined pr-1">download</span> Descargar
       </a>
     </div>
@@ -140,12 +142,12 @@
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      Aplicación de backend de BIMROCKET en formato war
+      Aplicación de <b>backend</b> de BIMROCKET en formato war
     </h3>
     <p>Requiere un contenedor de servlets Jakarta 10 (como Apache tomcat 10.1).</p>
-    <p>Tamaño: 66 Mb</p>
+    <p>Tamaño: 57 Mb</p>
     <div>
-      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-12/bimrocket-server.war" class="link-button">
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/v1.0-alpha-13/bimrocket-server.war" class="link-button">
         <span class="material-symbols-outlined pr-1">download</span> Descargar
       </a>
     </div>
