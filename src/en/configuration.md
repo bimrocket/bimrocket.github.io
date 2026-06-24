@@ -41,9 +41,14 @@ Base path: `services.security`
 
 - `.adminPassword` {String}: Password of the `admin` user. This user has full privileges over all services.
 - `.passwordPattern` {String}: Java regular expression that defines the accepted format for user passwords.
-- `.authorizationCacheTimeout` {Long}: Refresh time (in seconds) of the authorization cache.
-- `.userCacheTimeout` {Long}: Refresh time (in seconds) of the user cache.
-- `.roleCacheTimeout` {Long}: Refresh time (in seconds) of the role cache.
+- `.credentialsCacheTimeout` {Integer}: Refresh time (in seconds) of the credentials cache.
+- `.userCacheTimeout` {Integer}: Refresh time (in seconds) of the user cache.
+- `.roleCacheTimeout` {Integer}: Refresh time (in seconds) of the role cache.
+- `.tokenTimeout` {Integer}: Session token expiration time (in seconds) due to inactivity.
+- `.maxTokenAge` {Integer}: Maximum duration of a session token (in seconds).
+- `.cookie.secure` {Boolean}: `secure` property of the generated cookie.
+- `.cookie.httpOnly` {Boolean}: `httpOnly` property of the generated cookie.
+- `.cookie.sameSite` {String}: `sameSite` property of the generated cookie.
 - `.ldap.enabled` {Boolean}: Parameter that indicates whether user passwords are validated against an LDAP server.
    When this parameter is enabled, users do not need to be created in the database.
 - `.ldap.url` {String}: URL of the LDAP server.
@@ -51,6 +56,14 @@ Base path: `services.security`
 - `.ldap.searchBase` {String}: Base path in the LDAP directory where users are searched.
 - `.ldap.adminUsername` {String}: User for accessing the LDAP server.
 - `.ldap.adminPassword` {String}: Password for accessing the LDAP server.
+- `.oauth2.active` {String[]}: Names of the enabled OAuth2 providers.
+- `.oauth2.providers.<providerName>.logoUrl`: {String}: URL of the representative image of the OAuth2 provider.
+- `.oauth2.providers.<providerName>.baseUrl`: {String}: Base URL of the following URLs.
+- `.oauth2.providers.<providerName>.authUrl`: {String}: Authorization URL.
+- `.oauth2.providers.<providerName>.tokenUrl`: {String}: URL to obtain the token.
+- `.oauth2.providers.<providerName>.clientId`: {String}: Client id.
+- `.oauth2.providers.<providerName>.secretId`: {String}: Secret id.
+- `.oauth2.providers.<providerName>.roles`: {String[]}: List of roles assigned to users identified through this provider.
 - `.store.class` {Class}: Class that implements user and role storage:
   - For storage in OrientDB: `org.bimrocket.service.security.store.orient.SecurityOrientDaoStore`
   - For storage in MongoDB: `org.bimrocket.service.security.store.mongo.SecurityMongoDaoStore`

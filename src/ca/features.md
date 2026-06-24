@@ -31,6 +31,8 @@ language: ca
 - Eina BIM Delta per detectar canvis entre dues versions d’un fitxer IFC.
 - Eina de cerca per trobar propietats del model per nom o per valor.
 - Eina d’histograma per visualitzar la distribució de valors d’una propietat determinada.
+- Gestió d'usuaris i rols d'accés.
+- Multiples sistemes d'autenticació soportats: Bàsica, Token Bearer, Cookie de sessió, LDAP i OAuth2 (integració amb VALid, Gicar, Keycloak).
 - S’admeten múltiples sistemes d’emmagatzematge de fitxers: servidor WebDAV, sistema de fitxers local i IndexedDB.
 - Càrrega/exportació de models IFC. Compatibilitat amb múltiples esquemes IFC (IFC2X3, IFC4 i IFC4X3_ADD2).
 - Càrrega/exportació de models en format BRF (format JSON de Bimrocket).
@@ -50,4 +52,5 @@ language: ca
 - Aplicació web amb una interfície d’usuari adaptable (*responsive*). Compatibilitat amb dispositius tàctils.
 - Suport multilingüe (actualment disponible en anglès, castellà i català).
 - Basada en la llibreria gràfica [THREE.js](https://threejs.org).
+- També disponible una aplicació de consola per a la manipulació avançada de fitxers IFC (bimrocket-console).
 - Projecte generat amb Maven.

@@ -41,9 +41,14 @@ Ruta base: `services.security`
 
 - `.adminPassword` {String}: Contrasenya de l’usuari `admin`. Aquest usuari té privilegis totals sobre tots els serveis.
 - `.passwordPattern` {String}: Expressió regular de Java que determina el format acceptat de les contrasenyes dels usuaris.
-- `.authorizationCacheTimeout` {Long}: Temps de refresc (en segons) de la memòria cau d’autorització.
-- `.userCacheTimeout` {Long}: Temps de refresc (en segons) de la memòria cau d’usuaris.
-- `.roleCacheTimeout` {Long}: Temps de refresc (en segons) de la memòria cau de rols.
+- `.credentialsCacheTimeout` {Integer}: Temps de refresc (en segons) de la memòria cau de credencials.
+- `.userCacheTimeout` {Integer}: Temps de refresc (en segons) de la memòria cau d’usuaris.
+- `.roleCacheTimeout` {Integer}: Temps de refresc (en segons) de la memòria cau de rols.
+- `.tokenTimeout` {Integer}: Caducitat d'un token de sessió (en segonds) per inactivitat.
+- `.maxTokenAge` {Integer}: Durada màxima d'un token de sessió (en segonds).
+- `.cookie.secure` {Boolean}: propietat `secure` de la cookie generada.
+- `.cookie.httpOnly` {Boolean}: propietat `httpOnly` de la cookie generada.
+- `.cookie.sameSite` {String}: propietat `sameSite` de la cookie generada.
 - `.ldap.enabled` {Boolean}: Paràmetre que indica si les contrasenyes dels usuaris es validen contra un servidor LDAP.
    Quan aquest paràmetre està activat, no és necessari que els usuaris es creïn a la base de dades.
 - `.ldap.url` {String}: URL del servidor LDAP.
@@ -51,6 +56,14 @@ Ruta base: `services.security`
 - `.ldap.searchBase` {String}: Ruta base del directori LDAP on es busquen els usuaris.
 - `.ldap.adminUsername` {String}: Usuari per accedir al servidor LDAP.
 - `.ldap.adminPassword` {String}: Contrasenya per accedir al servidor LDAP.
+- `.oauth2.active` {String[]}: Noms dels proveïdors OAuth2 habilitats.
+- `.oauth2.providers.<providerName>.logoUrl`: {String}: URL de la imatge representativa del proveïdor OAuth2.
+- `.oauth2.providers.<providerName>.baseUrl`: {String}: URL base de les següents URLs.
+- `.oauth2.providers.<providerName>.authUrl`: {String}: URL d'autorització.
+- `.oauth2.providers.<providerName>.tokenUrl`: {String}: URL d'obtenció del token.
+- `.oauth2.providers.<providerName>.clientId`: {String}: Id client.
+- `.oauth2.providers.<providerName>.secretId`: {String}: Id secret.
+- `.oauth2.providers.<providerName>.roles`: {String[]}: Llista de rols assignats als usuaris identificats mitjaçant aquest proveïdor.
 - `.store.class` {Class}: Classe que implementa l’emmagatzematge dels usuaris i rols:
   - Per a l’emmagatzematge a OrientDB: `org.bimrocket.service.security.store.orient.SecurityOrientDaoStore`
   - Per a l’emmagatzematge a MongoDB: `org.bimrocket.service.security.store.mongo.SecurityMongoDaoStore`

@@ -1,5 +1,5 @@
 ---
-title: menu.download
+title: menu.downloads
 layout: layouts/base.njk
 icon: download
 language: en
@@ -9,15 +9,31 @@ language: en
 <p><a href="https://github.com/bimrocket/bimrocket/releases/tag/{{ product.version }}">Release notes</a></p>
 
 <section class="download">
-  <span class="material-symbols-outlined">deployed_code</span>
+  <span class="material-symbols-outlined">folder_zip</span>
   <div>
     <h3>
-      {{ product.name }} zip package for Windows x64.
+      {{ product.name }} <b>quarkus</b> zip package for all platforms (unix & windows).
     </h3>
-    <p>Contains the frontend application and the backend services. Includes openjdk-17 for Windows x64.</p>
-    <p>Size: 120 Mb</p>
+    <p>Contains the frontend application and backend services deployed on a Quarkus runtime environment.</p>
+    <p>Size: 68 Mb</p>
     <div>
-      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-tomcat-1.0-windows-x64.zip" class="link-button">
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-quarkus-{{ product.mavenVersion }}.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">folder_zip</span>
+  <div>
+    <h3>
+      {{ product.name }} <b>console</b> zip package for all platforms (unix & windows).
+    </h3>
+    <p>Contains the bimrocket-console application for advanced IFC file manipulation.</p>
+    <p>Size: 30 Mb</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-console-{{ product.mavenVersion }}.zip" class="link-button">
         <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
       </a>
     </div>
@@ -28,23 +44,7 @@ language: en
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      {{ product.name }} generic zip package for all platforms (Linux, MacOS, Windows).
-    </h3>
-    <p>Contains the frontend application and the backend services. Requires a Java virtual machine versión 17+ that must be installed separatelly.</p>
-    <p>Size: 78 Mb</p>
-    <div>
-      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-tomcat-1.0-generic.zip" class="link-button">
-        <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="download">
-  <span class="material-symbols-outlined pr-1">deployed_code</span>
-  <div>
-    <h3>
-      {{ product.name }} frontend application in war format
+      {{ product.name }} <b>frontend</b> application in war format
     </h3>
     <p>Requires a Jakarta 10 servlet container (like Apache tomcat 10.1).</p>
     <p>Size: 5 Mb</p>
@@ -60,10 +60,10 @@ language: en
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      {{ product.name }} backend application in war format
+      {{ product.name }} <b>backend</b> application in war format
     </h3>
     <p>Requires a Jakarta 10 servlet container (like Apache tomcat 10.1).</p>
-    <p>Size: 66 Mb</p>
+    <p>Size: 57 Mb</p>
 
     <div>
       <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-server.war" class="link-button">

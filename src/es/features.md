@@ -31,6 +31,8 @@ language: es
 - Herramienta BIM Delta para detectar cambios entre dos versiones de un archivo IFC.
 - Herramienta de búsqueda para encontrar propiedades del modelo por nombre o por valor.
 - Herramienta de histograma para visualizar la distribución de valores de una propiedad determinada.
+- Gestión de usuarios y roles de acceso.
+- Multiples sistemas de autenticación soportados: Básica, Token Bearer, Cookie de sesión, LDAP y OAuth2 (integración con VALid, Gicar, Keycloak).
 - Se soportan múltiples sistemas de almacenamiento de archivos: servidor WebDAV, sistema de archivos local e IndexedDB.
 - Carga/exportación de modelos IFC. Compatibilidad con múltiples esquemas IFC (IFC2X3, IFC4 e IFC4X3_ADD2).
 - Carga/exportación de modelos en formato BRF (formato JSON de Bimrocket).
@@ -50,4 +52,5 @@ language: es
 - Aplicación web con una interfaz de usuario adaptable (*responsive*). Compatibilidad con dispositivos táctiles.
 - Soporte multilingüe (actualmente disponible en inglés, castellano y catalán).
 - Basada en la librería gráfica [THREE.js](https://threejs.org).
+- También disponible una aplicación de consola para la manipulación avanzada de ficheros IFC (bimrocket-console).
 - Proyecto generado con Maven.

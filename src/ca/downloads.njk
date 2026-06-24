@@ -1,5 +1,5 @@
 ---
-title: menu.download
+title: menu.downloads
 layout: layouts/base.njk
 icon: download
 language: ca
@@ -9,15 +9,31 @@ language: ca
 <p><a href="https://github.com/bimrocket/bimrocket/releases/tag/{{ product.version }}">Notes de la versió</a></p>
 
 <section class="download">
-  <span class="material-symbols-outlined">deployed_code</span>
+  <span class="material-symbols-outlined">folder_zip</span>
   <div>
     <h3>
-      Paquet zip de {{ product.name }} per a Windows x64.
+      Paquet zip de {{ product.name }} <b>quarkus</b> per a totes les plataformes (unix i windows).
     </h3>
-    <p>Conté l'aplicació de frontend i els serveis de backend. Inclou openjdk-17 per a Windows x64.</p>
-    <p>Mida: 120 Mb</p>
+    <p>Conté l'aplicació de frontend i els serveis de backend desplegats sobre un entorn d'execució Quarkus.</p>
+    <p>Mida: 68 Mb</p>
     <div>
-      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-tomcat-1.0-windows-x64.zip" class="link-button">
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-quarkus-{{ product.mavenVersion }}.zip" class="link-button">
+        <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="download">
+  <span class="material-symbols-outlined pr-1">folder_zip</span>
+  <div>
+    <h3>
+      Paquet zip de {{ product.name }} <b>console</b> per a totes les plataformes (unix i windows).
+    </h3>
+    <p>Conté l'aplicació bimrocket-console per a la manipulació avançada de fitxers IFC.</p>
+    <p>Mida: 30 Mb</p>
+    <div>
+      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-console-{{ product.mavenVersion }}.zip" class="link-button">
         <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
       </a>
     </div>
@@ -28,23 +44,7 @@ language: ca
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      Paquet zip genèric de {{ product.name }} per a totes les plataformes (Linux, MacOS, Windows).
-    </h3>
-    <p>Conté l'aplicació de frontend i els serveis de backend. Requereix la instal·lació d'una màquina virtual de Java versió 17 o superior.</p>
-    <p>Mida: 78 Mb</p>
-    <div>
-      <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-tomcat-1.0-generic.zip" class="link-button">
-        <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="download">
-  <span class="material-symbols-outlined pr-1">deployed_code</span>
-  <div>
-    <h3>
-      Aplicació de frontend de {{ product.name }} en format war
+      Aplicació de <b>frontend</b> de {{ product.name }} en format war
     </h3>
     <p>Requereix un contenidor de servlets Jakarta 10 (com Apache tomcat 10.1).</p>
     <p>Mida: 5 Mb</p>
@@ -60,10 +60,10 @@ language: ca
   <span class="material-symbols-outlined pr-1">deployed_code</span>
   <div>
     <h3>
-      Aplicació de backend de {{ product.name }} en format war
+      Aplicació de <b>backend</b> de {{ product.name }} en format war
     </h3>
     <p>Requereix un contenidor de servlets Jakarta 10 (com Apache tomcat 10.1).</p>
-    <p>Mida: 66 Mb</p>
+    <p>Mida: 57 Mb</p>
     <div>
       <a href="https://github.com/bimrocket/bimrocket/releases/download/{{ product.version }}/bimrocket-server.war" class="link-button">
         <span class="material-symbols-outlined pr-1">download</span> {{ t("button.download") }}

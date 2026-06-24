@@ -7,7 +7,7 @@ language: ca
 
 BIMROCKET
 
-Copyright (C) 2021-2025, Ajuntament de Sant Feliu de Llobregat
+Copyright (C) 2021-2026, Ajuntament de Sant Feliu de Llobregat
 
 Aquest programa està llicenciat i es pot utilitzar, modificar i redistribuir segons
 els termes de la Llicència Pública Europea (EUPL), ja sigui la versió 1.1 o (a

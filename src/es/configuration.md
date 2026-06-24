@@ -43,9 +43,14 @@ Ruta base: `services.security`
 
 - `.adminPassword` {String}: Contraseña del usuario `admin`. Este usuario tiene privilegios totales sobre todos los servicios.
 - `.passwordPattern` {String}: Expresión regular de Java que determina el formato aceptado de las contraseñas de los usuarios.
-- `.authorizationCacheTimeout` {Long}: Tiempo de refresco (en segundos) de la cache de autorización.
-- `.userCacheTimeout` {Long}: Tiempo de refresco (en segundos) de la cache de usuarios.
-- `.roleCacheTimeout` {Long}: Tiempo de refresco (en segundos) de la cache de roles.
+- `.credentialsCacheTimeout` {Integer}: Tiempo de refresco (en segundos) de la cache de credenciales.
+- `.userCacheTimeout` {Integer}: Tiempo de refresco (en segundos) de la cache de usuarios.
+- `.roleCacheTimeout` {Integer}: Tiempo de refresco (en segundos) de la cache de roles.
+- `.tokenTimeout` {Integer}: Caducidad de un token de sesión (en segundos) por inactividad.
+- `.maxTokenAge` {Integer}: Duración máxima de un token de sesión (en segundos).
+- `.cookie.secure` {Boolean}: propiedad `secure` de la cookie generada.
+- `.cookie.httpOnly` {Boolean}: propiedad `httpOnly` de la cookie generada.
+- `.cookie.sameSite` {String}: propiedad `sameSite` de la cookie generada.
 - `.ldap.enabled` {Boolean}: Parámetro que indica si las contraseñas de los usuarios se validan contra un servidor LDAP.
    Cuando este parámetro está activado, no es necesario que los usuarios se creen en la base de datos.
 - `.ldap.url` {String}: URL del servidor LDAP.
@@ -53,6 +58,14 @@ Ruta base: `services.security`
 - `.ldap.searchBase` {String}: Ruta base del directorio LDAP donde buscar los usuarios.
 - `.ldap.adminUsername` {String}: Usuario para acceder al servidor LDAP.
 - `.ldap.adminPassword` {String}: Contraseña para acceder al servidor LDAP.
+- `.oauth2.active` {String[]}: Nombres de los proveedores OAuth2 habilitados.
+- `.oauth2.providers.<providerName>.logoUrl`: {String}: URL de la imagen representativa del proveedor OAuth2.
+- `.oauth2.providers.<providerName>.baseUrl`: {String}: URL base de las siguientes URLs.
+- `.oauth2.providers.<providerName>.authUrl`: {String}: URL de autorización.
+- `.oauth2.providers.<providerName>.tokenUrl`: {String}: URL de obtención del token.
+- `.oauth2.providers.<providerName>.clientId`: {String}: Id cliente.
+- `.oauth2.providers.<providerName>.secretId`: {String}: Id secreto.
+- `.oauth2.providers.<providerName>.roles`: {String[]}: Lista de roles asignados a los usuarios identificados mediante este proveedor.
 - `.store.class` {Class}: Clase que implementa el almacenamiento de los usuarios y roles:
   - Para el almacenamiento en OrientDB: `org.bimrocket.service.security.store.orient.SecurityOrientDaoStore`
   - Para el almacenamiento en MongoDB: `org.bimrocket.service.security.store.mongo.SecurityMongoDaoStore`

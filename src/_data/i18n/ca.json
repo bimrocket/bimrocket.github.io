@@ -13,7 +13,8 @@
   "menu.install": "Instal·lació",
   "menu.configuration": "Configuració",
   "menu.user_guides": "Guies d'usuari",
-  "menu.download": "Baixades",
+  "menu.console": "Consola",
+  "menu.downloads": "Baixades",
 
   "button.try": "Prova",
   "button.download": "Baixa"

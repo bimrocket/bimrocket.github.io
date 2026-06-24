@@ -13,7 +13,8 @@
   "menu.install": "Instalación",
   "menu.configuration": "Configuración",
   "menu.user_guides": "Guias de usuario",
-  "menu.download": "Descargas",
+  "menu.console": "Consola",
+  "menu.downloads": "Descargas",
 
   "button.try": "Probar",
   "button.download": "Descargar"

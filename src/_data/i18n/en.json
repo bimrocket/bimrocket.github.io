@@ -13,7 +13,8 @@
   "menu.install": "Install",
   "menu.configuration": "Configuration",
   "menu.user_guides": "User guides",
-  "menu.download": "Download",
+  "menu.console": "Console",
+  "menu.downloads": "Downloads",
 
   "button.try": "Try it",
   "button.download": "Download"

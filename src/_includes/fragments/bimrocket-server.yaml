@@ -1,5 +1,8 @@
 # bimrocket-server config
 
+# BIMROCKET_DATA_PATH is set by default to ${user.home}/bimrocket
+# but can be changed via JVM property or environ variable.
+
 # service config
 services:
 
@@ -7,9 +10,19 @@ services:
   security:
     adminPassword: bimrocket
     passwordPattern: '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_\-\.])(?=\S+$).{8,}$'
-    authorizationCacheTimeout: 300
+    credentialsCacheTimeout: 300
     userCacheTimeout: 300
     roleCacheTimeout: 300
+    tokenTimeout: 1800
+    maxTokenAge: 28800
+    cookie:
+      secure: false
+      httpOnly: true
+      sameSite: STRICT
+    store:
+      class: org.bimrocket.service.security.store.orient.SecurityOrientDaoStore
+      orient:
+        database: bimdb
     ldap:
       enabled: false
       url: ldap://dc1.santfeliu.local
@@ -17,34 +30,44 @@ services:
       searchBase: DC=santfeliu,DC=local
       adminUsername: admin
       adminPassword: changeit
-    store:
-      class: org.bimrocket.service.security.store.orient.SecurityOrientDaoStore
-      orient:
-        database: bimdb
+    oauth2:
+      active: []
+      providers:
+        valid:
+          logoUrl: changeit
+          baseUrl: https://valid-pre.aoc.cat
+          authUrl: /o/oauth2/auth
+          tokenUrl: /o/oauth2/token
+          getUserInfoUrl: /serveis-rest/getUserInfo
+          scope: autenticacio_usuari
+          clientId: changeit
+          secretId: changeit
+          roles: []
 
   # file service
   file:
-    store:
-      class: org.bimrocket.service.file.store.filesystem.FileSystemFileStore
-      filesystem:
-        directory: ${BIMROCKET_DATA_PATH}/cloudfs
     folders:
       - models
       - scripts
       - reports
       - ifc_snapshots
+      - tasks
+    store:
+      class: org.bimrocket.service.file.store.filesystem.FileSystemFileStore
+      filesystem:
+        directory: ${BIMROCKET_DATA_PATH}/cloudfs
 
   # bcf service
   bcf:
-    projectTemplate:
-    store:
-      class: org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore
-      orient:
-        database: bimdb
+    templateProjectName: template
     mail:
       createTopic:
         subject: '#{project.name}##{index}: #{title} [#{priority}]'
         body: '#{description}'
+    store:
+      class: org.bimrocket.service.bcf.store.orient.BcfOrientDaoStore
+      orient:
+        database: bimdb
 
   # ifcdb service
   ifcdb:
@@ -106,3 +129,4 @@ databases:
     url: embedded:${BIMROCKET_DATA_PATH}/db/IFC4
     username: root
     password: orientdb
+

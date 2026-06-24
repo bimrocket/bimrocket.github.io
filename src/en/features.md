@@ -31,6 +31,8 @@ language: en
 - BIM Delta tool to detect changes between two versions of an IFC file.
 - Search tool to find model properties by name or by value.
 - Histogram tool to visualize the distribution of values ​​for a given property.
+- User and role management.
+- Support for multiple authentication systems: Basic, Token Bearer, session cookie, LDAP and OAuth2 (integrated with VALid, Gicar and Keycloak).
 - Multiple file storage systems are supported: webdav server, local file system and IndexedDB.
 - Load/Export IFC models. Support for multiple IFC schemas (IFC2X3, IFC4 and IFC4X3_ADD2).
 - Load/Export models in BRF format (JSON Bimrocket format).
@@ -48,6 +50,8 @@ language: en
 - Data for **bimrocket-server** services can be stored in OrientDB or MongoDB.
 - Modular design to easily extend functionality.
 - Web application with a responsive user interface. Support for touch devices.
+- Suport multilingüe (actualment disponible en anglès, castellà i català).
 - Multi-language support (currently available in english, spanish and catalan).
 - Based on the [THREE.js](https://threejs.org) graphic library.
+- A console application for advanced manipulation of IFC files (bimrocket-console) is also available.
 - Project built with Maven.
