@@ -108,7 +108,7 @@ un backend que implementa los servicios de gestión y persistencia de datos.</p>
 <li>Cambio de nombre y de valor de las propiedades de los elementos IfcPropertySet de un fichero IFC.</li>
 </ul>
 <h3>Instalación</h3>
-<p>Para instalar la aplicación de consola basta con seguir los siguientes pasos:</p>
+<p>Para instalar la aplicación de consola, sigue los siguientes pasos:</p>
 <ul>
 <li>Descargar la última versión fichero bimrocket-console-*.zip de <a href="https://github.com/bimrocket/bimrocket/releases">https://github.com/bimrocket/bimrocket/releases</a>.</li>
 <li>Descomprimir el archivo zip anterior en un directorio local.</li>
@@ -121,7 +121,7 @@ un backend que implementa los servicios de gestión y persistencia de datos.</p>
 <ul>
 <li><strong>Modo interactivo</strong>: permite ejecutar comando a comando y ver el resultado en cada paso.
 Es el modo de funcionamiento por defecto.</li>
-<li><strong>Modo por lotes</strong>: permite ejecutar de golpe un conjunto de comandos almacenados en un fichero.
+<li><strong>Modo por lotes</strong>: permite ejecutar de golpe una secuencia de comandos almacenados en un fichero.
 Este modo se activa si al invocar la aplicación desde el terminal se pasa como argumento el nombre del fichero a ejecutar: <code>.\bimrocket-console.cmd script.js</code>.</li>
 </ul>
 <p>La mayoria de comandos que ofrece la consola se expresan en el lenguage de programación
@@ -135,20 +135,94 @@ escribir paréntesis, comas ni comillas. Por ejemplo, este comando: <code>addPse
 se podria lanzar así: <code>addPsetRule ASF_Geometria ASF_Volum CAT_Volum</code>.
 Cuando se usa la sintaxis simplificada no es posible referenciar variables ni funciones.</p>
 <p>La consola también admite cualquier expressión válida del lenguaje Javascript.</p>
+<h3>Ramas de un modelo</h3>
+<p>La carga de un modelo IFC se hace invocando el comando <code>loadIFC</code>:</p>
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
+Loading from /home/realor/model.ifc (2,45 MB)...
+Load completed in 1.001 seconds.
+</code></pre>
+<p>Este comando carga todos los objetos del fichero IFC en la rama &quot;main&quot;,
+donde una rama (branch) se puede ver como una lista de objetos IFC.</p>
+<p>Para un mismo modelo, podemos crear diferentes ramas, donde cada una de ellas puede contener
+una selección distinta de los objetos del modelo.</p>
+<p>Mientras haya un modelo cargado, siempre existirá:</p>
+<ul>
+<li>Una rama actual (current).</li>
+<li>Un cursor apuntando a un objecto de la rama actual.</li>
+</ul>
+<p>La mayoria de comandos de bimrocket-console actuan sobre sobre rama o el cursor actual.</p>
+<p>Se puede saber cual es la rama actual invocando el comando <code>branches</code>:</p>
+<pre><code class="language-text">&gt; branches
+branches()
+main
+walls (current)
+roots
+</code></pre>
+<p>Este comando nos muestra todas las ramas existentes y cual de ellas es la actual.</p>
+<p>Podemos ver cual es el objecto apuntado por el cursor actual mediante el comando <code>list</code>:</p>
+<pre><code class="language-text">&gt; list
+list()
+  #13410 IfcWallStandardCase:
+  [0] GlobalId: 3rPX_Juz59peXXY6wDJl18
+  [1] OwnerHistory: IfcOwnerHistory[...]
+  [2] Name: Wand-Ext-ERDG-1
+  [3] Description: null
+  [4] ObjectType: null
+  [5] ObjectPlacement: IfcLocalPlacement[...]
+  [6] Representation: IfcProductDefinitionShape[...]
+  [7] Tag: BEF1E630-DE4B-41C5-AD-66-B87F1A8D67A1
+  [8] PredefinedType: null
+...
+</code></pre>
+<p>Si el cursor apunta a una entidad nos mostrará sus atributos y si apunta a una colección, los elementos que ésta contenga.
+Podemos mover el cursor a uno de los objetos interiores mediante el comando <code>enter(&lt;index&gt;)</code> o <code>enter(&lt;attribute&gt;)</code>:</p>
+<pre><code class="language-text">&gt; enter 5
+&gt; list
+list()
+#13386 IfcLocalPlacement:
+  [0] PlacementRelTo: IfcLocalPlacement[...]
+  [1] RelativePlacement: IfcAxis2Placement3D[...]
+</code></pre>
+<p>Para mover el cursor al objeto padre hay que usar el comando <code>exit()</code>.</p>
+<p>Podemos hacer una búsqueda de objetos que cumplan cierta condición mediante el comando <code>find</code>:</p>
+<pre><code class="language-text">&gt; find(e =&gt; e.isWall(&quot;IfcWindow&quot;) &amp;&amp; e.get(&quot;OverallWidth&quot;) &gt; 2, &quot;walls&quot;)
+Matches found: 4
+Current branch is walls
+</code></pre>
+<p>Este comando añade a la rama indicada, <code>walls</code>, todos los objetos de la rama actual que cumplan la condición especificada
+(paredes de más de 2 metros de anchura).
+Si la rama no existe, la crea y la hace actual.</p>
+<p>Podemos cambiar de rama, mediante el comando <code>branch</code>:</p>
+<pre><code class="language-text">&gt; branch main
+branch(&quot;main&quot;)
+current branch is main
+</code></pre>
+<p>Este comando posiciona el cursor sobre la lista superior de la rama indicada.</p>
+<p>Es posible saber cuando objetos hay de cada tipo, a partir del cursor actual, mediante el comando <code>histogram</code>:</p>
+<pre><code class="language-text">&gt; histogram
+histogram()
+Entities found: 44249
+IfcAnnotation: 14
+IfcApplication: 1
+IfcArbitraryClosedProfileDef: 22
+IfcAxis2Placement2D: 94
+IfcAxis2Placement3D: 364
+...
+</code></pre>
 <h3>Ejemplos</h3>
-<p>Esta seria la secuencia de comandos para extraer la paredes (IfcWall) de fichero IFC:</p>
-<pre><code class="language-text">&gt; loadIFC(&quot;/users/realor/model.ifc&quot;)
+<p>Esta seria la secuencia de comandos para extraer la paredes (IfcWall) de un fichero IFC:</p>
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
 Loading from /home/realor/model.ifc (2,45 MB)...
 Load completed in 1.001 seconds.
 &gt; find(e =&gt; e.is(&quot;IfcWall&quot;))
 Matches found: 13
 Current branch is output
-&gt; exportIFC(&quot;/users/realor/walls.ifc&quot;)
+&gt; exportIFC(&quot;/home/realor/walls.ifc&quot;)
 Exporting to /home/realor/walls.ifc...
 Export completed in 0.033 seconds.
 </code></pre>
 <p>Para cambiar el nombre de las propiedades de un IfcPropertySet podríamos usar estos comandos:</p>
-<pre><code class="language-text">&gt; loadIFC(&quot;/users/realor/model.ifc&quot;)
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
 Loading from /home/realor/model.ifc (2,45 MB)...
 Load completed in 1.001 seconds.
 &gt; addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;)
@@ -156,9 +230,34 @@ Load completed in 1.001 seconds.
 &gt; addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Alçada&quot;, &quot;CAT_Alçada&quot;)
 &gt; transformPsets()
 ...
-&gt; exportIFC(&quot;/users/realor/model_cat.ifc&quot;)
+&gt; exportIFC(&quot;/home/realor/model_cat.ifc&quot;)
 Exporting to /home/realor/model_cat.ifc...
 Export completed in 0.824 seconds.
+</code></pre>
+<p>Para transformar las propiedades de los IfcPropertySet de los archivos IFC de un directorio, podríamos usar un script como éste:</p>
+<pre><code class="language-javascript">const inputDir = &quot;/home/realor/Descargas/&quot;;
+const outputDir = &quot;/home/realor/output_ifc/&quot;;
+
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;);
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Perimetre&quot;, &quot;CAT_Perimetre&quot;);
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Alçada&quot;, &quot;CAT_Alçada&quot;);
+
+const files = paths(inputDir, &quot;*.ifc&quot;);
+for (let file of files)
+{
+  console.info(&quot;---------------------&quot;);
+  try
+  {
+    loadIFC(inputDir + file);
+    transformPsets();
+    exportIFC(outputDir + file);
+  }
+  catch (ex)
+  {
+    console.error(ex);
+  }
+}
+
 </code></pre>
 
     </div>

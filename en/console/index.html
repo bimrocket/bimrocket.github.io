@@ -108,7 +108,7 @@ implements the data management and persistence services.</p>
 <li>Renaming and changing the value of properties within the IfcPropertySet elements of an IFC file.</li>
 </ul>
 <h3>Installation</h3>
-<p>To install the console application, simply follow these steps:</p>
+<p>To install the console application, follow these steps:</p>
 <ul>
 <li>Download the latest version of the bimrocket-console-*.zip file
 from <a href="https://github.com/bimrocket/bimrocket/releases">https://github.com/bimrocket/bimrocket/releases</a>.</li>
@@ -137,20 +137,94 @@ For example, the following command: <code>addPsetRule(&quot;ASF_Geometria&quot;,
 could be launched like this: <code>addPsetRule ASF_Geometria ASF_Volum CAT_Volum</code>.
 When using the simplified syntax, it is not possible to reference variables or functions.</p>
 <p>The console also supports any valid Javascript expression.</p>
+<h3>Branches of a model</h3>
+<p>A IFC model is loaded by invoking the <code>loadIFC</code> command:</p>
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
+Loading from /home/realor/model.ifc (2,45 MB)...
+Load completed in 1.001 seconds.
+</code></pre>
+<p>This command loads all objects from the IFC file into the &quot;main&quot; branch,
+where a branch can be seen as a list of IFC objects.</p>
+<p>For the same model, we can create different branches, where each one can contain
+a distinct selection of the model's objects.</p>
+<p>As long as a model is loaded, there will always exist:</p>
+<ul>
+<li>A current branch.</li>
+<li>A cursor pointing to an object in the current branch.</li>
+</ul>
+<p>Most bimrocket-console commands operate on the current branch or cursor.</p>
+<p>The current branch can be queried by invoking the <code>branches</code> command:</p>
+<pre><code class="language-text">&gt; branches
+branches()
+main
+walls (current)
+roots
+</code></pre>
+<p>This command shows all existing branches and which one is current.</p>
+<p>We can see which object the current cursor is pointing to using the <code>list</code> command:</p>
+<pre><code class="language-text">&gt; list
+list()
+  #13410 IfcWallStandardCase:
+  [0] GlobalId: 3rPX_Juz59peXXY6wDJl18
+  [1] OwnerHistory: IfcOwnerHistory[...]
+  [2] Name: Wand-Ext-ERDG-1
+  [3] Description: null
+  [4] ObjectType: null
+  [5] ObjectPlacement: IfcLocalPlacement[...]
+  [6] Representation: IfcProductDefinitionShape[...]
+  [7] Tag: BEF1E630-DE4B-41C5-AD-66-B87F1A8D67A1
+  [8] PredefinedType: null
+...
+</code></pre>
+<p>If the cursor points to an entity it will show its attributes, and if it points to a collection, the elements it contains.
+We can move the cursor to one of the inner objects using the <code>enter(&lt;index&gt;)</code> or <code>enter(&lt;attribute&gt;)</code> command:</p>
+<pre><code class="language-text">&gt; enter 5
+&gt; list
+list()
+#13386 IfcLocalPlacement:
+  [0] PlacementRelTo: IfcLocalPlacement[...]
+  [1] RelativePlacement: IfcAxis2Placement3D[...]
+</code></pre>
+<p>To move the cursor to the parent object, use the <code>exit()</code> command.</p>
+<p>We can search for objects matching a certain condition using the <code>find</code> command:</p>
+<pre><code class="language-text">&gt; find(e =&gt; e.isWall(&quot;IfcWindow&quot;) &amp;&amp; e.get(&quot;OverallWidth&quot;) &gt; 2, &quot;walls&quot;)
+Matches found: 4
+Current branch is walls
+</code></pre>
+<p>This command adds to the indicated branch, <code>walls</code>, all objects from the current branch that meet the specified condition
+(walls wider than 2 metres).
+If the branch does not exist, it creates it and makes it current.</p>
+<p>We can switch branches using the <code>branch</code> command:</p>
+<pre><code class="language-text">&gt; branch main
+branch(&quot;main&quot;)
+current branch is main
+</code></pre>
+<p>This command positions the cursor on the top-level list of the indicated branch.</p>
+<p>It is possible to see how many objects exist of each type, starting from the current cursor, using the <code>histogram</code> command:</p>
+<pre><code class="language-text">&gt; histogram
+histogram()
+Entities found: 44249
+IfcAnnotation: 14
+IfcApplication: 1
+IfcArbitraryClosedProfileDef: 22
+IfcAxis2Placement2D: 94
+IfcAxis2Placement3D: 364
+...
+</code></pre>
 <h3>Examples</h3>
 <p>This would be the sequence of commands to extract walls (IfcWall) from an IFC file:</p>
-<pre><code class="language-text">&gt; loadIFC(&quot;/users/realor/model.ifc&quot;)
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
 Loading from /home/realor/model.ifc (2,45 MB)...
 Load completed in 1.001 seconds.
 &gt; find(e =&gt; e.is(&quot;IfcWall&quot;))
 Matches found: 13
 Current branch is output
-&gt; exportIFC(&quot;/users/realor/walls.ifc&quot;)
+&gt; exportIFC(&quot;/home/realor/walls.ifc&quot;)
 Exporting to /home/realor/walls.ifc...
 Export completed in 0.033 seconds.
 </code></pre>
 <p>To change the names of the properties in an IfcPropertySet, we could use these commands:</p>
-<pre><code class="language-text">&gt; loadIFC(&quot;/users/realor/model.ifc&quot;)
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
 Loading from /home/realor/model.ifc (2,45 MB)...
 Load completed in 1.001 seconds.
 &gt; addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;)
@@ -158,9 +232,35 @@ Load completed in 1.001 seconds.
 &gt; addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Alçada&quot;, &quot;CAT_Alçada&quot;)
 &gt; transformPsets()
 ...
-&gt; exportIFC(&quot;/users/realor/model_cat.ifc&quot;)
+&gt; exportIFC(&quot;/home/realor/model_cat.ifc&quot;)
 Exporting to /home/realor/model_cat.ifc...
-Export completed in 0.824 seconds.</code></pre>
+Export completed in 0.824 seconds.
+</code></pre>
+<p>To transform the IfcPropertySet properties of the IFC files in a directory, we could use a script like this:</p>
+<pre><code class="language-javascript">const inputDir = &quot;/home/realor/Descargas/&quot;;
+const outputDir = &quot;/home/realor/output_ifc/&quot;;
+
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;);
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Perimetre&quot;, &quot;CAT_Perimetre&quot;);
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Alçada&quot;, &quot;CAT_Alçada&quot;);
+
+const files = paths(inputDir, &quot;*.ifc&quot;);
+for (let file of files)
+{
+  console.info(&quot;---------------------&quot;);
+  try
+  {
+    loadIFC(inputDir + file);
+    transformPsets();
+    exportIFC(outputDir + file);
+  }
+  catch (ex)
+  {
+    console.error(ex);
+  }
+}
+
+</code></pre>
 
     </div>
   </main>

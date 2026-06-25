@@ -108,7 +108,7 @@ backend que implementa els serveis de gestió i persistència de dades.</p>
 <li>Canvi de nom i de valor de les propietats dels elements IfcPropertySet d'un fitxer IFC.</li>
 </ul>
 <h3>Instal·lació</h3>
-<p>Per a instal·lar l'aplicació de consola només cal seguir els següents passos:</p>
+<p>Per a instal·lar l'aplicació de consola cal seguir els següents passos:</p>
 <ul>
 <li>Descarregar l'última versió del fitxer bimrocket-console-*.zip des de
 <a href="https://github.com/bimrocket/bimrocket/releases">https://github.com/bimrocket/bimrocket/releases</a>.</li>
@@ -122,7 +122,7 @@ backend que implementa els serveis de gestió i persistència de dades.</p>
 <ul>
 <li><strong>Mode interactiu</strong>: permet executar comanda a comanda i veure el resultat a cada pas.
 És el mode de funcionament per defecte.</li>
-<li><strong>Mode per lots</strong>: permet executar de cop un conjunt de comandes emmagatzemades en un fitxer.
+<li><strong>Mode per lots</strong>: permet executar de cop una seqüència de comandes emmagatzemades en un fitxer.
 Aquest mode s'activa si, en invocar l'aplicació des del terminal, es passa com a argument el nom del fitxer a executar: <code>.\bimrocket-console.cmd script.js</code>.</li>
 </ul>
 <p>La majoria de les comandes que ofereix la consola s'expressen en el llenguatge de programació Javascript i
@@ -136,20 +136,94 @@ escriure parèntesis, comes ni cometes. Per exemple, aquesta comanda: <code>addP
 es podria llançar així: <code>addPsetRule ASF_Geometria ASF_Volum CAT_Volum</code>.
 Quan s'utilitza la sintaxi simplificada no és possible referenciar variables ni funcions.</p>
 <p>La consola també admet qualsevol expressió vàlida del llenguatge Javascript.</p>
+<h3>Branques d'un model</h3>
+<p>La càrrega d'un model IFC es fa invocant la comanda <code>loadIFC</code>:</p>
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
+Loading from /home/realor/model.ifc (2,45 MB)...
+Load completed in 1.001 seconds.
+</code></pre>
+<p>Aquesta comanda carrega tots els objectes del fitxer IFC a la branca &quot;main&quot;,
+on una branca (branch) es pot veure com una llista d'objectes IFC.</p>
+<p>Per a un mateix model, podem crear diferents branques, on cadascuna d'elles pot contenir
+una selecció diferent dels objectes del model.</p>
+<p>Mentre hi hagi un model carregat, sempre existirà:</p>
+<ul>
+<li>Una branca actual (current).</li>
+<li>Un cursor apuntant a un objecte de la branca actual.</li>
+</ul>
+<p>La majoria de comandes de bimrocket-console actuen sobre la branca o el cursor actual.</p>
+<p>Es pot saber quina és la branca actual invocant la comanda <code>branches</code>:</p>
+<pre><code class="language-text">&gt; branches
+branches()
+main
+walls (current)
+roots
+</code></pre>
+<p>Aquesta comanda ens mostra totes les branques existents i quina d'elles és l'actual.</p>
+<p>Podem veure quin és l'objecte apuntat pel cursor actual mitjançant la comanda <code>list</code>:</p>
+<pre><code class="language-text">&gt; list
+list()
+  #13410 IfcWallStandardCase:
+  [0] GlobalId: 3rPX_Juz59peXXY6wDJl18
+  [1] OwnerHistory: IfcOwnerHistory[...]
+  [2] Name: Wand-Ext-ERDG-1
+  [3] Description: null
+  [4] ObjectType: null
+  [5] ObjectPlacement: IfcLocalPlacement[...]
+  [6] Representation: IfcProductDefinitionShape[...]
+  [7] Tag: BEF1E630-DE4B-41C5-AD-66-B87F1A8D67A1
+  [8] PredefinedType: null
+...
+</code></pre>
+<p>Si el cursor apunta a una entitat ens mostrarà els seus atributs i si apunta a una col·lecció, els elements que aquesta contingui.
+Podem moure el cursor a un dels objectes interiors mitjançant la comanda <code>enter(&lt;index&gt;)</code> o <code>enter(&lt;attribute&gt;)</code>:</p>
+<pre><code class="language-text">&gt; enter 5
+&gt; list
+list()
+#13386 IfcLocalPlacement:
+  [0] PlacementRelTo: IfcLocalPlacement[...]
+  [1] RelativePlacement: IfcAxis2Placement3D[...]
+</code></pre>
+<p>Per moure el cursor a l'objecte pare cal usar la comanda <code>exit()</code>.</p>
+<p>Podem fer una cerca d'objectes que compleixin una certa condició mitjançant la comanda <code>find</code>:</p>
+<pre><code class="language-text">&gt; find(e =&gt; e.isWall(&quot;IfcWindow&quot;) &amp;&amp; e.get(&quot;OverallWidth&quot;) &gt; 2, &quot;walls&quot;)
+Matches found: 4
+Current branch is walls
+</code></pre>
+<p>Aquesta comanda afegeix a la branca indicada, <code>walls</code>, tots els objectes de la branca actual que compleixin la condició especificada
+(parets de més de 2 metres d'amplada).
+Si la branca no existeix, la crea i la fa actual.</p>
+<p>Podem canviar de branca mitjançant la comanda <code>branch</code>:</p>
+<pre><code class="language-text">&gt; branch main
+branch(&quot;main&quot;)
+current branch is main
+</code></pre>
+<p>Aquesta comanda posiciona el cursor sobre la llista superior de la branca indicada.</p>
+<p>És possible saber quants objectes hi ha de cada tipus, a partir del cursor actual, mitjançant la comanda <code>histogram</code>:</p>
+<pre><code class="language-text">&gt; histogram
+histogram()
+Entities found: 44249
+IfcAnnotation: 14
+IfcApplication: 1
+IfcArbitraryClosedProfileDef: 22
+IfcAxis2Placement2D: 94
+IfcAxis2Placement3D: 364
+...
+</code></pre>
 <h3>Exemples</h3>
 <p>Aquesta seria la seqüència de comandes per a extreure les parets (IfcWall) d'un fitxer IFC:</p>
-<pre><code class="language-text">&gt; loadIFC(&quot;/users/realor/model.ifc&quot;)
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
 Loading from /home/realor/model.ifc (2,45 MB)...
 Load completed in 1.001 seconds.
 &gt; find(e =&gt; e.is(&quot;IfcWall&quot;))
 Matches found: 13
 Current branch is output
-&gt; exportIFC(&quot;/users/realor/walls.ifc&quot;)
+&gt; exportIFC(&quot;/home/realor/walls.ifc&quot;)
 Exporting to /home/realor/walls.ifc...
 Export completed in 0.033 seconds.
 </code></pre>
 <p>Per canviar el nom de les propietats d'un IfcPropertySet podríem fer servir aquestes comandes:</p>
-<pre><code class="language-text">&gt; loadIFC(&quot;/users/realor/model.ifc&quot;)
+<pre><code class="language-text">&gt; loadIFC(&quot;/home/realor/model.ifc&quot;)
 Loading from /home/realor/model.ifc (2,45 MB)...
 Load completed in 1.001 seconds.
 &gt; addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;)
@@ -157,9 +231,35 @@ Load completed in 1.001 seconds.
 &gt; addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Alçada&quot;, &quot;CAT_Alçada&quot;)
 &gt; transformPsets()
 ...
-&gt; exportIFC(&quot;/users/realor/model_cat.ifc&quot;)
+&gt; exportIFC(&quot;/home/realor/model_cat.ifc&quot;)
 Exporting to /home/realor/model_cat.ifc...
-Export completed in 0.824 seconds.</code></pre>
+Export completed in 0.824 seconds.
+</code></pre>
+<p>Per transformar les propietats dels IfcPropertySet dels arxius IFC d'un directori, es podria fer servir un script como aquest:</p>
+<pre><code class="language-javascript">const inputDir = &quot;/home/realor/Descargas/&quot;;
+const outputDir = &quot;/home/realor/output_ifc/&quot;;
+
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;);
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Perimetre&quot;, &quot;CAT_Perimetre&quot;);
+addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Alçada&quot;, &quot;CAT_Alçada&quot;);
+
+const files = paths(inputDir, &quot;*.ifc&quot;);
+for (let file of files)
+{
+  console.info(&quot;---------------------&quot;);
+  try
+  {
+    loadIFC(inputDir + file);
+    transformPsets();
+    exportIFC(outputDir + file);
+  }
+  catch (ex)
+  {
+    console.error(ex);
+  }
+}
+
+</code></pre>
 
     </div>
   </main>
