@@ -24,7 +24,7 @@ The console application (bimrocket-console) is especially suitable for the follo
 
 ### Installation
 
-To install the console application, simply follow these steps:
+To install the console application, follow these steps:
 - Download the latest version of the bimrocket-console-*.zip file
 from [https://github.com/bimrocket/bimrocket/releases](https://github.com/bimrocket/bimrocket/releases).
 - Decompress the downloaded ZIP file into a local directory.
@@ -54,18 +54,110 @@ When using the simplified syntax, it is not possible to reference variables or f
 
 The console also supports any valid Javascript expression.
 
+### Branches of a model
+
+A IFC model is loaded by invoking the `loadIFC` command:
+```text
+> loadIFC("/home/realor/model.ifc")
+Loading from /home/realor/model.ifc (2,45 MB)...
+Load completed in 1.001 seconds.
+```
+
+This command loads all objects from the IFC file into the "main" branch,
+where a branch can be seen as a list of IFC objects.
+
+For the same model, we can create different branches, where each one can contain
+a distinct selection of the model's objects.
+
+As long as a model is loaded, there will always exist:
+- A current branch.
+- A cursor pointing to an object in the current branch.
+
+Most bimrocket-console commands operate on the current branch or cursor.
+
+The current branch can be queried by invoking the `branches` command:
+
+```text
+> branches
+branches()
+main
+walls (current)
+roots
+```
+This command shows all existing branches and which one is current.
+
+We can see which object the current cursor is pointing to using the `list` command:
+```text
+> list
+list()
+  #13410 IfcWallStandardCase:
+  [0] GlobalId: 3rPX_Juz59peXXY6wDJl18
+  [1] OwnerHistory: IfcOwnerHistory[...]
+  [2] Name: Wand-Ext-ERDG-1
+  [3] Description: null
+  [4] ObjectType: null
+  [5] ObjectPlacement: IfcLocalPlacement[...]
+  [6] Representation: IfcProductDefinitionShape[...]
+  [7] Tag: BEF1E630-DE4B-41C5-AD-66-B87F1A8D67A1
+  [8] PredefinedType: null
+...
+```
+If the cursor points to an entity it will show its attributes, and if it points to a collection, the elements it contains.
+We can move the cursor to one of the inner objects using the `enter(<index>)` or `enter(<attribute>)` command:
+```text
+> enter 5
+> list
+list()
+#13386 IfcLocalPlacement:
+  [0] PlacementRelTo: IfcLocalPlacement[...]
+  [1] RelativePlacement: IfcAxis2Placement3D[...]
+```
+
+To move the cursor to the parent object, use the `exit()` command.
+
+We can search for objects matching a certain condition using the `find` command:
+```text
+> find(e => e.isWall("IfcWindow") && e.get("OverallWidth") > 2, "walls")
+Matches found: 4
+Current branch is walls
+```
+This command adds to the indicated branch, `walls`, all objects from the current branch that meet the specified condition
+(walls wider than 2 metres).
+If the branch does not exist, it creates it and makes it current.
+
+We can switch branches using the `branch` command:
+```text
+> branch main
+branch("main")
+current branch is main
+```
+This command positions the cursor on the top-level list of the indicated branch.
+
+It is possible to see how many objects exist of each type, starting from the current cursor, using the `histogram` command:
+```text
+> histogram
+histogram()
+Entities found: 44249
+IfcAnnotation: 14
+IfcApplication: 1
+IfcArbitraryClosedProfileDef: 22
+IfcAxis2Placement2D: 94
+IfcAxis2Placement3D: 364
+...
+```
+
 ### Examples
 
 This would be the sequence of commands to extract walls (IfcWall) from an IFC file:
 
 ```text
-> loadIFC("/users/realor/model.ifc")
+> loadIFC("/home/realor/model.ifc")
 Loading from /home/realor/model.ifc (2,45 MB)...
 Load completed in 1.001 seconds.
 > find(e => e.is("IfcWall"))
 Matches found: 13
 Current branch is output
-> exportIFC("/users/realor/walls.ifc")
+> exportIFC("/home/realor/walls.ifc")
 Exporting to /home/realor/walls.ifc...
 Export completed in 0.033 seconds.
 ```
@@ -73,7 +165,7 @@ Export completed in 0.033 seconds.
 To change the names of the properties in an IfcPropertySet, we could use these commands:
 
 ```text
-> loadIFC("/users/realor/model.ifc")
+> loadIFC("/home/realor/model.ifc")
 Loading from /home/realor/model.ifc (2,45 MB)...
 Load completed in 1.001 seconds.
 > addPsetRule("ASF_Geometria", "ASF_Volum", "CAT_Volum")
@@ -81,6 +173,34 @@ Load completed in 1.001 seconds.
 > addPsetRule("ASF_Geometria", "ASF_Alçada", "CAT_Alçada")
 > transformPsets()
 ...
-> exportIFC("/users/realor/model_cat.ifc")
+> exportIFC("/home/realor/model_cat.ifc")
 Exporting to /home/realor/model_cat.ifc...
 Export completed in 0.824 seconds.
+```
+
+To transform the IfcPropertySet properties of the IFC files in a directory, we could use a script like this:
+```javascript
+const inputDir = "/home/realor/Descargas/";
+const outputDir = "/home/realor/output_ifc/";
+
+addPsetRule("ASF_Geometria", "ASF_Volum", "CAT_Volum");
+addPsetRule("ASF_Geometria", "ASF_Perimetre", "CAT_Perimetre");
+addPsetRule("ASF_Geometria", "ASF_Alçada", "CAT_Alçada");
+
+const files = paths(inputDir, "*.ifc");
+for (let file of files)
+{
+  console.info("---------------------");
+  try
+  {
+    loadIFC(inputDir + file);
+    transformPsets();
+    exportIFC(outputDir + file);
+  }
+  catch (ex)
+  {
+    console.error(ex);
+  }
+}
+
+```
