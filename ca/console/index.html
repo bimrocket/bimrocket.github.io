@@ -92,13 +92,14 @@
 <p>Una <strong>aplicació web</strong> per a la visualització, gestió i anàlisi de models IFC,
 que pot desplegar-se en un servidor web <a href="https://jakarta.ee/">Jakarta</a> o executar-se de
 manera aïllada sobre un entorn d'execució <a href="https://quarkus.io/">Quarkus</a>.
-Aquesta aplicació té dues parts: un frontend que implementa la interfície d'usuari i un
-backend que implementa els serveis de gestió i persistència de dades.</p>
+Aquesta aplicació té dues parts: un <em>frontend</em> que implementa la interfície d'usuari i un
+<em>backend</em> que implementa els serveis de gestió i persistència de dades.</p>
 </li>
 <li>
 <p>Una <strong>aplicació de consola</strong> per a la manipulació avançada de fitxers IFC.</p>
 </li>
 </ul>
+<p>Aquesta secció descriu els usos i el funcionament de l'aplicació de consola.</p>
 <h3>Usos</h3>
 <p>L'aplicació de consola (bimrocket-console) està especialment indicada per a aquests casos d'ús:</p>
 <ul>
@@ -126,13 +127,13 @@ backend que implementa els serveis de gestió i persistència de dades.</p>
 Aquest mode s'activa si, en invocar l'aplicació des del terminal, es passa com a argument el nom del fitxer a executar: <code>.\bimrocket-console.cmd script.js</code>.</li>
 </ul>
 <p>La majoria de les comandes que ofereix la consola s'expressen en el llenguatge de programació Javascript i
-són de la forma <code>comanda(arg1, arg2, ...)</code>, tot i que existeixen dues comandes especials que no segueixen aquest patró:</p>
+segueixen el format <code>comanda(arg1, arg2, ...)</code>, si bé hi ha dues comandes especials que tenen una sintaxi diferent:</p>
 <ul>
 <li><code>:help</code> mostra l'ajuda de totes les comandes suportades.</li>
 <li><code>:quit</code> finalitza l'aplicació i torna al terminal del sistema operatiu.</li>
 </ul>
 <p>En mode <strong>interactiu</strong>, es pot executar una comanda utilitzant la sintaxi simplificada on no és necessari
-escriure parèntesis, comes ni cometes. Per exemple, aquesta comanda: <code>addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;)</code>
+escriure parèntesis, comes ni cometes. Per exemple, la comanda: <code>addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;)</code>
 es podria llançar així: <code>addPsetRule ASF_Geometria ASF_Volum CAT_Volum</code>.
 Quan s'utilitza la sintaxi simplificada no és possible referenciar variables ni funcions.</p>
 <p>La consola també admet qualsevol expressió vàlida del llenguatge Javascript.</p>
@@ -145,7 +146,7 @@ Load completed in 1.001 seconds.
 <p>Aquesta comanda carrega tots els objectes del fitxer IFC a la branca &quot;main&quot;,
 on una branca (branch) es pot veure com una llista d'objectes IFC.</p>
 <p>Per a un mateix model, podem crear diferents branques, on cadascuna d'elles pot contenir
-una selecció diferent dels objectes del model.</p>
+una selecció diferent d'objectes del model.</p>
 <p>Mentre hi hagi un model carregat, sempre existirà:</p>
 <ul>
 <li>Una branca actual (current).</li>
@@ -184,7 +185,7 @@ list()
   [0] PlacementRelTo: IfcLocalPlacement[...]
   [1] RelativePlacement: IfcAxis2Placement3D[...]
 </code></pre>
-<p>Per moure el cursor a l'objecte pare cal usar la comanda <code>exit()</code>.</p>
+<p>Per moure el cursor a l'objecte pare cal fer servir la comanda <code>exit()</code>.</p>
 <p>Podem fer una cerca d'objectes que compleixin una certa condició mitjançant la comanda <code>find</code>:</p>
 <pre><code class="language-text">&gt; find(e =&gt; e.isWall(&quot;IfcWindow&quot;) &amp;&amp; e.get(&quot;OverallWidth&quot;) &gt; 2, &quot;walls&quot;)
 Matches found: 4
@@ -235,7 +236,9 @@ Load completed in 1.001 seconds.
 Exporting to /home/realor/model_cat.ifc...
 Export completed in 0.824 seconds.
 </code></pre>
-<p>Per transformar les propietats dels IfcPropertySet dels arxius IFC d'un directori, es podria fer servir un script como aquest:</p>
+<p>El següent programa Javascript es pot executar en mode per lots per transformar
+les propietats dels IfcPropertySet de tots arxius IFC continguts
+en un determinat directori:</p>
 <pre><code class="language-javascript">const inputDir = &quot;/home/realor/Descargas/&quot;;
 const outputDir = &quot;/home/realor/output_ifc/&quot;;
 

@@ -92,13 +92,14 @@
 <p>Una <strong>aplicación web</strong> para la visualización, gestión y análisis de modelos IFC,
 que puede desplegarse en un servidor web <a href="https://jakarta.ee/">Jakarta</a> o
 ejecutarse de forma aislada sobre un entorno de ejecución <a href="https://quarkus.io/">Quarkus</a>.
-Esta aplicación tiene dos partes, un frontend que implementa la interfaz de usuario y
-un backend que implementa los servicios de gestión y persistencia de datos.</p>
+Esta aplicación tiene dos partes, un <em>frontend</em> que implementa la interfaz de usuario y
+un <em>backend</em> que implementa los servicios de gestión y persistencia de datos.</p>
 </li>
 <li>
 <p>Una <strong>aplicación de consola</strong> para la manipulación avanzada de ficheros IFC.</p>
 </li>
 </ul>
+<p>Esta sección describe los usos y el funcionamiento de la aplicación de consola.</p>
 <h3>Usos</h3>
 <p>La aplicación de consola (bimrocket-console) está especialmente indicada para estos casos de uso:</p>
 <ul>
@@ -125,13 +126,13 @@ Es el modo de funcionamiento por defecto.</li>
 Este modo se activa si al invocar la aplicación desde el terminal se pasa como argumento el nombre del fichero a ejecutar: <code>.\bimrocket-console.cmd script.js</code>.</li>
 </ul>
 <p>La mayoria de comandos que ofrece la consola se expresan en el lenguage de programación
-Javascript y son de la forma <code>comando(arg1, arg2, ...)</code>, si bien, existen dos comandos especiales que no siguen este patrón:</p>
+Javascript y siguen el formato <code>comando(arg1, arg2, ...)</code>, si bien existen dos comandos especiales que tienen una sintaxis diferente:</p>
 <ul>
 <li><code>:help</code> muestra la ayuda de todos los comandos soportados.</li>
 <li><code>:quit</code> finaliza la aplicación y vuelve al terminal del sistema operativo.</li>
 </ul>
 <p>En modo <strong>interactivo</strong>, se puede ejecutar un comando usando la sintaxis simplificada donde no es necesario
-escribir paréntesis, comas ni comillas. Por ejemplo, este comando: <code>addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;)</code>
+escribir paréntesis, comas ni comillas. Por ejemplo, el comando: <code>addPsetRule(&quot;ASF_Geometria&quot;, &quot;ASF_Volum&quot;, &quot;CAT_Volum&quot;)</code>
 se podria lanzar así: <code>addPsetRule ASF_Geometria ASF_Volum CAT_Volum</code>.
 Cuando se usa la sintaxis simplificada no es posible referenciar variables ni funciones.</p>
 <p>La consola también admite cualquier expressión válida del lenguaje Javascript.</p>
@@ -144,7 +145,7 @@ Load completed in 1.001 seconds.
 <p>Este comando carga todos los objetos del fichero IFC en la rama &quot;main&quot;,
 donde una rama (branch) se puede ver como una lista de objetos IFC.</p>
 <p>Para un mismo modelo, podemos crear diferentes ramas, donde cada una de ellas puede contener
-una selección distinta de los objetos del modelo.</p>
+una selección distinta de objetos del modelo.</p>
 <p>Mientras haya un modelo cargado, siempre existirá:</p>
 <ul>
 <li>Una rama actual (current).</li>
@@ -198,7 +199,7 @@ branch(&quot;main&quot;)
 current branch is main
 </code></pre>
 <p>Este comando posiciona el cursor sobre la lista superior de la rama indicada.</p>
-<p>Es posible saber cuando objetos hay de cada tipo, a partir del cursor actual, mediante el comando <code>histogram</code>:</p>
+<p>Es posible saber cuantos objetos hay de cada tipo, a partir del cursor actual, mediante el comando <code>histogram</code>:</p>
 <pre><code class="language-text">&gt; histogram
 histogram()
 Entities found: 44249
@@ -234,7 +235,9 @@ Load completed in 1.001 seconds.
 Exporting to /home/realor/model_cat.ifc...
 Export completed in 0.824 seconds.
 </code></pre>
-<p>Para transformar las propiedades de los IfcPropertySet de los archivos IFC de un directorio, podríamos usar un script como éste:</p>
+<p>El siguiente programa Javascript se puede ejecutar en modo por lotes para transformar
+las propiedades de los IfcPropertySet de todos archivos IFC contenidos
+en un determinado directorio:</p>
 <pre><code class="language-javascript">const inputDir = &quot;/home/realor/Descargas/&quot;;
 const outputDir = &quot;/home/realor/output_ifc/&quot;;
 

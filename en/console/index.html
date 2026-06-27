@@ -92,13 +92,14 @@
 <p>A <strong>web application</strong> for the visualization, management, and analysis of IFC models,
 which can be deployed on a <a href="https://jakarta.ee/">Jakarta</a> web server or run independently
 on a <a href="https://quarkus.io/">Quarkus</a> execution environment.
-This application has two parts: a frontend that implements the user interface and a backend that
+This application has two parts: a <em>frontend</em> that implements the user interface and a <em>backend</em> that
 implements the data management and persistence services.</p>
 </li>
 <li>
 <p>A <strong>console application</strong> for advanced manipulation of IFC files.</p>
 </li>
 </ul>
+<p>This section describes the uses and operation of the console application.</p>
 <h3>Uses</h3>
 <p>The console application (bimrocket-console) is especially suitable for the following use cases:</p>
 <ul>
@@ -125,8 +126,8 @@ result immediately. This is the default operating mode.</li>
 <li><strong>Batch mode</strong>: allows you to execute a sequence of commands stored in a file all at once.
 This mode is activated if you pass the name of the file to be executed as an argument when invoking the application from the terminal: <code>.\bimrocket-console.cmd script.js</code>.</li>
 </ul>
-<p>Most of the commands offered by the console are written in the Javascript programming language
-and follow the format <code>command(arg1, arg2, ...)</code>. However, there are two special commands that do not follow this pattern:</p>
+<p>Most of the commands offered by the console are expressed in the JavaScript programming language and
+follow the format <code>command(arg1, arg2, ...)</code>, although there are two special commands that have a different syntax:</p>
 <ul>
 <li><code>:help</code> shows the help documentation for all supported commands.</li>
 <li><code>:quit</code> terminates the application and returns to the operating system terminal.</li>
@@ -145,8 +146,8 @@ Load completed in 1.001 seconds.
 </code></pre>
 <p>This command loads all objects from the IFC file into the &quot;main&quot; branch,
 where a branch can be seen as a list of IFC objects.</p>
-<p>For the same model, we can create different branches, where each one can contain
-a distinct selection of the model's objects.</p>
+<p>For the same model, we can create different branches, where each of them can contain
+a different selection of model objects.</p>
 <p>As long as a model is loaded, there will always exist:</p>
 <ul>
 <li>A current branch.</li>
@@ -236,7 +237,8 @@ Load completed in 1.001 seconds.
 Exporting to /home/realor/model_cat.ifc...
 Export completed in 0.824 seconds.
 </code></pre>
-<p>To transform the IfcPropertySet properties of the IFC files in a directory, we could use a script like this:</p>
+<p>The following Javascript program can be run in batch mode to transform
+the IfcPropertySet properties of all IFC files contained in a given directory:</p>
 <pre><code class="language-javascript">const inputDir = &quot;/home/realor/Descargas/&quot;;
 const outputDir = &quot;/home/realor/output_ifc/&quot;;
 
