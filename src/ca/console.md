@@ -10,10 +10,12 @@ La plataforma bimrocket ofereix actualment les següents aplicacions:
 - Una **aplicació web** per a la visualització, gestió i anàlisi de models IFC,
 que pot desplegar-se en un servidor web [Jakarta](https://jakarta.ee/) o executar-se de
 manera aïllada sobre un entorn d'execució [Quarkus](https://quarkus.io/).
-Aquesta aplicació té dues parts: un frontend que implementa la interfície d'usuari i un
-backend que implementa els serveis de gestió i persistència de dades.
+Aquesta aplicació té dues parts: un _frontend_ que implementa la interfície d'usuari i un
+_backend_ que implementa els serveis de gestió i persistència de dades.
 
 - Una **aplicació de consola** per a la manipulació avançada de fitxers IFC.
+
+Aquesta secció descriu els usos i el funcionament de l'aplicació de consola.
 
 ### Usos
 
@@ -43,12 +45,12 @@ La consola ofereix dos modes de funcionament:
 Aquest mode s'activa si, en invocar l'aplicació des del terminal, es passa com a argument el nom del fitxer a executar: `.\bimrocket-console.cmd script.js`.
 
 La majoria de les comandes que ofereix la consola s'expressen en el llenguatge de programació Javascript i
-són de la forma `comanda(arg1, arg2, ...)`, tot i que existeixen dues comandes especials que no segueixen aquest patró:
+segueixen el format `comanda(arg1, arg2, ...)`, si bé hi ha dues comandes especials que tenen una sintaxi diferent:
 - `:help` mostra l'ajuda de totes les comandes suportades.
 - `:quit` finalitza l'aplicació i torna al terminal del sistema operatiu.
 
 En mode **interactiu**, es pot executar una comanda utilitzant la sintaxi simplificada on no és necessari
-escriure parèntesis, comes ni cometes. Per exemple, aquesta comanda: `addPsetRule("ASF_Geometria", "ASF_Volum", "CAT_Volum")`
+escriure parèntesis, comes ni cometes. Per exemple, la comanda: `addPsetRule("ASF_Geometria", "ASF_Volum", "CAT_Volum")`
 es podria llançar així: `addPsetRule ASF_Geometria ASF_Volum CAT_Volum`.
 Quan s'utilitza la sintaxi simplificada no és possible referenciar variables ni funcions.
 
@@ -67,7 +69,7 @@ Aquesta comanda carrega tots els objectes del fitxer IFC a la branca "main",
 on una branca (branch) es pot veure com una llista d'objectes IFC.
 
 Per a un mateix model, podem crear diferents branques, on cadascuna d'elles pot contenir
-una selecció diferent dels objectes del model.
+una selecció diferent d'objectes del model.
 
 Mentre hi hagi un model carregat, sempre existirà:
 - Una branca actual (current).
@@ -113,7 +115,7 @@ list()
   [1] RelativePlacement: IfcAxis2Placement3D[...]
 ```
 
-Per moure el cursor a l'objecte pare cal usar la comanda `exit()`.
+Per moure el cursor a l'objecte pare cal fer servir la comanda `exit()`.
 
 Podem fer una cerca d'objectes que compleixin una certa condició mitjançant la comanda `find`:
 ```text
@@ -134,6 +136,7 @@ current branch is main
 Aquesta comanda posiciona el cursor sobre la llista superior de la branca indicada.
 
 És possible saber quants objectes hi ha de cada tipus, a partir del cursor actual, mitjançant la comanda `histogram`:
+
 ```text
 > histogram
 histogram()
@@ -178,7 +181,10 @@ Exporting to /home/realor/model_cat.ifc...
 Export completed in 0.824 seconds.
 ```
 
-Per transformar les propietats dels IfcPropertySet dels arxius IFC d'un directori, es podria fer servir un script como aquest:
+El següent programa Javascript es pot executar en mode per lots per transformar
+les propietats dels IfcPropertySet de tots arxius IFC continguts
+en un determinat directori:
+
 ```javascript
 const inputDir = "/home/realor/Descargas/";
 const outputDir = "/home/realor/output_ifc/";

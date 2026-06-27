@@ -8,7 +8,7 @@ language: ca
 Bimrocket es pot instal·lar utilitzant qualsevol dels següents mètodes:
 
 ### 1. paquet zip quarkus
-Aquest és el mètode d'instal·lació Bimrocket més senzill.
+Aquest és el mètode d'instal·lació de Bimrocket més senzill.
 
 1. Baixa la darrera versió del paquet zip quarkus de: [https://github.com/bimrocket/bimrocket/releases](https://github.com/bimrocket/bimrocket/releases).
 2. Descomprimeix el paquet zip.

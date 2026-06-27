@@ -9,10 +9,12 @@ The bimrocket platform currently offers the following applications:
 - A **web application** for the visualization, management, and analysis of IFC models,
 which can be deployed on a [Jakarta](https://jakarta.ee/) web server or run independently
 on a [Quarkus](https://quarkus.io/) execution environment.
-This application has two parts: a frontend that implements the user interface and a backend that
+This application has two parts: a _frontend_ that implements the user interface and a _backend_ that
 implements the data management and persistence services.
 
 - A **console application** for advanced manipulation of IFC files.
+
+This section describes the uses and operation of the console application.
 
 ### Uses
 
@@ -41,8 +43,8 @@ result immediately. This is the default operating mode.
 - **Batch mode**: allows you to execute a sequence of commands stored in a file all at once.
 This mode is activated if you pass the name of the file to be executed as an argument when invoking the application from the terminal: `.\bimrocket-console.cmd script.js`.
 
-Most of the commands offered by the console are written in the Javascript programming language
-and follow the format `command(arg1, arg2, ...)`. However, there are two special commands that do not follow this pattern:
+Most of the commands offered by the console are expressed in the JavaScript programming language and
+follow the format `command(arg1, arg2, ...)`, although there are two special commands that have a different syntax:
 - `:help` shows the help documentation for all supported commands.
 - `:quit` terminates the application and returns to the operating system terminal.
 
@@ -66,8 +68,8 @@ Load completed in 1.001 seconds.
 This command loads all objects from the IFC file into the "main" branch,
 where a branch can be seen as a list of IFC objects.
 
-For the same model, we can create different branches, where each one can contain
-a distinct selection of the model's objects.
+For the same model, we can create different branches, where each of them can contain
+a different selection of model objects.
 
 As long as a model is loaded, there will always exist:
 - A current branch.
@@ -134,6 +136,7 @@ current branch is main
 This command positions the cursor on the top-level list of the indicated branch.
 
 It is possible to see how many objects exist of each type, starting from the current cursor, using the `histogram` command:
+
 ```text
 > histogram
 histogram()
@@ -178,7 +181,9 @@ Exporting to /home/realor/model_cat.ifc...
 Export completed in 0.824 seconds.
 ```
 
-To transform the IfcPropertySet properties of the IFC files in a directory, we could use a script like this:
+The following Javascript program can be run in batch mode to transform
+the IfcPropertySet properties of all IFC files contained in a given directory:
+
 ```javascript
 const inputDir = "/home/realor/Descargas/";
 const outputDir = "/home/realor/output_ifc/";

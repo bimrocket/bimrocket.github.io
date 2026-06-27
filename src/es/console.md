@@ -9,10 +9,12 @@ La plataforma bimrocket ofrece actualmente las siguientes aplicaciones:
 - Una **aplicación web** para la visualización, gestión y análisis de modelos IFC,
 que puede desplegarse en un servidor web [Jakarta](https://jakarta.ee/) o
 ejecutarse de forma aislada sobre un entorno de ejecución [Quarkus](https://quarkus.io/).
-Esta aplicación tiene dos partes, un frontend que implementa la interfaz de usuario y
-un backend que implementa los servicios de gestión y persistencia de datos.
+Esta aplicación tiene dos partes, un _frontend_ que implementa la interfaz de usuario y
+un _backend_ que implementa los servicios de gestión y persistencia de datos.
 
 - Una **aplicación de consola** para la manipulación avanzada de ficheros IFC.
+
+Esta sección describe los usos y el funcionamiento de la aplicación de consola.
 
 ### Usos
 
@@ -41,12 +43,12 @@ La consola ofrece dos modos de funcionamiento:
   Este modo se activa si al invocar la aplicación desde el terminal se pasa como argumento el nombre del fichero a ejecutar: `.\bimrocket-console.cmd script.js`.
 
 La mayoria de comandos que ofrece la consola se expresan en el lenguage de programación
-Javascript y son de la forma `comando(arg1, arg2, ...)`, si bien, existen dos comandos especiales que no siguen este patrón:
+Javascript y siguen el formato `comando(arg1, arg2, ...)`, si bien existen dos comandos especiales que tienen una sintaxis diferente:
 - `:help` muestra la ayuda de todos los comandos soportados.
 - `:quit` finaliza la aplicación y vuelve al terminal del sistema operativo.
 
 En modo **interactivo**, se puede ejecutar un comando usando la sintaxis simplificada donde no es necesario
-escribir paréntesis, comas ni comillas. Por ejemplo, este comando: `addPsetRule("ASF_Geometria", "ASF_Volum", "CAT_Volum")`
+escribir paréntesis, comas ni comillas. Por ejemplo, el comando: `addPsetRule("ASF_Geometria", "ASF_Volum", "CAT_Volum")`
 se podria lanzar así: `addPsetRule ASF_Geometria ASF_Volum CAT_Volum`.
 Cuando se usa la sintaxis simplificada no es posible referenciar variables ni funciones.
 
@@ -65,7 +67,7 @@ Este comando carga todos los objetos del fichero IFC en la rama "main",
 donde una rama (branch) se puede ver como una lista de objetos IFC.
 
 Para un mismo modelo, podemos crear diferentes ramas, donde cada una de ellas puede contener
-una selección distinta de los objetos del modelo.
+una selección distinta de objetos del modelo.
 
 Mientras haya un modelo cargado, siempre existirá:
 - Una rama actual (current).
@@ -131,7 +133,7 @@ current branch is main
 ```
 Este comando posiciona el cursor sobre la lista superior de la rama indicada.
 
-Es posible saber cuando objetos hay de cada tipo, a partir del cursor actual, mediante el comando `histogram`:
+Es posible saber cuantos objetos hay de cada tipo, a partir del cursor actual, mediante el comando `histogram`:
 ```text
 > histogram
 histogram()
@@ -175,7 +177,10 @@ Exporting to /home/realor/model_cat.ifc...
 Export completed in 0.824 seconds.
 ```
 
-Para transformar las propiedades de los IfcPropertySet de los archivos IFC de un directorio, podríamos usar un script como éste:
+El siguiente programa Javascript se puede ejecutar en modo por lotes para transformar
+las propiedades de los IfcPropertySet de todos archivos IFC contenidos
+en un determinado directorio:
+
 ```javascript
 const inputDir = "/home/realor/Descargas/";
 const outputDir = "/home/realor/output_ifc/";
