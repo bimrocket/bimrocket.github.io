@@ -10,6 +10,7 @@ export default async function(eleventyConfig)
   eleventyConfig.setInputDirectory("src");
   eleventyConfig.setIncludesDirectory("_includes");
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/favicon");
   eleventyConfig.addGlobalData("year", new Date().getFullYear());
 
   const translations = {};
